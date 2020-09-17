@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:25:42 by rtacos            #+#    #+#             */
-/*   Updated: 2020/09/17 19:26:16 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/09/17 22:00:45 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ t_vector			creat_vector(t_coord first_point, t_coord second_point);
 t_coord				diff(t_coord p1, t_coord p2);
 float				dot(t_coord p1, t_coord p2);
 
-int					discrim(int a, int b, int c);
+float				discrim(float a, float b, float c);
 
 int					find_tangent_to_object(t_vector _ov_, t_object my, float *t_min);
 

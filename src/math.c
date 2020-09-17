@@ -6,13 +6,8 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 18:25:44 by rtacos            #+#    #+#             */
-/*   Updated: 2020/09/17 18:25:59 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/09/17 22:02:35 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-
-int		discrim(int a, int b, int c)
-{
-	return (b * b - 4 * a * c);
-}

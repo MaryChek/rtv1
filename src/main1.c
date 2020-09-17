@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 17:39:55 by rtacos            #+#    #+#             */
-/*   Updated: 2020/09/17 20:53:10 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/09/17 22:04:52 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,14 @@ int		main()
 	t_sph		obj_sph;
 	
 	obj_sph.center.x = 0;
-	obj_sph.center.y = 10;
-	obj_sph.center.z = 2000;
+	obj_sph.center.y = 0;
+	obj_sph.center.z = 100;
+	
 	obj_sph.color.r = 255;
 	obj_sph.color.g = 0;
 	obj_sph.color.b = 0;
-	obj_sph.rad = 200;
+	
+	obj_sph.rad = 20;
 
 	my.num_sphs++;
 	
@@ -75,7 +77,7 @@ int		main()
 
 	view_port.wid = WIN_WID;
 	view_port.hig = WIN_HIG;
-	view_port.distanse = 1;
+	view_port.distanse = 1000;
 
 	int x, y;
 	t_color	pix_color;

@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:25:37 by rtacos            #+#    #+#             */
-/*   Updated: 2020/09/17 19:11:11 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/09/17 21:22:38 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,5 @@ t_vector	creat_vector(t_coord first_point, t_coord second_point)
 
 float		dot(t_coord p1, t_coord p2)
 {
-	return (p1.x * p2.x + p1.y * p2.y + p1.z * p2.z);
+	return ((float)(p1.x * p2.x + p1.y * p2.y + p1.z * p2.z));
 }
