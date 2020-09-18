@@ -13,7 +13,7 @@ HEAD = header/rtv1.h
 SRC_DIR = src/
 
 SRCS = main1.c tangent_to_object.c vector_color.c vectors.c\
-math.c
+math.c key_press.c
 
 CFIND =	$(SRCS:%=$(SRC_DIR)%)
 
