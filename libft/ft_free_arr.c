@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_freetg.c                                        :+:      :+:    :+:   */
+/*   ft_free_arr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rtacos <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: dtaisha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/18 23:26:51 by rtacos            #+#    #+#             */
-/*   Updated: 2019/09/19 17:49:01 by rtacos           ###   ########.fr       */
+/*   Created: 2020/09/19 17:09:13 by dtaisha           #+#    #+#             */
+/*   Updated: 2020/09/19 17:09:28 by dtaisha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_freetg(char **tg, size_t w)
+void	*ft_free_arr(char **str, size_t n)
 {
-	size_t	i;
-
-	i = 0;
-	while (i < w)
-		ft_strdel(&tg[i++]);
-	free(tg);
-	tg = NULL;
+	while (n)
+	{
+		free(str[n]);
+		n--;
+	}
+	ft_strdel(str);
+	if (str)
+		free(str);
+	return (NULL);
 }

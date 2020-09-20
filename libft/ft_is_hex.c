@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_base_intlen.c                                   :+:      :+:    :+:   */
+/*   ft_is_hex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dtaisha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/06 18:02:02 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/08 16:53:08 by rtacos           ###   ########.fr       */
+/*   Created: 2020/09/19 17:09:47 by dtaisha           #+#    #+#             */
+/*   Updated: 2020/09/19 17:09:53 by dtaisha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t		ft_base_intlen(t_ull_int n, int base)
+int	ft_is_hex(char c)
 {
-	size_t	i;
-
-	i = 1;
-	while (n /= base)
-		i++;
-	return (i);
+	return (ft_isdigit(c) || (c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F'));
 }

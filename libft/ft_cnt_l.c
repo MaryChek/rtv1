@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_put_n_line_char.c                               :+:      :+:    :+:   */
+/*   ft_cnt_l.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dtaisha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/06 17:55:28 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/06 17:56:48 by rtacos           ###   ########.fr       */
+/*   Created: 2019/09/21 15:59:58 by dtaisha           #+#    #+#             */
+/*   Updated: 2019/09/21 16:02:10 by dtaisha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_put_n_line_char(char const *s, int n, int fd)
+size_t		ft_cnt_l(char const *s, char c, size_t len)
 {
-	int		i;
+	size_t	count;
 
-	i = 0;
-	if (s && n > 0)
-		while (*s && n--)
+	count = 0;
+	if (s != NULL)
+	{
+		while (s[len] && s[len] != c)
 		{
-			i++;
-			ft_putchar_fd(*s++, fd);
+			len++;
+			count++;
 		}
-	return (i);
+	}
+	return (count);
 }

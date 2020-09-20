@@ -1,60 +1,81 @@
+# ************************************************************************** #
+#                                                                            #
+#                                                        :::      ::::::::   #
+#   Makefile                                           :+:      :+:    :+:   #
+#                                                    +:+ +:+         +:+     #
+#   By: dtaisha <dtaisha@student.21-school.ru>     +#+  +:+       +#+        #
+#                                                +#+#+#+#+#+   +#+           #
+#   Created: 2020/05/09 19:47:36 by dtaisha           #+#    #+#             #
+#   Updated: 2020/08/11 10:27:45 by dtaisha          ###   ########lyon.fr   #
+#                                                                            #
+# ************************************************************************** #
+
 NAME = rtv1
 
-LIB_DIR = libft/
+CC = gcc
+FLAGS = -g -Wall -Wextra -Werror -O2
+GRAF_FLAGS = -framework OpenGL -framework AppKit
 
-LIBFT_H = -I $(LIB_DIR)
+LIBS = -L $(LIBFT_DIR) -lft -L $(MINILIBX_DIR) -lmlx -lm $(GRAF_FLAGS)
+INCLUDES = -I $(LIBFT_DIR) -I $(MINILIBX_DIR) -I $(H_DIR)
 
-LIBFTA = libft.a
+LIBFT = $(LIBFT_DIR)libft.a
+LIBFT_DIR = ./libft/
+LIBFT_H = $(LIBFT_DIR)
 
-RTV1_H = -I header/
+MINILIBX = $(MINILIBX_DIR)libmlx.a
+MINILIBX_DIR = ./minilibx/
+MINILIBX_H = $(MINILIBX_DIR)
 
-HEAD = header/rtv1.h
+H_FILE = rtv1.h
+H_DIR = ./header/
+HEADER = $(addprefix $(H_DIR), $(H_FILE))
 
-SRC_DIR = src/
+SRC_DIR = ./src/
+SRC_FILES = main1.c math.c key_press.c tangent_to_object.c vector_color.c \
+			vectors.c
 
-SRCS = main1.c tangent_to_object.c vector_color.c vectors.c\
-math.c key_press.c
+SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 
-CFIND =	$(SRCS:%=$(SRC_DIR)%)
+OBJ_DIR = ./src/objects/
+OBJ_FILES = $(patsubst %.c, %.o, $(SRC_FILES))
+OBJ	= $(addprefix $(OBJ_DIR), $(OBJ_FILES))
 
-OBJ_DIR =	obj/
-
-OFILE =	$(SRCS:%.c=%.o)
-
-OBJ =	$(addprefix $(OBJ_DIR), $(OFILE))
-
-CFLAGS = -Wall -Wextra -Werror -g
-
-CC = clang
-
-MLX = -lmlx -framework OpenGL -framework AppKit
-
-OPENCL = -framework OpenCL
-
-COMP =	$(CC) $(CFLAGS) $(RTV1_H) $(LIBFT_H) $(LIB_DIR)$(LIBFTA)
+.PHONY: all clean fclean re
 
 all: $(NAME)
 
+$(NAME): $(LIBFT) $(MINILIBX) $(OBJ_DIR) $(OBJ)
+	@$(CC) $(FLAGS) $(LIBS) $(INCLUDES) $(OBJ) -o $(NAME)
+	@echo "------------RTv1 compiled!---------------"
+
 $(OBJ_DIR):
-		@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEAD)
-		@$(CC) $(CFLAGS) $(RTV1_H) $(LIBFT_H) -c $< -o $@
+$(OBJ_DIR)%.o : $(SRC_DIR)%.c $(HEADER)
+	@$(CC) $(FLAGS) -c $(INCLUDES) $< -o $@
 
-$(NAME): $(OBJ_DIR) $(OBJ)
-	@make -C $(LIB_DIR)
-	@cp $(LIB_DIR)$(LIBFTA) .
-	@mv $(LIBFTA) $(NAME)
-	$(COMP) $(MLX) $(OPENCL) $(addprefix $(SRC_DIR), $(SRCS)) -o $(NAME)
+$(LIBFT):
+	@$(MAKE) -sC $(LIBFT_DIR)
+	@echo "------------make libft finish------------"
+
+$(MINILIBX):
+	@$(MAKE) -sC $(MINILIBX_DIR)
+	@echo "------------make minilibx finish------------"
 
 clean:
-	@/bin/rm -rf $(OBJ_DIR)
-	@make -C $(LIB_DIR) clean
-	@echo OBJECTS FILES HAS BEEN DELETED.
+	@$(MAKE) -sC $(LIBFT_DIR) clean
+	@$(MAKE) -sC $(MINILIBX_DIR) clean
+	@rm -rf $(OBJ_DIR)
+	@echo "------------clean finish------------"
 
 fclean: clean
-	@/bin/rm -f $(NAME)
-	@make -C $(LIB_DIR) fclean
-	@echo OBJECT FILES AND EXECUTABLE HAS BEEN DELETED.
+	@rm -f $(LIBFT)
+	@rm -f $(MINILIBX)
+	@rm -f $(NAME)
+	@echo "------------fclean finish------------"
 
-re: fclean all
+re:
+	@$(MAKE) fclean
+	@$(MAKE) all
+	@echo "------------fclean all finish------------"

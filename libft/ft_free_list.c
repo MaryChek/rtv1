@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_power.c                                         :+:      :+:    :+:   */
+/*   ft_free_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dtaisha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/06 18:01:33 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/06 18:01:34 by rtacos           ###   ########.fr       */
+/*   Created: 2019/09/21 23:41:55 by dtaisha           #+#    #+#             */
+/*   Updated: 2019/09/21 23:57:11 by dtaisha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_power(int num, int power)
-{
-	int		rez;
+#include "libft.h"
 
-	rez = 1;
-	if (power == 0)
-		return (1);
-	while (power-- > 0)
-		rez *= num;
-	return (rez);
+void	ft_free_list(t_list *start)
+{
+	while (start)
+	{
+		free(start);
+		start = start->next;
+	}
 }

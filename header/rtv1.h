@@ -14,7 +14,8 @@
 # define RTV1_H
 
 # include <math.h>
-# include <mlx.h>
+# include "mlx.h"
+# include "libft.h"
 # include <OpenCL/cl.h>
 
 # define WIN_WID 1920
@@ -33,6 +34,7 @@ typedef struct		s_mlx
 	void		*win_ptr;
 	void		*img_ptr;
 	int			*img_data;
+	int 		bit_pp;
 }					t_mlx;
 
 typedef struct		s_viewport
@@ -88,6 +90,20 @@ typedef struct		s_object
 	int			num_cylns;
 }					t_object;
 
+typedef struct		s_data
+{
+	t_mlx			*mlx_ptr;
+	t_quadr_equation	*quadr_equation_ptr;
+	t_viewport			*viewport_ptr;
+	t_coord				*coord_ptr;
+	t_vector			*vector_ptr;
+	t_color				*color_ptr;
+	t_sph				*sph_ptr;
+	t_cylindr			*cylindr_ptr;
+	t_object			*object_ptr;
+}						t_data;
+
+
 t_color				mult_colors(t_color v1, t_color v2, int minus);
 void				brightness_change(t_color *color, float mult);
 void				change_color(t_color *color, int r, int g, int b);
@@ -104,5 +120,14 @@ float				quadr_equation(t_quadr_equation factor, float *t_1);
 void				normal_rotation(t_coord *q);
 
 int					key_press(int key);
+
+int					allocation(t_data *data);
+int					main(int ac, char **av);
+void				param_validation(char *param_name);
+
+void			free_all(t_data *data);
+void			clear_image(t_mlx *mlx);
+int		error_exit(char *text, int code);
+void	free_error_exit(char *text, int code, t_data *data);
 
 #endif

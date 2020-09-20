@@ -3,51 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rtacos <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: dtaisha <dtaisha@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/05 11:04:42 by rtacos            #+#    #+#             */
-/*   Updated: 2019/09/15 20:40:30 by rtacos           ###   ########.fr       */
+/*   Created: 2019/09/16 22:08:17 by dtaisha           #+#    #+#             */
+/*   Updated: 2019/09/17 21:13:42 by dtaisha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	get_minimum(int nbr)
+void	ft_putnbr(int n)
 {
-	int output;
+	long int		num;
 
-	if (nbr == -2147483648)
+	num = (long int)n;
+	if (num < 0)
 	{
-		ft_putchar('2');
-		output = nbr % 1000000000;
+		write(1, "-", 1);
+		num *= -1;
 	}
-	else
-		return (nbr);
-	return (output);
-}
-
-void		ft_putnbr(int nb)
-{
-	int a;
-	int c;
-
-	c = 1;
-	if (nb < 0)
+	if (num >= 0 && num <= 9)
+		ft_putchar(num + '0');
+	else if (num > 9)
 	{
-		ft_putchar('-');
-		nb = get_minimum(nb);
-		nb = nb * (-1);
-	}
-	a = nb;
-	while ((a / 10) > 0)
-	{
-		a = a / 10;
-		c = c * 10;
-	}
-	while (c > 0)
-	{
-		ft_putchar((nb / c) + '0');
-		nb = nb % c;
-		c = c / 10;
+		ft_putnbr(num / 10);
+		ft_putnbr(num % 10);
 	}
 }

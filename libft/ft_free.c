@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rtacos <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: dtaisha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/20 13:47:49 by rtacos            #+#    #+#             */
-/*   Updated: 2019/09/28 19:39:55 by rtacos           ###   ########.fr       */
+/*   Created: 2020/09/19 17:08:34 by dtaisha           #+#    #+#             */
+/*   Updated: 2020/09/19 17:08:59 by dtaisha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_strindch(char *str, char c)
-{
-	int				i;
+#include "libft.h"
 
-	i = 0;
-	if (str)
-		while (str[i])
-		{
-			if (str[i] == c)
-				return (i);
-			i++;
-		}
-	return (-1);
+void	ft_safe_free(void *item)
+{
+	if (item)
+		free(item);
 }

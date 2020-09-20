@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dellst.c                                        :+:      :+:    :+:   */
+/*   ft_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rtacos <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: dtaisha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/18 23:08:47 by rtacos            #+#    #+#             */
-/*   Updated: 2019/09/18 23:49:12 by rtacos           ###   ########.fr       */
+/*   Created: 2020/09/19 17:10:34 by dtaisha           #+#    #+#             */
+/*   Updated: 2020/09/19 17:10:37 by dtaisha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_dellst(t_list **list)
+void	ft_swap(int *a, int *b)
 {
-	t_list	*tmp;
+	int temp;
 
-	if (list)
-		while ((*list)->next)
-		{
-			tmp = (*list)->next;
-			free((*list)->content);
-			(void)((*list)->content_size);
-			free(*list);
-			*list = tmp;
-		}
+	temp = *a;
+	*a = *b;
+	*b = temp;
 }

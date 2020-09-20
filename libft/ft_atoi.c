@@ -3,48 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dtaisha <dtaisha@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/05 21:20:31 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/08 16:36:37 by rtacos           ###   ########.fr       */
+/*   Created: 2019/09/13 11:46:02 by dtaisha           #+#    #+#             */
+/*   Updated: 2019/09/21 17:09:28 by dtaisha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	space(char c)
+int		ft_atoi(const char *nptr)
 {
-	if (c == ' ' || c == '\n' || c == '\f' || c == '\v'
-			|| c == '\t' || c == '\r')
-		return (1);
-	return (0);
-}
+	int					sign;
+	long long int		res;
+	int					i;
+	long long int		x;
 
-int			ft_atoi(const char *s)
-{
-	int				fl;
-	long long int	at;
-	long long int	r;
-	int				i;
-
-	fl = 1;
-	at = 0;
+	sign = 1;
+	res = 0;
 	i = 0;
-	while (space(s[i]) == 1)
+	while ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == 32)
 		i++;
-	if (s[i] == '-')
-		fl = -1;
-	if (s[i] == '-' || s[i] == '+')
+	if (nptr[i] == '-')
+		sign = -1;
+	if (nptr[i] == '-' || nptr[i] == '+')
 		i++;
-	while (ft_isdigit(s[i]) == 1)
+	while (nptr[i] && nptr[i] >= '0' && nptr[i] <= '9')
 	{
-		r = at;
-		at = at * 10 + (s[i] - '0');
-		if (r != (at / 10) && fl == 1)
-			return (-1);
-		if (r != (at / 10) && fl == -1)
-			return (0);
-		i++;
+		x = res * 10 + (nptr[i++] - '0');
+		if (x < res)
+			return (sign > 0 ? -1 : 0);
+		res = x;
 	}
-	return (at * fl);
+	return (res * sign);
 }

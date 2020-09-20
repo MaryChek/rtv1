@@ -3,69 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dtaisha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/06 17:57:12 by rtacos            #+#    #+#             */
-/*   Updated: 2020/07/08 16:09:14 by rtacos           ###   ########.fr       */
+/*   Created: 2020/09/19 17:10:11 by dtaisha           #+#    #+#             */
+/*   Updated: 2020/09/19 17:10:16 by dtaisha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int		in(char c, char max)
-{
-	char	*s1;
-	char	*s2;
-	int		i;
+#include "libft.h"
 
-	i = 0;
-	s1 = "0123456789abcdef\0";
-	s2 = "0123456789ABCDEF\0";
-	if ((c >= 'a' && c <= 'f') || (c >= '0' && c <= '9'))
-		while (s1[i] && s1[i] != (max + 33))
-			if (c == s1[i++])
-				return (i - 1);
-	if ((c >= 'A' && c <= 'F') || (c >= '0' && c <= '9'))
-		while (s2[i] && s2[i] != (max + 1))
-			if (c == s2[i++])
-				return (i - 1);
-	return (-1);
+static int		is_valid(char c, int base)
+{
+	char	*digits;
+	char	*digits2;
+
+	digits = "0123456789abcdef";
+	digits2 = "0123456789ABCDEF";
+	while (base--)
+		if (digits[base] == c || digits2[base] == c)
+			return (1);
+	return (0);
 }
 
-static char		max_nb(int base)
+static int		int_value(char c)
 {
-	char *ar;
-
-	ar = "ABCDEF\0";
-	if (base > 1 && base < 11)
-		return ((base - 1) - '0');
-	return (ar[base - 11]);
+	if (c >= '0' && c <= '9')
+		return (c - '0');
+	else if (c >= 'a' && c <= 'f')
+		return (c - 'a' + 10);
+	else if (c >= 'A' && c <= 'F')
+		return (c - 'A' + 10);
+	return (0);
 }
 
-static int		ft_atoi(const char *nbr, char max, int base)
+int				ft_atoi_base(const char *str, int which_base)
 {
-	int i;
-	int r;
-	int a;
+	int		result;
+	int		sign;
 
-	i = 0;
-	r = 0;
-	if (nbr[i] == '-')
-		i++;
-	while (nbr[i])
-		if ((a = in(nbr[i++], max)) != -1)
-			r = r * base + a;
-		else
-			break ;
-	return (r);
-}
-
-int				ft_atoi_base(const char *nbr, unsigned int base)
-{
-	char	max;
-	int		res;
-
-	max = max_nb(base);
-	res = ft_atoi(nbr, max, base);
-	if (nbr[0] == '-')
-		res *= -1;
-	return (res);
+	result = 0;
+	while (ft_is_space(*str))
+		str++;
+	sign = (*str == '-') ? -1 : 1;
+	(*str == '-' || *str == '+') ? ++str : 0;
+	while (is_valid(*str, which_base))
+		result = result * which_base + int_value(*str++);
+	return (result * sign);
 }
