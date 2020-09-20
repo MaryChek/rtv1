@@ -4,8 +4,9 @@ rtv1
 *.a
 *.o
 src/objects
+/obj
 .idea/
-.vscode
+.vscode/
 .DS_Store
 *.bak
 *.dSYM/

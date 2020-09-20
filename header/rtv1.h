@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:25:42 by rtacos            #+#    #+#             */
-/*   Updated: 2020/09/17 19:26:16 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/09/18 21:09:26 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@
 # define WIN_WID 1920
 # define WIN_HIG 1080
 
+typedef struct		s_quadr_equation
+{
+	float		a;
+	float		b;
+	float		c;
+}					t_quadr_equation;
+
 typedef struct		s_mlx
 {
 	void		*ptr;
@@ -28,17 +35,23 @@ typedef struct		s_mlx
 	int			*img_data;
 }					t_mlx;
 
+typedef struct		s_viewport
+{
+	int			wid;
+	int			hig;
+	int			distanse;
+}					t_viewport;
+
 typedef struct		s_coord
 {
-	int			x;
-	int			y;
-	int			z;
+	float		x;
+	float		y;
+	float		z;
 }					t_coord;
 
 typedef struct		s_vector
 {
-	t_coord		st;
-	t_coord		end;
+	t_coord		point;
 	t_coord		distance;
 }					t_vector;
 
@@ -56,12 +69,14 @@ typedef struct		s_sph
 	float		rad;
 }					t_sph;
 
-typedef struct		s_viewport
+typedef struct		s_cylindr
 {
-	int			wid;
-	int			hig;
-	int			distanse;
-}					t_viewport;
+	t_coord		center;
+	t_color		color;
+	t_coord		rotation;
+	float		hig;
+	float		rad;
+}					t_cylindr;
 
 typedef struct		s_object
 {
@@ -69,6 +84,8 @@ typedef struct		s_object
 	t_color		pix_color;
 	t_sph		*sph_objs;
 	int			num_sphs;
+	t_cylindr	*cyln_objs;
+	int			num_cylns;
 }					t_object;
 
 t_color				mult_colors(t_color v1, t_color v2, int minus);
@@ -81,8 +98,11 @@ t_vector			creat_vector(t_coord first_point, t_coord second_point);
 t_coord				diff(t_coord p1, t_coord p2);
 float				dot(t_coord p1, t_coord p2);
 
-int					discrim(int a, int b, int c);
+t_color				find_tangent_to_object(t_vector _ov_, t_object my, float t_min);
 
-int					find_tangent_to_object(t_vector _ov_, t_object my, float *t_min);
+float				quadr_equation(t_quadr_equation factor, float *t_1);
+void				normal_rotation(t_coord *q);
+
+int					key_press(int key);
 
 #endif
