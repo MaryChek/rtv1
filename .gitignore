@@ -1,0 +1,13 @@
+cmake-build-debug/
+a.out
+rtv1
+*.a
+*.o
+src/objects
+.idea/
+.vscode
+.DS_Store
+*.bak
+*.dSYM/
+workspace.xml
+fractol.dSYM/

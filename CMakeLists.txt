@@ -1,0 +1,45 @@
+cmake_minimum_required(VERSION 3.15)
+project(rtv1 C)
+
+set(CMAKE_C_STANDARD 11)
+
+
+include_directories(header/)
+include_directories(libft/)
+
+add_executable(rtv1
+        header/rtv1.h
+        src/
+        libft/ft_strchr.c
+        libft/ft_strlen.c
+        libft/ft_strsplit.c
+        libft/ft_putstr.c
+        libft/ft_strsub.c
+        libft/ft_strsplit.c
+        libft/ft_isdigit.c
+        libft/ft_memcpy.c
+        libft/ft_memcmp.c
+        libft/ft_memset.c
+        libft/ft_strdup.c
+        libft/libft.h
+        libft/ft_atoi.c
+        libft/ft_memccpy.c
+        libft/ft_strcmp.c
+        libft/ft_memdel.c
+        libft/ft_strcat.c
+        libft/ft_strchr.c
+        libft/ft_strrchr.c
+        libft/ft_strclr.c
+        libft/ft_strcpy.c
+        libft/ft_strdel.c
+        libft/ft_strjoin.c
+        libft/ft_strlcat.c
+        libft/ft_strncat.c
+        libft/ft_strnew.c
+        libft/ft_strnstr.c
+        libft/ft_bzero.c
+        src/main1.c
+        src/math.c
+        src/tangent_to_object.c
+        src/vector_color.c
+        src/vectors.c)
