@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:25:42 by rtacos            #+#    #+#             */
-/*   Updated: 2020/09/18 21:09:26 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/09/20 20:16:39 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ t_vector			creat_vector(t_coord first_point, t_coord second_point);
 t_coord				diff(t_coord p1, t_coord p2);
 float				dot(t_coord p1, t_coord p2);
 
-t_color				find_tangent_to_object(t_vector _ov_, t_object my, float t_min);
+t_color				find_color(t_vector _ov_, t_object my, float t_min);
 
 float				quadr_equation(t_quadr_equation factor, float *t_1);
 void				normal_rotation(t_coord *q);

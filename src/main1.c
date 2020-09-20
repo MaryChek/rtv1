@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 17:39:55 by rtacos            #+#    #+#             */
-/*   Updated: 2020/09/18 21:15:55 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/09/20 20:56:58 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_mlx	init_img()
 	return (mlx);
 }
 
-void	put_color_into_pix(int **img_data, int x, int y, t_color color)
+void	paint_the_pix(int **img_data, int x, int y, t_color color)
 {
 	(*img_data)[((y * WIN_WID) + x)] = color.r << 16;
 	(*img_data)[((y * WIN_WID) + x)] += color.g << 8;
@@ -87,9 +87,9 @@ int		main()
 	obj_cyln.color.g = 255;
 	obj_cyln.color.b = 0;
 
-	obj_cyln.rotation.x = 1.0;
+	obj_cyln.rotation.x = 0.0;
 	obj_cyln.rotation.y = 1.0;
-	obj_cyln.rotation.z = 0.0;
+	obj_cyln.rotation.z = -1.0;
 	normal_rotation(&obj_cyln.rotation);
 	
 
@@ -108,16 +108,13 @@ int		main()
 	my.camera.z = 0;
 	
 // ----------------------------------------- PARSING_END
-
 	t_viewport view_port;
 
 	view_port.wid = WIN_WID;
 	view_port.hig = WIN_HIG;
-	view_port.distanse = 100;
+	view_port.distanse = 1;
 
 	int x, y;
-	t_color	pix_color;
-
 	y = -1;
 	while (++y < WIN_HIG)
 	{
@@ -128,10 +125,8 @@ int		main()
 			float		t_min;
 
 			t_min = 0.0;
-			change_color(&pix_color, 0, 0, 0);
 			_vo_ = creat_vector(my.camera, win_to_viewport(x, y, view_port));
-			pix_color = find_tangent_to_object(_vo_, my, t_min); ////// вернуть int if(find) -> pix =... else pix(0,0,0);
-			put_color_into_pix(&mlx.img_data, x, y, pix_color);
+			paint_the_pix(&mlx.img_data, x, y, find_color(_vo_, my, t_min));
 		}
 	}
 	mlx_hook(mlx.win_ptr, 2, 1L << 0, key_press, 0);
