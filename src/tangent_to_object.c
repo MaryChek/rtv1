@@ -52,7 +52,7 @@ void	put_color_on_pix(t_color *pix_color, float t_min, float t_extr, float *t, t
 	}
 }
 
-t_color		find_tangent_to_object(t_vector _ov_, t_object my, float t_min) // t_max
+t_color		find_tangent_to_object(t_vector _ov_, t_object *object, float t_min) // t_max
 {
 	int			i;
 	float		t_extr;
@@ -63,13 +63,13 @@ t_color		find_tangent_to_object(t_vector _ov_, t_object my, float t_min) // t_ma
 	t_min = 0.0;
 	t = -1.0;
 	find = 0;
-	while (my.sph_objs && i < my.num_sphs)
-		if ((find = tang_to_sph(_ov_, my.sph_objs[i++], &t_extr, my.camera)))
-			put_color_on_pix(&my.pix_color, t_min, t_extr, &t, my.sph_objs->color);
+	while (object->sph_objs && i < object->num_sphs)
+		if ((find = tang_to_sph(_ov_, object->sph_objs[i++], &t_extr, object->camera)))
+			put_color_on_pix(&object->pix_color, t_min, t_extr, &t, object->sph_objs->color);
 
 	i = 0;
-	while (my.cyln_objs && i < my.num_cylns)
-		if ((find = tang_to_cyln(_ov_, my.cyln_objs[i++], &t_extr, my.camera)))
-			put_color_on_pix(&my.pix_color, t_min, t_extr, &t, my.cyln_objs->color);
-	return (my.pix_color);
+	while (object->cyln_objs && i < object->num_cylns)
+		if ((find = tang_to_cyln(_ov_, object->cyln_objs[i++], &t_extr, object->camera)))
+			put_color_on_pix(&object->pix_color, t_min, t_extr, &t, object->cyln_objs->color);
+	return (object->pix_color);
 }

@@ -6,7 +6,7 @@
 #   By: dtaisha <dtaisha@student.21-school.ru>     +#+  +:+       +#+        #
 #                                                +#+#+#+#+#+   +#+           #
 #   Created: 2020/05/09 19:47:36 by dtaisha           #+#    #+#             #
-#   Updated: 2020/08/11 10:27:45 by dtaisha          ###   ########lyon.fr   #
+#   Updated: 2020/09/21 09:12:21 by dtaisha          ###   ########lyon.fr   #
 #                                                                            #
 # ************************************************************************** #
 
@@ -32,8 +32,10 @@ H_DIR = ./header/
 HEADER = $(addprefix $(H_DIR), $(H_FILE))
 
 SRC_DIR = ./src/
-SRC_FILES = main1.c math.c key_press.c tangent_to_object.c vector_color.c \
-			vectors.c
+SRC_FILES = main.c math.c tangent_to_object.c vector_color.c \
+			vectors.c param_validation.c allocation.c color.c draw.c \
+			errors.c grafic_connection.c hooks_and_deals.c presets.c \
+			read_setups.c tear_down.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 

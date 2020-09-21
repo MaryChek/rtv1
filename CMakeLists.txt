@@ -14,7 +14,9 @@ add_executable(rtv1
         minilibx/
         src/
         src/allocation.c
+        src/hooks_and_deals.c
         src/param_validation.c
+        src/errors.c
         src/main.c
         src/tear_down.c
         libft/ft_strchr.c
@@ -51,4 +53,4 @@ add_executable(rtv1
         src/math.c
         src/tangent_to_object.c
         src/vector_color.c
-        src/vectors.c)
+        src/vectors.c src/grafic_connection.c src/presets.c src/read_setups.c src/draw.c src/color.c)

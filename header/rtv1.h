@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:25:42 by rtacos            #+#    #+#             */
-/*   Updated: 2020/09/18 21:09:26 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/09/21 09:35:09 by dtaisha          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,20 @@
 # include "mlx.h"
 # include "libft.h"
 # include <OpenCL/cl.h>
+#include <stdio.h>
 
-# define WIN_WID 1920
-# define WIN_HIG 1080
+# define WIN_WID 1024
+# define WIN_HIG 768
+
+# define ESC 53
+# define SCROLL_UP 4
+# define SCROLL_DOWN 5
+# define LEFT_BTTN 1
+# define LEFT 123
+# define RIGHT 124
+# define UP 125
+# define DOWN 126
+# define SPACE 49
 
 typedef struct		s_quadr_equation
 {
@@ -30,11 +41,13 @@ typedef struct		s_quadr_equation
 
 typedef struct		s_mlx
 {
-	void		*ptr;
-	void		*win_ptr;
-	void		*img_ptr;
-	int			*img_data;
+	void		*mlx;
+	void		*win;
+	int			*img_ptr;
+	int			*data_ptr;
 	int 		bit_pp;
+	int 		endian;
+	int 		size_line;
 }					t_mlx;
 
 typedef struct		s_viewport
@@ -92,14 +105,7 @@ typedef struct		s_object
 
 typedef struct		s_data
 {
-	t_mlx			*mlx_ptr;
-	t_quadr_equation	*quadr_equation_ptr;
-	t_viewport			*viewport_ptr;
-	t_coord				*coord_ptr;
-	t_vector			*vector_ptr;
-	t_color				*color_ptr;
-	t_sph				*sph_ptr;
-	t_cylindr			*cylindr_ptr;
+	t_mlx				*mlx_ptr;
 	t_object			*object_ptr;
 }						t_data;
 
@@ -114,7 +120,7 @@ t_vector			creat_vector(t_coord first_point, t_coord second_point);
 t_coord				diff(t_coord p1, t_coord p2);
 float				dot(t_coord p1, t_coord p2);
 
-t_color				find_tangent_to_object(t_vector _ov_, t_object my, float t_min);
+t_color				find_tangent_to_object(t_vector _ov_, t_object *object, float t_min);
 
 float				quadr_equation(t_quadr_equation factor, float *t_1);
 void				normal_rotation(t_coord *q);
@@ -125,9 +131,16 @@ int					allocation(t_data *data);
 int					main(int ac, char **av);
 void				param_validation(char *param_name);
 
-void			free_all(t_data *data);
-void			clear_image(t_mlx *mlx);
-int		error_exit(char *text, int code);
-void	free_error_exit(char *text, int code, t_data *data);
+void				free_all(t_data *data);
+void				clear_image(t_mlx *mlx);
+int					error_exit(char *text, int code);
+void				free_error_exit(char *text, int code, t_data *data);
+void				grafic_connection(t_data *data, t_mlx *mlx);
+void				grafic_preset(t_mlx *mlx);
+int					close_window(t_data *data);
+int					buttons_press(int key, t_data *data);
+void				read_setups(t_object *object, char *name);
+void 				draw(t_data *data, t_mlx *mlx, t_object *object);
+void				put_color_into_pix(int *img_data, int x, int y, t_color color);
 
 #endif
