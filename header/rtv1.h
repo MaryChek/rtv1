@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:25:42 by rtacos            #+#    #+#             */
-/*   Updated: 2020/09/21 23:35:51 by dtaisha          ###   ########lyon.fr   */
+/*   Updated: 2020/09/21 23:36:22 by dtaisha          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void				change_color(t_color *color, int r, int g, int b);
 
 t_coord				win_to_viewport(int x, int y, t_viewport vp);
 
-t_vector			creat_vector(t_coord first_point, t_coord second_point);
+t_vector			create_vector(t_coord first_point, t_coord second_point);
 t_coord				diff(t_coord p1, t_coord p2);
 float				dot(t_coord p1, t_coord p2);
 

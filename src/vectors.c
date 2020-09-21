@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:25:37 by rtacos            #+#    #+#             */
-/*   Updated: 2020/09/21 11:20:22 by dtaisha          ###   ########lyon.fr   */
+/*   Updated: 2020/09/21 23:47:46 by dtaisha          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_coord		vector_dis(t_coord p1, t_coord p2)
 	return (rez_point);
 }
 
-t_vector	creat_vector(t_coord first_point, t_coord second_point)
+t_vector	create_vector(t_coord first_point, t_coord second_point)
 {
 	t_vector	vector;
 

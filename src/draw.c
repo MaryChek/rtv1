@@ -22,7 +22,7 @@ void 				draw(t_data *data, t_mlx *mlx, t_object *object)
 
 			t_min = 0.0;
 //			change_color(&pix_color, 0, 0, 0);
-			_vo_ = creat_vector(object->camera, win_to_viewport(x, y, view_port));
+			_vo_ = create_vector(object->camera, win_to_viewport(x, y, view_port));
 			paint_the_pix(mlx->data_ptr, x, y, find_color(_vo_, object, t_min));
 		}
 	}

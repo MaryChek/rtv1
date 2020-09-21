@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 18:59:17 by rtacos            #+#    #+#             */
-/*   Updated: 2020/09/21 23:48:31 by dtaisha          ###   ########lyon.fr   */
+/*   Updated: 2020/09/21 23:49:31 by dtaisha          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		tang_to_cyln(t_vector v_ov_, t_cylindr cyln, float *t, t_coord camera)
 	float				dot_ov_r;
 	float				dot_co_r;
 
-	v_co_ = creat_vector(cyln.center, camera);
+	v_co_ = create_vector(cyln.center, camera);
 	// normal_rotation(&v_co_);
 	dot_co_r = dot(v_co_.distance, cyln.rotation);
 	dot_ov_r = dot(v_ov_.distance, cyln.rotation);
@@ -37,7 +37,7 @@ int		tang_to_sph(t_vector v_ov_, t_sph sph, float *t, t_coord camera)
 	t_quadr_equation	factor;
 	t_vector			v_co_;
 
-	v_co_ = creat_vector(sph.center, camera);
+	v_co_ = create_vector(sph.center, camera);
 	factor.a = dot(v_ov_.distance, v_ov_.distance);
 	factor.b = 2.0 * dot(v_co_.distance, v_ov_.distance);
 	factor.c = dot(v_co_.distance, v_co_.distance) - sph.rad * sph.rad;

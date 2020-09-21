@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 17:39:55 by rtacos            #+#    #+#             */
-/*   Updated: 2020/09/21 23:35:51 by dtaisha          ###   ########lyon.fr   */
+/*   Updated: 2020/09/21 23:36:22 by dtaisha          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@
 //
 //			t_min = 0.0;
 //			change_color(&pix_color, 0, 0, 0);
-//			_vo_ = creat_vector(my.camera, win_to_viewport(x, y, view_port));
+//			_vo_ = create_vector(my.camera, win_to_viewport(x, y, view_port));
 //			pix_color = find_color(_vo_, my, t_min); ////// вернуть int if(find) -> pix =... else pix(0,0,0);
 //			paint_the_pix(&mlx.img_data, x, y, pix_color);
 //		}
