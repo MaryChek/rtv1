@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 17:39:55 by rtacos            #+#    #+#             */
-/*   Updated: 2020/09/18 21:15:55 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/09/21 09:05:58 by dtaisha          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@
 //												&bpp, &size_line, &endian);
 //	return (mlx);
 //}
-
 //void	put_color_into_pix(int **img_data, int x, int y, t_color color)
 //{
 //	(*img_data)[((y * WIN_WID) + x)] = color.r << 16;
