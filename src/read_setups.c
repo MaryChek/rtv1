@@ -31,9 +31,9 @@ static void		mock_cylinder(t_cylindr *cylinder)
 	cylinder->color.g = 255;
 	cylinder->color.b = 0;
 
-	cylinder->rotation.x = 1.0;
+	cylinder->rotation.x = 0.0;
 	cylinder->rotation.y = 1.0;
-	cylinder->rotation.z = 0.0;
+	cylinder->rotation.z = -1.0;
 
 	normal_rotation(&cylinder->rotation);
 

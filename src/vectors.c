@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:25:37 by rtacos            #+#    #+#             */
-/*   Updated: 2020/09/21 11:17:04 by dtaisha          ###   ########lyon.fr   */
+/*   Updated: 2020/09/21 11:20:22 by dtaisha          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_coord		win_to_viewport(int x, int y, t_viewport vp)
 
 	point.x = (x - (WIN_WID / 2));
 	point.y = (y - (WIN_HIG / 2));
-	if (point.x == 0.0 && point.y == 0.0)
+	if (x == (WIN_WID / 2) && y == 0)
 		point.z = vp.distanse;
 	point.z = vp.distanse;
 	return (point);

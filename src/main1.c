@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 17:39:55 by rtacos            #+#    #+#             */
-/*   Updated: 2020/09/18 21:15:55 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/09/21 23:35:51 by dtaisha          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@
 //												&bpp, &size_line, &endian);
 //	return (mlx);
 //}
-
-//void	put_color_into_pix(int **img_data, int x, int y, t_color color)
+//void	paint_the_pix(int **img_data, int x, int y, t_color color)
 //{
 //	(*img_data)[((y * WIN_WID) + x)] = color.r << 16;
 //	(*img_data)[((y * WIN_WID) + x)] += color.g << 8;
@@ -130,8 +129,8 @@
 //			t_min = 0.0;
 //			change_color(&pix_color, 0, 0, 0);
 //			_vo_ = creat_vector(my.camera, win_to_viewport(x, y, view_port));
-//			pix_color = find_tangent_to_object(_vo_, my, t_min); ////// вернуть int if(find) -> pix =... else pix(0,0,0);
-//			put_color_into_pix(&mlx.img_data, x, y, pix_color);
+//			pix_color = find_color(_vo_, my, t_min); ////// вернуть int if(find) -> pix =... else pix(0,0,0);
+//			paint_the_pix(&mlx.img_data, x, y, pix_color);
 //		}
 //	}
 //	mlx_hook(mlx.win_ptr, 2, 1L << 0, key_press, 0);

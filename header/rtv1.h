@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:25:42 by rtacos            #+#    #+#             */
-/*   Updated: 2020/09/21 09:35:09 by dtaisha          ###   ########lyon.fr   */
+/*   Updated: 2020/09/21 23:35:51 by dtaisha          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ t_vector			creat_vector(t_coord first_point, t_coord second_point);
 t_coord				diff(t_coord p1, t_coord p2);
 float				dot(t_coord p1, t_coord p2);
 
-t_color				find_tangent_to_object(t_vector _ov_, t_object *object, float t_min);
+t_color				find_color(t_vector _ov_, t_object *object, float t_min);
 
 float				quadr_equation(t_quadr_equation factor, float *t_1);
 void				normal_rotation(t_coord *q);
@@ -141,6 +141,6 @@ int					close_window(t_data *data);
 int					buttons_press(int key, t_data *data);
 void				read_setups(t_object *object, char *name);
 void 				draw(t_data *data, t_mlx *mlx, t_object *object);
-void				put_color_into_pix(int *img_data, int x, int y, t_color color);
+void				paint_the_pix(int *img_data, int x, int y, t_color color);
 
 #endif
