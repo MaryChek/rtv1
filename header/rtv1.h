@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:25:42 by rtacos            #+#    #+#             */
-/*   Updated: 2020/09/21 23:36:22 by dtaisha          ###   ########lyon.fr   */
+/*   Updated: 2020/09/22 11:06:14 by dtaisha          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 # define UP 125
 # define DOWN 126
 # define SPACE 49
+
+# define T_MIN 0.0
 
 typedef struct		s_quadr_equation
 {
