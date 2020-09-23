@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 17:39:55 by rtacos            #+#    #+#             */
-/*   Updated: 2020/09/20 20:56:58 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/09/22 20:08:12 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,15 @@ int		main()
 // ------------------------------------------ SPHERE
 	t_sph		obj_sph;
 
-	obj_sph.center.x = 0.0;
-	obj_sph.center.y = 0.0;
-	obj_sph.center.z = 210.0;
+	obj_sph.center.x = 0.0f;
+	obj_sph.center.y = 0.0f;
+	obj_sph.center.z = 1030.0f;
 	
 	obj_sph.color.r = 255;
 	obj_sph.color.g = 0;
 	obj_sph.color.b = 0;
 	
-	obj_sph.rad = 200;
+	obj_sph.rad = 300.0f;
 
 	my.num_sphs++;
 	
@@ -79,21 +79,21 @@ int		main()
 
 	t_cylindr	obj_cyln;
 
-	obj_cyln.center.x = 0.0;
-	obj_cyln.center.y = 0.0;
-	obj_cyln.center.z = 210.0;
+	obj_cyln.center.x = 100.0f;
+	obj_cyln.center.y = 0.0f;
+	obj_cyln.center.z = 10.0f;
 
 	obj_cyln.color.r = 0;
 	obj_cyln.color.g = 255;
 	obj_cyln.color.b = 0;
 
-	obj_cyln.rotation.x = 0.0;
-	obj_cyln.rotation.y = 1.0;
-	obj_cyln.rotation.z = -1.0;
+	obj_cyln.rotation.x = 0.0f;
+	obj_cyln.rotation.y = 0.0f;
+	obj_cyln.rotation.z = 1.0f;
 	normal_rotation(&obj_cyln.rotation);
 	
 
-	obj_cyln.rad = 50;
+	obj_cyln.rad = 100.0f;
 
 	my.num_cylns++;
 
@@ -103,16 +103,18 @@ int		main()
 
 // ------------------------------------------ CAMERA
 
-	my.camera.x = 0;
-	my.camera.y = 0;
-	my.camera.z = 0;
+	my.camera.x = 0.0f;
+	my.camera.y = 0.0f;
+	my.camera.z = 0.0f;
 	
+	
+
 // ----------------------------------------- PARSING_END
 	t_viewport view_port;
 
 	view_port.wid = WIN_WID;
 	view_port.hig = WIN_HIG;
-	view_port.distanse = 1;
+	view_port.distanse = 1080.0f;
 
 	int x, y;
 	y = -1;
@@ -121,12 +123,12 @@ int		main()
 		x = -1;
 		while (++x < WIN_WID)
 		{
-			t_vector	_vo_;
+			t_vector	_ov_;
 			float		t_min;
 
 			t_min = 0.0;
-			_vo_ = creat_vector(my.camera, win_to_viewport(x, y, view_port));
-			paint_the_pix(&mlx.img_data, x, y, find_color(_vo_, my, t_min));
+			_ov_ = creat_vector(my.camera, win_to_viewport(x, y, view_port));
+			paint_the_pix(&mlx.img_data, x, y, find_color(_ov_, my, t_min));
 		}
 	}
 	mlx_hook(mlx.win_ptr, 2, 1L << 0, key_press, 0);

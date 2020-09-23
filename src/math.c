@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 18:25:44 by rtacos            #+#    #+#             */
-/*   Updated: 2020/09/18 20:20:21 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/09/22 20:33:24 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,12 @@ float		quadr_equation(t_quadr_equation factor, float *t_1)
 	
 	if (((dis = factor.b * factor.b - 4 * factor.a * factor.c) >= 0.0))
 	{
-		*t_1 = (float)((- factor.b + (float)sqrt(dis)) / (2.0 * factor.a));
-		t_2 = (float)((- factor.b - (float)sqrt(dis)) / (2.0 * factor.a));
-		*t_1 = *t_1 < t_2 ? *t_1 : t_2;
+		*t_1 = (float)((- factor.b + (float)sqrt(dis)) / (2.0f * factor.a));
+		t_2 = (float)((- factor.b - (float)sqrt(dis)) / (2.0f * factor.a));
+		if (*t_1 < 0.0 && t_2 < 0.0)
+			return (0);
+		else
+			*t_1 = (*t_1 >= 0.0 && (*t_1 < t_2 || t_2 <= 0.0)) ? *t_1 : t_2;
 		return (1);
 	}
 	else

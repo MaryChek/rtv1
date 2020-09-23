@@ -23,7 +23,7 @@ OFILE =	$(SRCS:%.c=%.o)
 
 OBJ =	$(addprefix $(OBJ_DIR), $(OFILE))
 
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -g
 
 CC = clang
 

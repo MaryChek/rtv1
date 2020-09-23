@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:25:42 by rtacos            #+#    #+#             */
-/*   Updated: 2020/09/20 20:16:39 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/09/22 20:09:05 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct		s_viewport
 {
 	int			wid;
 	int			hig;
-	int			distanse;
+	float		distanse;
 }					t_viewport;
 
 typedef struct		s_coord
