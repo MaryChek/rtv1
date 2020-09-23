@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:25:42 by rtacos            #+#    #+#             */
-/*   Updated: 2020/09/22 11:06:14 by dtaisha          ###   ########lyon.fr   */
+/*   Updated: 2020/09/22 11:11:36 by dtaisha          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ typedef struct		s_mlx
 
 typedef struct		s_viewport
 {
-	int			wid;
-	int			hig;
-	int			distanse;
+	float			wid;
+	float			hig;
+	float			distanse;
 }					t_viewport;
 
 typedef struct		s_coord

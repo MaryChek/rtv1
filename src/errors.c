@@ -6,21 +6,24 @@
 /*   By: dtaisha <dtaisha@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/05 18:48:32 by dtaisha           #+#    #+#             */
-/*   Updated: 2020/09/21 00:02:44 by dtaisha          ###   ########lyon.fr   */
+/*   Updated: 2020/09/23 11:00:17 by dtaisha          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-//todo нужно прописать юзаддж
+
 int		error_exit(char *text, int code)
 {
 	if (code == 3)
 	{
-		ft_putstr("usage: ./rtv1 [scine]\n");
-		ft_putstr("\t\0scine:\0");
-		ft_putstr(" use numbers or names:\n");
-		ft_putstr("\t\ttest\n\t\ttest\n");
-		ft_putstr("\t\ttest\n");
+		ft_putstr("usage: ./rtv1 [scene]\n");
+		ft_putstr("\t\0scene:\0");
+		ft_putstr("The following options are available:\n");
+		ft_putstr("\t\ttest   \t\ttest var, for develop(tmp)\n");
+		ft_putstr("\t\tscene_1\t\tStage with plane\n");
+		ft_putstr("\t\tscene_2\t\tStage with sphere\n");
+		ft_putstr("\t\tscene_3\t\tStage with cylinder\n");
+		ft_putstr("\t\tscene_4\t\tStage with cone\n");
 	}
 	else
 		ft_putstr(text);
