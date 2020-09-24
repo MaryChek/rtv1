@@ -6,25 +6,26 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 18:25:44 by rtacos            #+#    #+#             */
-/*   Updated: 2020/09/22 20:33:24 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/09/24 21:22:53 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-float		quadr_equation(t_quadr_equation factor, float *t_1)
+float		quadr_equation(t_quadr_equation factor, t_obj_info *near)
 {
 	float	dis;
+	float	t_1;
 	float	t_2;
 	
 	if (((dis = factor.b * factor.b - 4 * factor.a * factor.c) >= 0.0))
 	{
-		*t_1 = (float)((- factor.b + (float)sqrt(dis)) / (2.0f * factor.a));
+		t_1 = (float)((- factor.b + (float)sqrt(dis)) / (2.0f * factor.a));
 		t_2 = (float)((- factor.b - (float)sqrt(dis)) / (2.0f * factor.a));
-		if (*t_1 < 0.0 && t_2 < 0.0)
+		if (t_1 < 0.0 && t_2 < 0.0)
 			return (0);
 		else
-			*t_1 = (*t_1 >= 0.0 && (*t_1 < t_2 || t_2 <= 0.0)) ? *t_1 : t_2;
+			near->t = (t_1 >= 0.0 && (t_1 < t_2 || t_2 <= 0.0)) ? t_1 : t_2;
 		return (1);
 	}
 	else

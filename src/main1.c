@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 17:39:55 by rtacos            #+#    #+#             */
-/*   Updated: 2020/09/22 20:08:12 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/09/24 18:32:12 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,45 @@ int		main()
 	my.camera.y = 0.0f;
 	my.camera.z = 0.0f;
 	
+// ------------------------------------------ LIGHT SOURCES
+
+	my.num_l_src = 0;
 	
+	t_light		light_1;
+
+	light_1.type = AMBIENT;
+	light_1.intensity = 0.2f;
+	
+	my.num_l_src++;
+	
+	t_light		light_2;
+
+	light_2.type = POINT;
+	light_2.intensity = 0.6f;
+	light_2.pos_or_dir.x = 2.0;
+	light_2.pos_or_dir.y = 1.0;
+	light_2.pos_or_dir.z = 0.0;
+
+	my.num_l_src++;
+
+	t_light		light_3;
+
+	light_2.type = DIRECTIONAL;
+	light_2.intensity = 0.2f;
+	light_2.pos_or_dir.x = 1.0;
+	light_2.pos_or_dir.y = 1.0;
+	light_2.pos_or_dir.z = 4.0;
+
+	my.num_l_src++;
+
+	my.light_srcs = (t_light *)malloc(sizeof(t_light) * my.num_l_src);
+
+	my.light_srcs[0] = light_1;
+	my.light_srcs[1] = light_2;
+	my.light_srcs[2] = light_3;
 
 // ----------------------------------------- PARSING_END
+
 	t_viewport view_port;
 
 	view_port.wid = WIN_WID;

@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:25:42 by rtacos            #+#    #+#             */
-/*   Updated: 2020/09/22 20:09:05 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/09/24 21:23:21 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,20 @@ typedef struct		s_cylindr
 	float		rad;
 }					t_cylindr;
 
+enum	type_of_light_src
+{
+	AMBIENT,
+	POINT,
+	DIRECTIONAL,
+};
+
+typedef struct		s_light
+{
+	int		type;
+	float	intensity;
+	t_coord	pos_or_dir;
+}					t_light;
+
 typedef struct		s_object
 {
 	t_coord		camera;
@@ -86,7 +100,24 @@ typedef struct		s_object
 	int			num_sphs;
 	t_cylindr	*cyln_objs;
 	int			num_cylns;
+	t_light		*light_srcs;
+	int			num_l_src;
 }					t_object;
+
+enum	type_obj
+{
+	SPH,
+	CYLINDER,
+};
+
+typedef struct		s_obj_info
+{
+	int			type;
+	int			index;
+	t_coord		point;
+	t_vector	v_co;
+	float		t;
+}					t_obj_info;
 
 t_color				mult_colors(t_color v1, t_color v2, int minus);
 void				brightness_change(t_color *color, float mult);
@@ -100,9 +131,11 @@ float				dot(t_coord p1, t_coord p2);
 
 t_color				find_color(t_vector _ov_, t_object my, float t_min);
 
-float				quadr_equation(t_quadr_equation factor, float *t_1);
+float				quadr_equation(t_quadr_equation factor, t_obj_info *near);
 void				normal_rotation(t_coord *q);
 
 int					key_press(int key);
+
+float				compute_lighting(t_coord p, t_vector norm);
 
 #endif
