@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 17:39:55 by rtacos            #+#    #+#             */
-/*   Updated: 2020/09/24 18:32:12 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/09/25 20:38:57 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@ int		main()
 
 	obj_sph.center.x = 0.0f;
 	obj_sph.center.y = 0.0f;
-	obj_sph.center.z = 1030.0f;
+	obj_sph.center.z = 50.0f;
 	
 	obj_sph.color.r = 255;
 	obj_sph.color.g = 0;
 	obj_sph.color.b = 0;
 	
-	obj_sph.rad = 300.0f;
+	obj_sph.rad = 10.0f;
 
 	my.num_sphs++;
 	
@@ -79,21 +79,21 @@ int		main()
 
 	t_cylindr	obj_cyln;
 
-	obj_cyln.center.x = 100.0f;
-	obj_cyln.center.y = 0.0f;
-	obj_cyln.center.z = 10.0f;
+	obj_cyln.center.x = 0.0f;
+	obj_cyln.center.y = 5.0f;
+	obj_cyln.center.z = 47.0f;
 
 	obj_cyln.color.r = 0;
 	obj_cyln.color.g = 255;
 	obj_cyln.color.b = 0;
 
-	obj_cyln.rotation.x = 0.0f;
-	obj_cyln.rotation.y = 0.0f;
-	obj_cyln.rotation.z = 1.0f;
-	normal_rotation(&obj_cyln.rotation);
+	obj_cyln.rotation.x = 1.0f;
+	obj_cyln.rotation.y = 1.0f;
+	obj_cyln.rotation.z = 0.0f;
+	normal_vector(&obj_cyln.rotation);
 	
 
-	obj_cyln.rad = 100.0f;
+	obj_cyln.rad = 5.0f;
 
 	my.num_cylns++;
 
@@ -121,20 +121,20 @@ int		main()
 	t_light		light_2;
 
 	light_2.type = POINT;
-	light_2.intensity = 0.6f;
-	light_2.pos_or_dir.x = 2.0;
-	light_2.pos_or_dir.y = 1.0;
-	light_2.pos_or_dir.z = 0.0;
+	light_2.intensity = 0.3f;
+	light_2.pos_or_dir.x = 15.0;
+	light_2.pos_or_dir.y = 0.0;
+	light_2.pos_or_dir.z = 40.0;
 
 	my.num_l_src++;
 
 	t_light		light_3;
 
-	light_2.type = DIRECTIONAL;
-	light_2.intensity = 0.2f;
-	light_2.pos_or_dir.x = 1.0;
-	light_2.pos_or_dir.y = 1.0;
-	light_2.pos_or_dir.z = 4.0;
+	light_3.type = DIRECTIONAL;
+	light_3.intensity = 0.0f;
+	light_3.pos_or_dir.x = 0.0;
+	light_3.pos_or_dir.y = 0.0;
+	light_3.pos_or_dir.z = 50.0;
 
 	my.num_l_src++;
 
@@ -152,19 +152,25 @@ int		main()
 	view_port.hig = WIN_HIG;
 	view_port.distanse = 1080.0f;
 
+	t_obj_info	*near;
+
+	near = NULL;
+
 	int x, y;
+	t_raytrace	value;
+	
+	value = fill_in_values_to_raytracing(0.0, 100000.0, -1, my.camera);
 	y = -1;
 	while (++y < WIN_HIG)
 	{
 		x = -1;
 		while (++x < WIN_WID)
 		{
-			t_vector	_ov_;
-			float		t_min;
+			t_coord		vec_ov;
 
-			t_min = 0.0;
-			_ov_ = creat_vector(my.camera, win_to_viewport(x, y, view_port));
-			paint_the_pix(&mlx.img_data, x, y, find_color(_ov_, my, t_min));
+			vec_ov = vector_coord(my.camera, win_to_viewport(x, y, view_port));
+			value.begin_vec = vec_ov;
+			paint_the_pix(&mlx.img_data, x, y, find_color(my, value, near));
 		}
 	}
 	mlx_hook(mlx.win_ptr, 2, 1L << 0, key_press, 0);
