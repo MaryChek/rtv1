@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 17:39:55 by rtacos            #+#    #+#             */
-/*   Updated: 2020/09/25 20:38:57 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/09/29 21:23:43 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,32 +56,105 @@ int		main()
 
 // ----------------------------------------- PARSING(my_obj)
 
+// ------------------------------------------ CONE
+
+	t_cone		obj_cone;
+
+	my.num_cons = 0;
+	obj_cone.center.x = 0.0f;
+	obj_cone.center.y = 0.0f;
+	obj_cone.center.z = 3.0f;
+	
+	obj_cone.color.r = 255;
+	obj_cone.color.g = 0;
+	obj_cone.color.b = 0;
+	
+	obj_cone.rad = 1.0f;
+
+	obj_cone.rotation.x = 0.0f;
+	obj_cone.rotation.y = 1.0f;
+	obj_cone.rotation.z = 0.0f;
+	obj_cone.rotation = normal_vector((t_coord){0.0, 1.0, 0.0});
+
+	obj_cone.angle = 10;
+
+	my.num_cons++;
+
+	my.cone_objs = (t_cone *)malloc(sizeof(t_cone) * my.num_cons);
+
+	my.cone_objs[0] = obj_cone;
+
 // ------------------------------------------ SPHERE
 	t_sph		obj_sph;
 
 	obj_sph.center.x = 0.0f;
-	obj_sph.center.y = 0.0f;
-	obj_sph.center.z = 50.0f;
+	obj_sph.center.y = -1.0f;
+	obj_sph.center.z = 3.0f;
 	
 	obj_sph.color.r = 255;
 	obj_sph.color.g = 0;
 	obj_sph.color.b = 0;
 	
-	obj_sph.rad = 10.0f;
+	obj_sph.rad = 1.0f;
+
+	my.num_sphs++;
+
+	t_sph		obj_sph2;
+
+	obj_sph2.center.x = 2.0f;
+	obj_sph2.center.y = 0.0f;
+	obj_sph2.center.z = 4.0f;
+	
+	obj_sph2.color.r = 0;
+	obj_sph2.color.g = 0;
+	obj_sph2.color.b = 255;
+	
+	obj_sph2.rad = 1.0f;
+
+	my.num_sphs++;
+
+	t_sph		obj_sph3;
+
+	obj_sph3.center.x = -2.0f;
+	obj_sph3.center.y = 0.0f;
+	obj_sph3.center.z = 4.0f;
+	
+	obj_sph3.color.r = 0;
+	obj_sph3.color.g = 255;
+	obj_sph3.color.b = 0;
+	
+	obj_sph3.rad = 1.0f;
+
+	my.num_sphs++;
+
+	t_sph		obj_sph4;
+
+	obj_sph4.center.x = 0.0f;
+	obj_sph4.center.y = -5001.0f;
+	obj_sph4.center.z = 0.0f;
+	
+	obj_sph4.color.r = 255;
+	obj_sph4.color.g = 255;
+	obj_sph4.color.b = 0;
+	
+	obj_sph4.rad = 5000.0f;
 
 	my.num_sphs++;
 	
 	my.sph_objs = (t_sph *)malloc(sizeof(t_sph) * my.num_sphs);
 
 	my.sph_objs[0] = obj_sph;
+	my.sph_objs[1] = obj_sph2;
+	my.sph_objs[2] = obj_sph3;
+	my.sph_objs[3] = obj_sph4;
 
 // ------------------------------------------ CYLINDER
 
 	t_cylindr	obj_cyln;
 
 	obj_cyln.center.x = 0.0f;
-	obj_cyln.center.y = 5.0f;
-	obj_cyln.center.z = 47.0f;
+	obj_cyln.center.y = 0.0f;
+	obj_cyln.center.z = 7.0f;
 
 	obj_cyln.color.r = 0;
 	obj_cyln.color.g = 255;
@@ -90,10 +163,10 @@ int		main()
 	obj_cyln.rotation.x = 1.0f;
 	obj_cyln.rotation.y = 1.0f;
 	obj_cyln.rotation.z = 0.0f;
-	normal_vector(&obj_cyln.rotation);
+	obj_cyln.rotation = normal_vector((t_coord){1.0, 1.0, 0.0});
 	
 
-	obj_cyln.rad = 5.0f;
+	obj_cyln.rad = 1.0f;
 
 	my.num_cylns++;
 
@@ -114,27 +187,27 @@ int		main()
 	t_light		light_1;
 
 	light_1.type = AMBIENT;
-	light_1.intensity = 0.2f;
+	light_1.intensity = 0.6f;
 	
 	my.num_l_src++;
 	
 	t_light		light_2;
 
 	light_2.type = POINT;
-	light_2.intensity = 0.3f;
-	light_2.pos_or_dir.x = 15.0;
-	light_2.pos_or_dir.y = 0.0;
-	light_2.pos_or_dir.z = 40.0;
+	light_2.intensity = 0.6f;
+	light_2.pos_or_dir.x = 9.0;
+	light_2.pos_or_dir.y = 1.0;
+	light_2.pos_or_dir.z = 0.0;
 
 	my.num_l_src++;
 
 	t_light		light_3;
 
 	light_3.type = DIRECTIONAL;
-	light_3.intensity = 0.0f;
-	light_3.pos_or_dir.x = 0.0;
-	light_3.pos_or_dir.y = 0.0;
-	light_3.pos_or_dir.z = 50.0;
+	light_3.intensity = 0.2f;
+	light_3.pos_or_dir.x = 1.0;
+	light_3.pos_or_dir.y = 4.0;
+	light_3.pos_or_dir.z = 4.0;
 
 	my.num_l_src++;
 
@@ -152,25 +225,25 @@ int		main()
 	view_port.hig = WIN_HIG;
 	view_port.distanse = 1080.0f;
 
-	t_obj_info	*near;
-
-	near = NULL;
-
 	int x, y;
 	t_raytrace	value;
+	t_obj_info	*near;
 	
-	value = fill_in_values_to_raytracing(0.0, 100000.0, -1, my.camera);
 	y = -1;
 	while (++y < WIN_HIG)
 	{
 		x = -1;
 		while (++x < WIN_WID)
 		{
-			t_coord		vec_ov;
-
-			vec_ov = vector_coord(my.camera, win_to_viewport(x, y, view_port));
-			value.begin_vec = vec_ov;
-			paint_the_pix(&mlx.img_data, x, y, find_color(my, value, near));
+			value.t_near = -1;
+			value = fill_in_values_to_raytracing(0.0, 100000.0, -1);
+			value.begin_vec = normal_vector(vector_coord(my.camera,
+									win_to_viewport(x, y, view_port)));
+			if ((near = ray_tracing(my, value, my.camera)))
+				my.pix_color = light_and_shadow(near, my, value);
+			else
+				change_color(&my.pix_color, 0, 0, 0);
+			paint_the_pix(&mlx.img_data, x, y, my.pix_color);
 		}
 	}
 	mlx_hook(mlx.win_ptr, 2, 1L << 0, key_press, 0);

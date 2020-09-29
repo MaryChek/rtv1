@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:25:42 by rtacos            #+#    #+#             */
-/*   Updated: 2020/09/25 19:58:22 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/09/29 21:12:18 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,17 @@ typedef struct		s_cylindr
 	t_coord		center;
 	t_color		color;
 	t_coord		rotation;
-	float		hig;
 	float		rad;
 }					t_cylindr;
+
+typedef struct		s_cone
+{
+	t_coord		center;
+	t_color		color;
+	t_coord		rotation;
+	float		rad;
+	float		angle;
+}					t_cone;
 
 enum	type_of_light_src
 {
@@ -94,6 +102,8 @@ typedef struct		s_object
 	int			num_sphs;
 	t_cylindr	*cyln_objs;
 	int			num_cylns;
+	t_cone		*cone_objs;
+	int			num_cons;
 	t_light		*light_srcs;
 	int			num_l_src;
 }					t_object;
@@ -102,6 +112,7 @@ enum	type_obj
 {
 	SPH,
 	CYLINDER,
+	CONE,
 };
 
 typedef struct		s_obj_info
@@ -109,7 +120,7 @@ typedef struct		s_obj_info
 	int			type;
 	int			index;
 	t_coord		point;
-	// t_coord		begin_vec;
+	t_coord		begin_vec;
 	t_coord		center;
 	float		t;
 }					t_obj_info;
@@ -121,30 +132,31 @@ typedef struct		s_raytrace
 	float		t_near;
 	t_coord		begin_vec;
 	t_coord		center;
-	t_coord		camera;
 }					t_raytrace;
+
+t_color				light_and_shadow(t_obj_info *near, t_object my, t_raytrace value);
+float				compute_lighting(t_coord point, t_coord normal, t_object my, t_raytrace value);
+
+int					key_press(int key);
+
+float				quadr_equation(t_quadr_equation factor, t_raytrace *value);
+t_coord				normal_vector(t_coord vector);
+float				vector_len(t_coord q);
+
+t_coord				cyln_normal(t_coord rotation, t_obj_info near);
+t_coord				cone_normal(t_coord rotation, t_obj_info near, float angle);
+t_raytrace			fill_in_values_to_raytracing(float t_min, float t_max, float t_near);
+t_obj_info			*ray_tracing(t_object my, t_raytrace value, t_coord point);
 
 t_color				mult_colors(t_color v1, t_color v2, int minus);
 t_color				brightness_change(t_color color, float mult);
 void				change_color(t_color *color, int r, int g, int b);
 
 t_coord				win_to_viewport(int x, int y, t_viewport vp);
-
 float				dot(t_coord v_1, t_coord v_2);
-
-t_raytrace			fill_in_values_to_raytracing(float t_min, float t_max, float t_near,
-																t_coord begin_vec);
-t_color				find_color(t_object my, t_raytrace value, t_obj_info *near);
-
 t_coord				sum_vectors(t_coord vec_1, t_coord vec_2);
 t_coord				vec_scalar_mult(t_coord vector, float mult);
 t_coord				vector_coord(t_coord begin_point, t_coord end_point);
-float				quadr_equation(t_quadr_equation factor, float *t);
-void				normal_vector(t_coord *q);
-float				vector_len(t_coord q);
 
-int					key_press(int key);
-
-float				compute_lighting(t_coord p, t_coord normal, t_light *light_srcs, int num_light_src);
 
 #endif

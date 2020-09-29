@@ -6,13 +6,18 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 18:25:44 by rtacos            #+#    #+#             */
-/*   Updated: 2020/09/25 20:24:34 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/09/29 20:02:10 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-float		quadr_equation(t_quadr_equation factor, float *t)
+float		is_domain_of_definition(float num, float min, float max)
+{
+	return ((num < min) ? 0.0 : num);
+}
+
+float		quadr_equation(t_quadr_equation factor, t_raytrace *value)
 {
 	float	dis;
 	float	t_1;
@@ -20,29 +25,37 @@ float		quadr_equation(t_quadr_equation factor, float *t)
 	
 	if (((dis = factor.b * factor.b - 4 * factor.a * factor.c) >= 0.0))
 	{
-		t_1 = (float)((- factor.b + (float)sqrt(dis)) / (2.0f * factor.a));
-		t_2 = (float)((- factor.b - (float)sqrt(dis)) / (2.0f * factor.a));
-		if (t_1 < 0.0 && t_2 < 0.0)
-			return (0);
-		else
-			*t = (t_1 > 0.0 && (t_1 < t_2 || t_2 < 0.0)) ? t_1 : t_2;
-		return (1);
+		t_1 = (float)((-factor.b + (float)sqrt(dis)) / (2.0f * factor.a));
+		t_2 = (float)((-factor.b - (float)sqrt(dis)) / (2.0f * factor.a));
+		t_1 = is_domain_of_definition(t_1, value->t_min, value->t_max);
+		t_2 = is_domain_of_definition(t_2, value->t_min, value->t_max);
+		if (t_1 != 0.0 && t_1 < t_2)
+		{
+			value->t_near = t_1;
+			return(1);
+		}
+		else if (t_2 != 0.0 && t_2 < t_1)
+		{
+			value->t_near = t_2;
+			return(1);
+		}
 	}
-	else
-		return (0);
+	return (0);
 }
 
-float		vector_len(t_coord q)
+float		vector_len(t_coord vector)
 {
-	return (sqrt(q.x * q.x + q.y * q.y + q.z * q.z));
+	return (sqrt(vector.x * vector.x + vector.y * vector.y
+									+ vector.z * vector.z));
 }
 
-void		normal_vector(t_coord *q)
+t_coord		normal_vector(t_coord vector)
 {
-	float	quat_len;
+	float	vec_len;
 
-	quat_len = vector_len(*q);
-	q->x = q->x / quat_len;
-	q->y = q->y / quat_len;
-	q->z = q->z / quat_len;
+	vec_len = vector_len(vector);
+	vector.x /= vec_len;
+	vector.y /= vec_len;
+	vector.z /= vec_len;
+	return (vector);
 }
