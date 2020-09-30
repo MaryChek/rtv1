@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:25:42 by rtacos            #+#    #+#             */
-/*   Updated: 2020/09/29 21:12:18 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/09/30 21:14:21 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,15 @@ typedef struct		s_cone
 	t_coord		center;
 	t_color		color;
 	t_coord		rotation;
-	float		rad;
 	float		angle;
 }					t_cone;
+
+typedef struct		s_plane
+{
+	t_coord		center;
+	t_color		color;
+	t_coord		rotation;
+}					t_plane;
 
 enum	type_of_light_src
 {
@@ -97,6 +103,7 @@ typedef struct		s_light
 typedef struct		s_object
 {
 	t_coord		camera;
+	t_coord		rot_cam;
 	t_color		pix_color;
 	t_sph		*sph_objs;
 	int			num_sphs;
@@ -104,6 +111,8 @@ typedef struct		s_object
 	int			num_cylns;
 	t_cone		*cone_objs;
 	int			num_cons;
+	t_plane		*plane_objs;
+	int			num_plans;
 	t_light		*light_srcs;
 	int			num_l_src;
 }					t_object;
@@ -113,6 +122,7 @@ enum	type_obj
 	SPH,
 	CYLINDER,
 	CONE,
+	PLANE,
 };
 
 typedef struct		s_obj_info
@@ -122,6 +132,7 @@ typedef struct		s_obj_info
 	t_coord		point;
 	t_coord		begin_vec;
 	t_coord		center;
+	t_coord		st_cent;
 	float		t;
 }					t_obj_info;
 
@@ -132,6 +143,7 @@ typedef struct		s_raytrace
 	float		t_near;
 	t_coord		begin_vec;
 	t_coord		center;
+	t_coord		st_cent;
 }					t_raytrace;
 
 t_color				light_and_shadow(t_obj_info *near, t_object my, t_raytrace value);
@@ -152,7 +164,7 @@ t_color				mult_colors(t_color v1, t_color v2, int minus);
 t_color				brightness_change(t_color color, float mult);
 void				change_color(t_color *color, int r, int g, int b);
 
-t_coord				win_to_viewport(int x, int y, t_viewport vp);
+t_coord				win_to_viewport(int x, int y, t_viewport vp, t_coord rot);
 float				dot(t_coord v_1, t_coord v_2);
 t_coord				sum_vectors(t_coord vec_1, t_coord vec_2);
 t_coord				vec_scalar_mult(t_coord vector, float mult);

@@ -23,7 +23,7 @@ OFILE =	$(SRCS:%.c=%.o)
 
 OBJ =	$(addprefix $(OBJ_DIR), $(OFILE))
 
-CFLAGS = -g
+CFLAGS = -g -O2
 
 CC = clang
 

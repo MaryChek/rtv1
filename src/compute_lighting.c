@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 18:03:46 by rtacos            #+#    #+#             */
-/*   Updated: 2020/09/29 21:12:59 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/09/30 20:15:23 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,23 @@ float	compute_lighting(t_coord point, t_coord normal, t_object my,
 				vec_l = normal_vector(my.light_srcs[i].pos_or_dir);
 			value.begin_vec = vec_l;
 			if (!ray_tracing(my, value, point)
-				&& (nor_dot_l = dot(normal, vec_l)) > value.t_min)
+				&& (nor_dot_l = dot(normal, vec_l)) > 0.0)
 				light_pow += my.light_srcs[i].intensity * nor_dot_l;
 		}
 	}
 	return (light_pow);
+}
+
+t_color		color_near_obj(t_object my, t_obj_info near)
+{
+	if (near.type == SPH)
+		return (my.sph_objs[near.index].color);
+	else if (near.type == CYLINDER)
+		return (my.cyln_objs[near.index].color);
+	else if (near.type == CONE)
+		return (my.cone_objs[near.index].color);
+	else
+		return (my.plane_objs[near.index].color);
 }
 
 t_color		light_and_shadow(t_obj_info *near, t_object my, t_raytrace value)
@@ -50,22 +62,18 @@ t_color		light_and_shadow(t_obj_info *near, t_object my, t_raytrace value)
 	near->point = sum_vectors(my.camera,
 				vec_scalar_mult(near->begin_vec, near->t));
 	if (near->type == SPH)
-	{
-		color = my.sph_objs[near->index].color;
 		normal = normal_vector(vector_coord(near->center, near->point));
-	}
 	else if (near->type == CYLINDER)
-	{
-		color = my.cyln_objs[near->index].color;
 		normal = cyln_normal(my.cyln_objs[near->index].rotation, *near);
-	}
 	else if (near->type == CONE)
-	{
-		color = my.cone_objs[near->index].color;
 		normal = cone_normal(my.cone_objs[near->index].rotation, *near,
 										my.cone_objs[near->index].angle);
+	else if (near->type == PLANE)
+	{
+		normal = my.plane_objs[near->index].rotation;
 	}
-	value = fill_in_values_to_raytracing(0.00000001f, 1.0, -1.0);
-	return (brightness_change(color,
+		
+	value = fill_in_values_to_raytracing(0.001f, 1.0, 0.0);
+	return (brightness_change(color_near_obj(my, *near),
 		compute_lighting(near->point, normal, my, value)));
 }
