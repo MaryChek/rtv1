@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 18:59:17 by rtacos            #+#    #+#             */
-/*   Updated: 2020/09/30 21:31:49 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/01 19:44:24 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,14 @@ int			tang_to_plane(t_raytrace *value, t_plane plane, t_coord st_point)
 	value->st_cent = vector_coord(plane.center, st_point);
 	dot_co_r = dot(value->st_cent, plane.rotation);
 	dot_ov_r = dot(value->begin_vec, plane.rotation);
-	// if (()) < 0.0)
-	// 	plane.rotation = normal_vector(vec_scalar_mult(plane.rotation, -1));
-	// if (dot_ov_r == 0.0)
-	// 	return (0);
-	t = (- dot_co_r) / dot_ov_r;
-	if (t > value->t_min && t < value->t_max)
+	if (dot_ov_r > 0.0 || dot_ov_r < 0.0)
 	{
-		value->t_near = t;
-		return (1);
+		t = (float)(- dot_co_r / dot_ov_r);
+		if ((t > (value->t_min * 10000) && t < value->t_max))
+		{
+			value->t_near = t;
+			return (1);
+		}
 	}
 	return (0);
 }
@@ -99,9 +98,12 @@ int			tang_to_cone(t_raytrace *value, t_cone cone, t_coord st_point)
 	dot_ov_r = dot(value->begin_vec, cone.rotation);
 	k = (float)tan(cone.angle);
 	k = k * k + 1.0;
-	factor.a = dot(value->begin_vec, value->begin_vec) - k * (float)pow(dot_ov_r, 2.0);
-	factor.b = 2.0 * (dot(value->begin_vec, value->st_cent) - k * dot_co_r * dot_ov_r);
-	factor.c = dot(value->st_cent, value->st_cent) - k * (float)pow(dot_co_r, 2.0);
+	factor.a = dot(value->begin_vec, value->begin_vec) -
+							k * (float)pow(dot_ov_r, 2.0);
+	factor.b = 2.0 * (dot(value->begin_vec, value->st_cent)
+							- k * dot_co_r * dot_ov_r);
+	factor.c = dot(value->st_cent, value->st_cent)
+							- k * (float)pow(dot_co_r, 2.0);
 	return (quadr_equation(factor, value));
 }
 

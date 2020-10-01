@@ -6,22 +6,33 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:25:37 by rtacos            #+#    #+#             */
-/*   Updated: 2020/09/30 21:15:23 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/01 18:26:34 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-t_coord		win_to_viewport(int x, int y, t_viewport vp, t_coord rot)
+t_coord		win_to_viewport(int x, int y, t_viewport vp/*, t_coord rot*/)
 {
 	t_coord		point;
 
-	point.x = (float)(x - (WIN_WID / 2)) + rot.x;
-	point.y = (float)((WIN_HIG / 2) - y) + rot.y;
-	if (point.x == 0.0 && point.y == 0.0) // для дебага
+	point.x = (float)(x - (WIN_WID / 2))/* + rot.x*/;
+	point.y = (float)((WIN_HIG / 2) - y)/* + rot.y*/;
+	if (point.x == -15.0 && point.y == -10.0) // для дебага
 		point.z = vp.distanse;
-	point.z = vp.distanse + rot.z;
+	point.z = vp.distanse/* + rot.z*/;
 	return (point);
+}
+
+void		reverse_vector(t_coord *vector)
+{
+	if (vector->x != 0.00)
+		vector->x = -vector->x;
+	if (vector->y != 0.00)
+		vector->y = -vector->y;
+	if (vector->z != 0.00)
+		vector->z = -vector->z;
+	*vector = normal_vector(*vector);
 }
 
 t_coord		vector_coord(t_coord begin_point, t_coord end_point)

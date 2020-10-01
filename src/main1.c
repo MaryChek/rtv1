@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 17:39:55 by rtacos            #+#    #+#             */
-/*   Updated: 2020/09/30 21:31:18 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/01 19:45:59 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ int		main()
 
 	t_cone		obj_cone;
 
-	obj_cone.center.x = 0.0f;
+	obj_cone.center.x = -1.0f;
 	obj_cone.center.y = 0.0f;
-	obj_cone.center.z = 4.0f;
+	obj_cone.center.z = 5.0f;
 	
 	obj_cone.color.r = 255;
 	obj_cone.color.g = 0;
@@ -72,9 +72,9 @@ int		main()
 	obj_cone.rotation.x = 1.0f;
 	obj_cone.rotation.y = 0.0f;
 	obj_cone.rotation.z = 0.0f;
-	obj_cone.rotation = normal_vector((t_coord){-1.5, 1.0, 0.0});
+	obj_cone.rotation = normal_vector((t_coord){-1.0, 1.0, 0.0});
 
-	obj_cone.angle = 10;
+	obj_cone.angle = 0.523599;
 
 	my.num_cons++;
 
@@ -103,9 +103,9 @@ int		main()
 
 	t_plane		obj_plane2;
 
-	obj_plane2.center.x = -2.0f;
-	obj_plane2.center.y = -1.0f;
-	obj_plane2.center.z = 10.0f;
+	obj_plane2.center.x = 0.0f;
+	obj_plane2.center.y = 0.0f;
+	obj_plane2.center.z = 8.0f;
 	
 	obj_plane2.color.r = 255;
 	obj_plane2.color.g = 255;
@@ -114,7 +114,7 @@ int		main()
 	obj_plane2.rotation.x = -1.0f;
 	obj_plane2.rotation.y = 1.0f;
 	obj_plane2.rotation.z = 1.0f;
-	obj_plane2.rotation = normal_vector((t_coord){1.0, 0.0, 0.0});
+	obj_plane2.rotation = normal_vector((t_coord){1.0, 1.0, 1.0});
 
 	my.num_plans++;
 
@@ -205,7 +205,7 @@ int		main()
 	my.camera.y = 0.0f;
 	my.camera.z = 0.0f;
 
-	my.rot_cam = normal_vector((t_coord){1.0, 0.0, 1.0});
+	// my.rot_cam = normal_vector((t_coord){0.0, 0.0, 0.0});
 	
 // ------------------------------------------ LIGHT SOURCES
 
@@ -214,7 +214,7 @@ int		main()
 	t_light		light_1;
 
 	light_1.type = AMBIENT;
-	light_1.intensity = 0.2f;
+	light_1.intensity = 0.3f;
 	
 	my.num_l_src++;
 	
@@ -222,16 +222,16 @@ int		main()
 
 	light_2.type = POINT;
 	light_2.intensity = 0.6f;
-	light_2.pos_or_dir.x = 2.0;
-	light_2.pos_or_dir.y = -1.0;
-	light_2.pos_or_dir.z = 0.0;
+	light_2.pos_or_dir.x = -20.0;
+	light_2.pos_or_dir.y = 0.0;
+	light_2.pos_or_dir.z = -30.0;
 
 	my.num_l_src++;
 
 	t_light		light_3;
 
 	light_3.type = DIRECTIONAL;
-	light_3.intensity = 0.4f;
+	light_3.intensity = 0.0f;
 	light_3.pos_or_dir.x = 1.0;
 	light_3.pos_or_dir.y = 4.0;
 	light_3.pos_or_dir.z = 4.0;
@@ -265,9 +265,9 @@ int		main()
 			value.t_near = -1;
 			value = fill_in_values_to_raytracing(0.0f, INFINITY, 0.0);
 			value.begin_vec = normal_vector(vector_coord(my.camera,
-									win_to_viewport(x, y, view_port, my.rot_cam)));
+									win_to_viewport(x, y, view_port/*, my.rot_cam*/)));
 			if ((near = ray_tracing(my, value, my.camera)))
-				my.pix_color = light_and_shadow(near, my, value);
+				my.pix_color = light_and_shadow(*near, my, value);
 			else
 				change_color(&my.pix_color, 0, 0, 0);
 			paint_the_pix(&mlx.img_data, x, y, my.pix_color);
