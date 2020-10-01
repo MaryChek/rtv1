@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 18:03:46 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/01 19:38:03 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/01 20:38:20 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ float	compute_lighting(t_coord point, t_coord normal, t_object my,
 								my.light_srcs[i].pos_or_dir);
 			else
 				vec_l = my.light_srcs[i].pos_or_dir;
-			// vec_l = normal_vector(vec_l);
+			vec_l = normal_vector(vec_l);
 			value.begin_vec = vec_l;
 			if (!ray_tracing(my, value, point)
 				&& (nor_dot_l = dot(normal, vec_l)) > 0.0)

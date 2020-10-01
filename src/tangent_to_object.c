@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 18:59:17 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/01 19:44:24 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/01 20:32:35 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,13 +147,13 @@ t_obj_info		*ray_tracing(t_object my, t_raytrace value, t_coord point)
 
 	i = -1;
 	near = NULL;
-	while (my.sph_objs && ++i < my.num_sphs)
-		if (tang_to_sph(&value, my.sph_objs[i], point))
-			check_near_obj(value, &near, SPH, i);
-	i = -1;
-	while (my.cyln_objs && ++i < my.num_cylns)
-		if (tang_to_cyln(&value, my.cyln_objs[i], point))
-			check_near_obj(value, &near, CYLINDER, i);
+	// while (my.sph_objs && ++i < my.num_sphs)
+	// 	if (tang_to_sph(&value, my.sph_objs[i], point))
+	// 		check_near_obj(value, &near, SPH, i);
+	// i = -1;
+	// while (my.cyln_objs && ++i < my.num_cylns)
+	// 	if (tang_to_cyln(&value, my.cyln_objs[i], point))
+	// 		check_near_obj(value, &near, CYLINDER, i);
 	i = -1;
 	while (my.cone_objs && ++i < my.num_cons)
 		if (tang_to_cone(&value, my.cone_objs[i], point))

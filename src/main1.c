@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 17:39:55 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/01 19:45:59 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/01 20:38:18 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int		main()
 
 	obj_plane2.center.x = 0.0f;
 	obj_plane2.center.y = 0.0f;
-	obj_plane2.center.z = 8.0f;
+	obj_plane2.center.z = 6.0f;
 	
 	obj_plane2.color.r = 255;
 	obj_plane2.color.g = 255;
