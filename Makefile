@@ -6,7 +6,7 @@
 #   By: dtaisha <dtaisha@student.21-school.ru>     +#+  +:+       +#+        #
 #                                                +#+#+#+#+#+   +#+           #
 #   Created: 2020/05/09 19:47:36 by dtaisha           #+#    #+#             #
-#   Updated: 2020/09/21 09:12:21 by dtaisha          ###   ########lyon.fr   #
+#   Updated: 2020/09/30 20:06:06 by dtaisha          ###   ########lyon.fr   #
 #                                                                            #
 # ************************************************************************** #
 
@@ -35,7 +35,8 @@ SRC_DIR = ./src/
 SRC_FILES = main.c math.c tangent_to_object.c vector_color.c \
 			vectors.c param_validation.c allocation.c color.c draw.c \
 			errors.c grafic_connection.c hooks_and_deals.c presets.c \
-			read_setups.c tear_down.c
+			tear_down.c compute_lighting.c read_file.c light.c figure.c \
+			camera.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 

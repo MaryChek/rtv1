@@ -6,7 +6,7 @@
 /*   By: dtaisha <dtaisha@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/05 11:26:06 by dtaisha           #+#    #+#             */
-/*   Updated: 2020/09/21 09:25:33 by dtaisha          ###   ########lyon.fr   */
+/*   Updated: 2020/10/02 09:25:35 by dtaisha          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int			main(int ac, char **av)
 		if (!(data = (t_data*)malloc(sizeof(t_data))) ||
 				(allocation(data) != 0))
 			free_error_exit("Malloc error\n", 1, data);
-		read_setups(data->object_ptr, av[1]); //там будем считывать файл из аргументов (название файла, и указатель на структурку куда вностить настройки)
-		grafic_connection(data, data->mlx_ptr);
+		read_setups(data, av[1]); //там будем считывать файл из аргументов (название файла, и указатель на структурку куда вностить настройки)
+//		grafic_connection(data, data->mlx_ptr);
 		free_all(data);
 	}
 	else

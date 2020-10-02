@@ -1,26 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_arr.c                                      :+:      :+:    :+:   */
+/*   quater_rotation.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtaisha <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/19 17:09:13 by dtaisha           #+#    #+#             */
-/*   Updated: 2020/10/02 11:03:26 by dtaisha          ###   ########lyon.fr   */
+/*   Created: 2020/09/30 21:27:09 by rtacos            #+#    #+#             */
+/*   Updated: 2020/09/30 21:27:51 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-void	*ft_free_arr(char **str, size_t n)
-{
-	while (n)
-	{
-		free(str[n]);
-		n--;
-	}
-	ft_strdel(str);
-	if (str)
-		free(str);
-	return (NULL);
-}
+//#include "rtv1.h"
+//
+//int quater_rotation()
+//
+//return (0);

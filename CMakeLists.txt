@@ -6,20 +6,24 @@ set(CMAKE_C_STANDARD 11)
 
 include_directories(header/)
 include_directories(libft/)
-include_directories(minilibx/)
+include_directories(src/)
 
 
 add_executable(rtv1
         header/rtv1.h
-        minilibx/
         src/
+        libft/
         src/allocation.c
-        src/hooks_and_deals.c
         src/param_validation.c
         src/errors.c
         src/main.c
         src/tear_down.c
         libft/ft_strchr.c
+        libft/get_next_line.c
+        libft/ft_free.c
+        libft/ft_free_arr.c
+        libft/ft_cnt_l.c
+        libft/ft_cnt_w.c
         libft/ft_bzero.c
         libft/ft_strcmp.c
         libft/ft_strlen.c
@@ -49,8 +53,4 @@ add_executable(rtv1
         libft/ft_strnew.c
         libft/ft_strnstr.c
         libft/ft_bzero.c
-        src/main1.c
-        src/math.c
-        src/tangent_to_object.c
-        src/vector_color.c
-        src/vectors.c src/grafic_connection.c src/presets.c src/read_setups.c src/draw.c src/color.c)
+         src/read_file.c src/figure.c src/camera.c src/light.c)

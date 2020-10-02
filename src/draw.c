@@ -6,10 +6,14 @@ void 				draw(t_data *data, t_mlx *mlx, t_object *object)
 
 	view_port.wid = WIN_WID;
 	view_port.hig = WIN_HIG;
-	view_port.distanse = 1;
+	view_port.distanse = 768.0f;
 
 	int x, y;
-	t_color	color;
+	t_raytrace	value;
+	t_obj_info	*near;
+
+//	value = fill_in_values_to_raytracing(0.0, 100000.0, -1, object->camera);
+//	t_color	color;
 
 	y = -1;
 	while (++y < WIN_HIG)
@@ -17,12 +21,16 @@ void 				draw(t_data *data, t_mlx *mlx, t_object *object)
 		x = -1;
 		while (++x < WIN_WID)
 		{
-			t_vector _vo_;
-//			change_color(&pix_color, 0, 0, 0);
-			_vo_ = create_vector(object->camera, win_to_viewport(x, y, view_port)); // CanvasToViewPort почему так??
-			color = find_color(_vo_,object, T_MIN);
-			paint_the_pix(mlx->data_ptr, x, y, color);
+			value.t_near = -1;
+			value = fill_in_values_to_raytracing(0.0f, INFINITY, 0.0);
+			value.begin_vec = normal_vector(vector_coord(object->camera, win_to_viewport(x, y, view_port, object->rot_cam)));
+			if ((near = ray_tracing(object, value, object->camera)))
+				object->pix_color = light_and_shadow(near, object, value);
+			else
+				change_color(&object->pix_color, 0, 0, 0);
+			paint_the_pix(mlx->data_ptr, x, y, object->pix_color);
 		}
 	}
 	(void)data;
+//	ft_safe_free(near);
 }
