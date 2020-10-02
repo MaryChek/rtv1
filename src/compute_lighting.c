@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 18:03:46 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/01 20:38:20 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/02 19:31:06 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ float	compute_lighting(t_coord point, t_coord normal, t_object my,
 								my.light_srcs[i].pos_or_dir);
 			else
 				vec_l = my.light_srcs[i].pos_or_dir;
-			vec_l = normal_vector(vec_l);
+			// vec_l = normal_vector(vec_l);
 			value.begin_vec = vec_l;
 			if (!ray_tracing(my, value, point)
 				&& (nor_dot_l = dot(normal, vec_l)) > 0.0)
@@ -48,7 +48,7 @@ t_coord		normal_to_near_obj(t_object my, t_obj_info near)
 	t_coord		normal;
 	
 	if (near.type == SPH)
-		normal = normal_vector(vector_coord(near.center, near.point));
+		normal = vector_coord(near.center, near.point);
 	else if (near.type == CYLINDER)
 		normal = cyln_normal(my.cyln_objs[near.index].rotation, near);
 	else if (near.type == CONE)
@@ -58,9 +58,9 @@ t_coord		normal_to_near_obj(t_object my, t_obj_info near)
 	{
 		normal = my.plane_objs[near.index].rotation;
 		if (dot(near.begin_vec, normal) > 0.0)
-			reverse_vector(&normal);
+			normal = reverse_vector(normal);
 	}
-	return (normal);
+	return (normal_vector(normal));
 }
 
 t_color		color_near_obj(t_object my, int type, int index)
@@ -83,7 +83,7 @@ t_color		light_and_shadow(t_obj_info near, t_object my, t_raytrace value)
 	near.point = sum_vectors(my.camera,
 				vec_scalar_mult(near.begin_vec, near.t));
 	normal = normal_to_near_obj(my, near);
-	value = fill_in_values_to_raytracing(0.00001f, 1.0, 0.0);
+	value = min_and_max_to_raytracing(0.00001f, 1.0);
 	return (brightness_change(color_near_obj(my, near.type, near.index),
 		compute_lighting(near.point, normal, my, value)));
 }
