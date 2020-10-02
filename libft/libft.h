@@ -97,5 +97,6 @@ int					ft_atoi_base(const char *str, int which_base);
 int					ft_is_hex(char c);
 void				ft_swap(int	*a, int *b);
 void				ft_safe_free(void *item);
+int					ft_to_digit(char c);
 
 #endif

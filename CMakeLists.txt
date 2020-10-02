@@ -53,4 +53,4 @@ add_executable(rtv1
         libft/ft_strnew.c
         libft/ft_strnstr.c
         libft/ft_bzero.c
-         src/read_file.c src/figure.c src/camera.c src/light.c)
+         src/read_file.c src/figure.c src/camera.c src/light.c src/read_lib.c libft/ft_to_digit.c)

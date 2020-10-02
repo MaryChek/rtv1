@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:25:42 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/02 11:58:29 by dtaisha          ###   ########lyon.fr   */
+/*   Updated: 2020/10/02 23:45:59 by dtaisha          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define RTV1_H
 
 # include <math.h>
-# include "mlx.h"
+//# include "mlx.h"
 # include "libft.h"
 # include <OpenCL/cl.h>
 #include <stdio.h>
@@ -33,6 +33,10 @@
 # define SPACE 49
 
 # define T_MIN 0.0
+
+# define DEFAULT_COORDINATE 0.0f
+# define MAX_INT 2147483647
+# define DEFAULT_Z -1.0f
 
 
 typedef struct		s_quadr_equation
@@ -229,6 +233,7 @@ void				cone(t_object *object, char **arr);
 void				plane(t_object *object, char **arr);
 void				camera(t_object *object, char **arr);
 void				light(t_object *object, char **arr);
-
+void				position(t_object *object, char *arr);
+void ft_safe_free_arr(char **arr);
 
 #endif

@@ -26,13 +26,13 @@ SRC = ft_strncmp.c ft_memalloc.c ft_strcat.c ft_strncpy.c ft_bzero.c \
 	  ft_putstr_fd.c ft_strncat.c ft_free_arr.c ft_cnt_l.c ft_cnt_w.c \
 	  ft_lstnew.c ft_lstdelone.c ft_lstdel.c ft_lstadd.c ft_lstiter.c \
 	  ft_lstmap.c ft_free_list.c get_next_line.c ft_free.c\
-	  ft_is_hex.c ft_atoi_base.c ft_is_space.c ft_swap.c
+	  ft_is_hex.c ft_atoi_base.c ft_is_space.c ft_swap.c ft_to_digit.c
 
 FT_O = $(SRC:.c=.o)
 
 INC = libft.h
 
-.PHONY: all, clean, fclean, re
+.PHONY: all clean fclean re
 
 all: $(NAME)
 

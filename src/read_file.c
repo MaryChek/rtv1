@@ -6,7 +6,8 @@ static void		validate_fd(int fd, t_data *data)
 	if (fd == 0 || read(fd, NULL, 0) == -1)
 		free_error_exit("Error: can't read file\n", 1, data);
 }
-static void ft_safe_free_arr(char **arr)
+
+void ft_safe_free_arr(char **arr)
 {
 	char **cpy;
 	cpy = arr;

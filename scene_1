@@ -1,9 +1,9 @@
-#			position	 	 R 		color	rotation	  angle
-sphere		0.0 -1.0 3.0	1.0		red
-cylinder	0.0 0.0 4.0		1.0		blue	1.0 1.0 0.0
-cone		0.0 0.0 4.0		1.0		green	1.0 1.0 0.0		10
-plane		-2.0 -1.0 10.0	1.0		yellow	-1.0 1.0 1.0	10
-camera		0.0 0.0 0.0						1.0 0.0 0.0
+#			position	 	     R 		color	rotation	  angle
+sphere		-0.0023 -10 1.		red
+cylinder	-0.23 0.0fr 4.0		1.0		blue	1.0 1.0 0.0
+cone		0.99 0.ы054 4.0				green	1.0 1.0 0.0		10
+plane		-2.0 -ыва.0 10.0			yellow	-1.0 1.0 1.0	10
+camera		7.0 1.0 9.0							1.0 0.0 0.0		10
 
 #			type		intensity		position
 light		AMBIENT			0.2
