@@ -19,6 +19,8 @@ void ft_safe_free_arr(char **arr)
 	}
 	ft_free_arr(arr, i - 1);
 }
+//todo нужно проверить при разделении пробелами а не табами
+//todo нужно подумать как реализовать подсчет и реаллокацию нескольких фигур
 
 void		read_line(t_object *object, char *line)
 {
@@ -35,7 +37,9 @@ void		read_line(t_object *object, char *line)
 	else if (!ft_strcmp(arr[0], "camera"))
 		camera(object, arr);
 	else if (!ft_strcmp(arr[0], "light"))
-		light(object, arr);
+		if (!ft_strcmp(arr[1], "AMBIENT") || !ft_strcmp(arr[1], "POINT") ||
+				!ft_strcmp(arr[1], "DIRECTIONAL"))
+			light(object, arr);
 	ft_safe_free_arr(arr);
 	(void) object;
 }

@@ -49,8 +49,51 @@ void	position(t_object *object, char *arr)
 	coord = ft_strsplit(arr, ' ');
 	printf("\n[%s, %s, %s]\n",coord[0], coord[1], coord[2]);
 	x = coord[0] ? coordinate(coord[0]) : DEFAULT_COORDINATE;
-	y = coord[0] ? coordinate(coord[1]) : DEFAULT_COORDINATE;
-	z = coord[0] ? coordinate(coord[2]) : DEFAULT_COORDINATE;
+	y = coord[1] ? coordinate(coord[1]) : DEFAULT_COORDINATE;
+	z = coord[2] ? coordinate(coord[2]) : DEFAULT_COORDINATE;
 	printf("[%.2f, %.2f, %.2f]\n",x,y,z);
 	ft_safe_free_arr(coord);
+}
+
+void	radius(t_object *object, char *arr)
+{
+	float rad;
+	rad = coordinate(arr);
+	printf("R=%s R=%.2f\n",arr,rad);
+}
+
+void	angle(t_object *object, char *arr)
+{
+	float angle;
+	angle = 0.0;
+	if (arr)
+		angle = coordinate(arr);
+	printf("A=%s A=%.2f\n",arr,angle);
+}
+
+void	color(t_object *object, char *arr)
+{
+	int r;
+	int g;
+	int b;
+	r = 0;
+	g = 0;
+	b = 0;
+	if (arr)
+	{
+		if (!ft_strcmp(arr, "red"))
+			r = 255;
+		else if (!ft_strcmp(arr, "green"))
+			g = 255;
+		else if (!ft_strcmp(arr, "blue"))
+			b = 255;
+		else
+			b = 60;
+	}
+	else
+	{
+		g = 128;
+		b = 128;
+	}
+	printf("Color %s [%d, %d, %d]\n",arr,r, g, b);
 }
