@@ -1,5 +1,5 @@
 #			position	 	     R 		color	rotation	  angle
-sphere		-0.0023 -10 1.		1.0		fdf
+sphere		-0.0023 -10 1.		1.0		red
 cylinder	-0.23 0.0fr 4.0		1.0		blue	1.0 1.0 0.0
 cone		0.99 0.ы054 4.0				green	1.0 1.0 0.0		10
 plane		-2.0 -ыва.0 10.0			blue	-1.0 1.0 1.0	10

@@ -40,6 +40,7 @@ void		read_line(t_object *object, char *line)
 		if (!ft_strcmp(arr[1], "AMBIENT") || !ft_strcmp(arr[1], "POINT") ||
 				!ft_strcmp(arr[1], "DIRECTIONAL"))
 			light(object, arr);
+
 	ft_safe_free_arr(arr);
 	(void) object;
 }

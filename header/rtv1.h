@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:25:42 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/03 09:22:31 by dtaisha          ###   ########lyon.fr   */
+/*   Updated: 2020/10/05 10:48:54 by dtaisha          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,12 +233,12 @@ void				cone(t_object *object, char **arr);
 void				plane(t_object *object, char **arr);
 void				camera(t_object *object, char **arr);
 void				light(t_object *object, char **arr);
-void				position(t_object *object, char *arr);
-void				radius(t_object *object, char *arr);
-void				angle(t_object *object, char *arr);
-void				color(t_object *object, char *arr);
+void				position(t_coord *p, char *arr);
+void				radius(float *rad, char *arr);
+void				angle(float angle, char *arr);
+void				color(t_color *color, char *arr);
 void 				ft_safe_free_arr(char **arr);
 float				coordinate(char *str);
-
+void			preset_structures(t_object *object);
 
 #endif
