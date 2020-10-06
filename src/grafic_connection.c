@@ -4,7 +4,7 @@ void			grafic_connection(t_data *data, t_mlx *mlx)
 {
 	grafic_preset(mlx);
 
-	draw(data, mlx, data->object_ptr);
+	draw(data, mlx, data->p_object);
 
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img_ptr, 0, 0);
 	mlx_hook(mlx->win, 2, 0, buttons_press, data);

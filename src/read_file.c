@@ -1,5 +1,5 @@
 #include "rtv1.h"
-static void		validate_fd(int fd, t_data *data)
+void		validate_fd(int fd, t_data *data)
 {
 	if (fd < 0)
 		free_error_exit("Error: file doesn't exist\n", 1, data);
@@ -12,34 +12,38 @@ void ft_safe_free_arr(char **arr)
 	char **cpy;
 	cpy = arr;
 	size_t i = 0;
-	while (*cpy != NULL)
+	if (arr)
 	{
-		i++;
-		cpy++;
+		while (*cpy != NULL)
+		{
+			i++;
+			cpy++;
+		}
+		if (*arr)
+			ft_free_arr(arr, i - 1);
 	}
-	ft_free_arr(arr, i - 1);
 }
 //todo нужно проверить при разделении пробелами а не табами
 //todo нужно подумать как реализовать подсчет и реаллокацию нескольких фигур
 
-void		read_line(t_object *object, char *line)
+static void		read_line(t_data *data, t_object *object, char *line)
 {
 	char **arr;
 	arr = ft_strsplit(line, '\t');
 	if (!ft_strcmp(arr[0], "sphere"))
-		sphere(object, arr);
+		sphere(data, object, arr);
 	else if (!ft_strcmp(arr[0], "cylinder"))
-		cylinder(object, arr);
+		cylinder(data, object, arr);
 	else if (!ft_strcmp(arr[0], "cone"))
-		cone(object, arr);
+		cone(data, object, arr);
 	else if (!ft_strcmp(arr[0], "plane"))
-		plane(object, arr);
+		plane(data, object, arr);
 	else if (!ft_strcmp(arr[0], "camera"))
 		camera(object, arr);
 	else if (!ft_strcmp(arr[0], "light"))
 		if (!ft_strcmp(arr[1], "AMBIENT") || !ft_strcmp(arr[1], "POINT") ||
 				!ft_strcmp(arr[1], "DIRECTIONAL"))
-			light(object, arr);
+			light(data, object, arr);
 
 	ft_safe_free_arr(arr);
 	(void) object;
@@ -55,7 +59,7 @@ void		read_setups(t_data *data, char *name)
 	{
 		if(line[0] != '#' && ft_strlen(line) > 10)
 		{
-			read_line(data->object_ptr, line);
+			read_line(data, data->p_object, line);
 		}
 		ft_safe_free(line);
 	}

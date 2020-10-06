@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:25:42 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/05 10:48:54 by dtaisha          ###   ########lyon.fr   */
+/*   Updated: 2020/10/07 01:35:46 by dtaisha          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,14 @@
 # define MAX_INT 2147483647
 # define DEFAULT_Z -1.0f
 
-
+typedef struct		s_num_fig
+{
+	int			sph;
+	int 		cyl;
+	int 		cone;
+	int 		plane;
+	int			light;
+}					t_num_fig;
 
 typedef struct		s_quadr_equation
 {
@@ -129,19 +136,19 @@ typedef struct		s_object
 	t_coord		camera;
 	t_color		pix_color;
 
-	t_sph		*sph_objs;
+	t_sph		**sph_objs;
 	int			num_sphs;
 
-	t_cylindr	*cyln_objs;
+	t_cylindr	**cyln_objs;
 	int			num_cylns;
 
-	t_cone		*cone_objs;
+	t_cone		**cone_objs;
 	int			num_cons;
 
-	t_plane		*plane_objs;
+	t_plane		**plane_objs;
 	int			num_plans;
 
-	t_light		*light_srcs;
+	t_light		**light_srcs;
 	int			num_l_src;
 }					t_object;
 
@@ -177,7 +184,7 @@ typedef struct		s_raytrace
 typedef struct		s_data
 {
 	t_mlx				*mlx_ptr;
-	t_object			*object_ptr;
+	t_object			*p_object;
 }						t_data;
 
 
@@ -189,7 +196,7 @@ t_coord				win_to_viewport(int x, int y, t_viewport vp, t_coord rot);
 
 int					key_press(int key);
 
-int					allocation(t_data *data);
+int					allocation(t_data *data, char *param_name);
 int					main(int ac, char **av);
 void				param_validation(char *param_name);
 
@@ -227,18 +234,19 @@ t_coord				cone_normal(t_coord rotation, t_obj_info near, float angle);
 t_raytrace			fill_in_values_to_raytracing(float t_min, float t_max, float t_near);
 t_obj_info			*ray_tracing(t_object *object, t_raytrace value, t_coord point);
 
-void				sphere(t_object *object, char **arr);
-void				cylinder(t_object *object, char **arr);
-void				cone(t_object *object, char **arr);
-void				plane(t_object *object, char **arr);
+void				sphere(t_data *data, t_object *object, char **arr);
+void				cylinder(t_data *data, t_object *object, char **arr);
+void				cone(t_data *data, t_object *object, char **arr);
+void				plane(t_data *data, t_object *object, char **arr);
 void				camera(t_object *object, char **arr);
-void				light(t_object *object, char **arr);
+void				light(t_data *data, t_object *object, char **arr);
 void				position(t_coord *p, char *arr);
 void				radius(float *rad, char *arr);
 void				angle(float angle, char *arr);
 void				color(t_color *color, char *arr);
 void 				ft_safe_free_arr(char **arr);
 float				coordinate(char *str);
-void			preset_structures(t_object *object);
+void				preset_structures(t_object *object);
+void				validate_fd(int fd, t_data *data);
 
 #endif
