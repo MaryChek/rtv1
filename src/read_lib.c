@@ -8,13 +8,15 @@ static float float_tail(char *str)
 	digit2 = 0;
 	while(*str != '.')
 		str++;
-	str++;
+	if (*(str + 1))
+		str++;
 	if (*str)
 		digit1 = ft_to_digit(*str);
-	str++;
+	if (*(str + 1))
+		str++;
 	if (*str)
 		digit2 = ft_to_digit(*str);
-	tail = (float) digit1 * 0.1f + (float)digit2 * 0.01f;
+	tail = ((float) digit1 * 0.1f) + ((float)digit2 * 0.01f);
 //	printf("d1 %d, d2 %d, tail %f\n",digit1, digit2, tail);
 	return (tail);
 }
@@ -56,15 +58,12 @@ void	position(t_coord *p, char *arr)
 
 void	radius(float *rad, char *arr)
 {
-//	float rad;
 	*rad = coordinate(arr);
 }
 
-void	angle(float angle, char *arr)
+void	angle(float *angle, char *arr)
 {
-	angle = 0.0f;
-	if (arr)
-		angle = coordinate(arr);
+	*angle = coordinate(arr);
 }
 
 void	color(t_color *color, char *arr)

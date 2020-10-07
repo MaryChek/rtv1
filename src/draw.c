@@ -23,7 +23,7 @@ void 				draw(t_data *data, t_mlx *mlx, t_object *object)
 		{
 			value.t_near = -1;
 			value = fill_in_values_to_raytracing(0.0f, INFINITY, 0.0);
-			value.begin_vec = normal_vector(vector_coord(object->camera, win_to_viewport(x, y, view_port, object->rot_cam)));
+			value.begin_vec = normal_vector(vector_coord(object->camera, win_to_viewport(x, y, view_port, object->rot_cam.vec)));
 			if ((near = ray_tracing(object, value, object->camera)))
 				object->pix_color = light_and_shadow(near, object, value);
 			else

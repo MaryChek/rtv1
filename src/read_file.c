@@ -12,6 +12,15 @@ void ft_safe_free_arr(char **arr)
 	char **cpy;
 	cpy = arr;
 	size_t i = 0;
+//
+//	if(arr)
+//	{
+//		size_t i = 0;
+//		while (arr[i])
+//			free(arr[i]);
+////		ft_strdel(arr);
+//		free(arr);
+//	}
 	if (arr)
 	{
 		while (*cpy != NULL)
@@ -29,7 +38,8 @@ void ft_safe_free_arr(char **arr)
 static void		read_line(t_data *data, t_object *object, char *line)
 {
 	char **arr;
-	arr = ft_strsplit(line, '\t');
+	if (!(arr = ft_strsplit(line, '\t')))
+		free_error_exit("Malloc", 1, data);
 	if (!ft_strcmp(arr[0], "sphere"))
 		sphere(data, object, arr);
 	else if (!ft_strcmp(arr[0], "cylinder"))

@@ -6,7 +6,7 @@
 /*   By: dtaisha <dtaisha@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/05 11:26:06 by dtaisha           #+#    #+#             */
-/*   Updated: 2020/10/07 00:24:04 by dtaisha          ###   ########lyon.fr   */
+/*   Updated: 2020/10/07 22:45:37 by dtaisha          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,49 @@ int			main(int ac, char **av)
 
 		t_object *object;
 		object = data->p_object;
-		printf("------------------------\n");
-		printf("sphere [%.2f, %.2f, %.2f] %.2f (%d %d %d)\n" , object->sph_objs[0]->center.x, object->sph_objs[0]->center.y, object->sph_objs[0]->center.z, object->sph_objs[0]->rad, object->sph_objs[0]->color.r, object->sph_objs[0]->color.g, object->sph_objs[0]->color.b);
-		printf("cylinder [%.2f, %.2f, %.2f]  %.2f  (%d %d %d) [%.2f, %.2f, %.2f]\n", object->cyln_objs[0]->center.x, object->cyln_objs[0]->center.y, object->cyln_objs[0]->center.z, object->cyln_objs[0]->rad, object->cyln_objs[0]->color.r, object->cyln_objs[0]->color.g, object->cyln_objs[0]->color.b, object->cyln_objs[0]->rotation.x, object->cyln_objs[0]->rotation.y, object->cyln_objs[0]->rotation.z);
-		printf("cone [%.2f, %.2f, %.2f] (%d %d %d) [%.2f, %.2f, %.2f] %.2f\n", object->cone_objs[0]->center.x, object->cone_objs[0]->center.y, object->cone_objs[0]->center.z, object->cone_objs[0]->color.r, object->cone_objs[0]->color.g, object->cone_objs[0]->color.b, object->cone_objs[0]->rotation.x, object->cone_objs[0]->rotation.y, object->cone_objs[0]->rotation.z, object->cone_objs[0]->angle);
-		printf("plane [%.2f, %.2f, %.2f] (%d %d %d) [%.2f, %.2f, %.2f]\n", object->plane_objs[0]->center.x, object->plane_objs[0]->center.y, object->plane_objs[0]->center.z, object->plane_objs[0]->color.r, object->plane_objs[0]->color.g, object->plane_objs[0]->color.b, object->plane_objs[0]->rotation.x, object->plane_objs[0]->rotation.y, object->plane_objs[0]->rotation.z);
-		printf("------------------------\n");
-		printf("camera [%.2f, %.2f, %.2f] [%.2f, %.2f, %.2f]\n", object->camera.x, object->camera.y, object->camera.z, object->rot_cam.x, object->rot_cam.y, object->rot_cam.z);
-		printf("light %d %.2f [%.2f, %.2f, %.2f]\n", object->light_srcs[0]->type, object->light_srcs[0]->intensity, object->light_srcs[0]->pos_or_dir.x, object->light_srcs[0]->pos_or_dir.y, object->light_srcs[0]->pos_or_dir.z);
-		printf("light %d %.2f [%.2f, %.2f, %.2f]\n", object->light_srcs[1]->type, object->light_srcs[1]->intensity, object->light_srcs[1]->pos_or_dir.x, object->light_srcs[1]->pos_or_dir.y, object->light_srcs[1]->pos_or_dir.z);
-		printf("light %d %.2f [%.2f, %.2f, %.2f]\n", object->light_srcs[2]->type, object->light_srcs[2]->intensity, object->light_srcs[2]->pos_or_dir.x, object->light_srcs[2]->pos_or_dir.y, object->light_srcs[2]->pos_or_dir.z);
+
+
+//		printf("------------------------\n");
+//		int i = 0;
+//		while (i <= (object->num_sphs - 1))
+//		{
+//			printf("sphere [%.2f, %.2f, %.2f] %.2f (%d %d %d)\n" , object->sph_objs[i].center.x, object->sph_objs[i].center.y, object->sph_objs[i].center.z, object->sph_objs[i].rad, object->sph_objs[i].color.r, object->sph_objs[i].color.g, object->sph_objs[i].color.b);
+//			object->sph_objs++;
+//			i++;
+//		}
+//
+//		i = 0;
+//		while (i <= (object->num_cylns - 1))
+//		{
+//			printf("cylinder [%.2f, %.2f, %.2f]  %.2f  (%d %d %d) [%.2f, %.2f, %.2f]\n", object->cyln_objs[i].center.x, object->cyln_objs[i].center.y, object->cyln_objs[i].center.z, object->cyln_objs[i].rad, object->cyln_objs[i].color.r, object->cyln_objs[i].color.g, object->cyln_objs[i].color.b, object->cyln_objs[i].rotation.x, object->cyln_objs[i].rotation.y, object->cyln_objs[i].rotation.z);
+//			i++;
+//		}
+//		i = 0;
+//		while (i <= (object->num_cons - 1))
+//		{
+//			printf("cone [%.2f, %.2f, %.2f] (%d %d %d) [%.2f, %.2f, %.2f] %f\n", object->cone_objs[i].center.x, object->cone_objs[i].center.y, object->cone_objs[i].center.z, object->cone_objs[i].color.r, object->cone_objs[i].color.g, object->cone_objs[i].color.b, object->cone_objs[i].rotation.x, object->cone_objs[i].rotation.y, object->cone_objs[i].rotation.z, object->cone_objs[i].angle);
+//			i++;
+//		}
+//		i = 0;
+//		while (i <= (object->num_plans - 1))
+//		{
+//			printf("plane [%.2f, %.2f, %.2f] (%d %d %d) [%.2f, %.2f, %.2f]\n", object->plane_objs[i].center.x, object->plane_objs[i].center.y, object->plane_objs[i].center.z, object->plane_objs[i].color.r, object->plane_objs[i].color.g, object->plane_objs[i].color.b, object->plane_objs[i].rotation.x, object->plane_objs[i].rotation.y, object->plane_objs[i].rotation.z);
+//			i++;
+//		}
+//
+//		printf("------------------------\n");
+//		printf("camera [%.2f, %.2f, %.2f] [%.2f, %.2f, %.2f]\n", object->camera.x, object->camera.y, object->camera.z, object->rot_cam.vec.x, object->rot_cam.vec.y, object->rot_cam.vec.z);
+//		i = 0;
+//		while (i <= (object->num_l_src - 1))
+//		{
+//			printf("light %d %.2f [%.2f, %.2f, %.2f]\n", object->light_srcs[i].type, object->light_srcs[i].intensity, object->light_srcs[i].pos_or_dir.x, object->light_srcs[i].pos_or_dir.y, object->light_srcs[i].pos_or_dir.z);
+//			i++;
+//		}
 
 		//		grafic_connection(data, data->mlx_ptr);
 		free_all(data);
 	}
+
 	else
 		return (error_exit(NULL, 3));
 	return (0);

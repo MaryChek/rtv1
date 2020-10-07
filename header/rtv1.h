@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:25:42 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/07 01:35:46 by dtaisha          ###   ########lyon.fr   */
+/*   Updated: 2020/10/07 23:08:29 by dtaisha          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,10 @@
 
 # define T_MIN 0.0
 
-# define DEFAULT_COORDINATE 0.0f
+# define DEFAULT_COORDINATE 1.0f
 # define MAX_INT 2147483647
 # define DEFAULT_Z -1.0f
 
-typedef struct		s_num_fig
-{
-	int			sph;
-	int 		cyl;
-	int 		cone;
-	int 		plane;
-	int			light;
-}					t_num_fig;
 
 typedef struct		s_quadr_equation
 {
@@ -79,6 +71,12 @@ typedef struct		s_coord
 	float		z;
 }					t_coord;
 
+typedef struct	s_quat
+{
+	float		w;
+	t_coord		vec;
+}				t_quat;
+
 typedef struct		s_color
 {
 	int			r;
@@ -91,6 +89,7 @@ typedef struct		s_sph
 	t_coord		center;
 	t_color		color;
 	float		rad;
+	int			specular;
 }					t_sph;
 
 typedef struct		s_cylindr
@@ -99,6 +98,7 @@ typedef struct		s_cylindr
 	t_color		color;
 	t_coord		rotation;
 	float		rad;
+	int			specular;
 }					t_cylindr;
 
 typedef struct		s_cone
@@ -107,6 +107,7 @@ typedef struct		s_cone
 	t_color		color;
 	t_coord		rotation;
 	float		angle;
+	int			specular;
 }					t_cone;
 
 typedef struct		s_plane
@@ -114,6 +115,7 @@ typedef struct		s_plane
 	t_coord		center;
 	t_color		color;
 	t_coord		rotation;
+	int			specular;
 }					t_plane;
 
 enum	type_of_light_src
@@ -132,23 +134,23 @@ typedef struct		s_light
 
 typedef struct		s_object
 {
-	t_coord		rot_cam;
 	t_coord		camera;
+	t_quat		rot_cam;
 	t_color		pix_color;
 
-	t_sph		**sph_objs;
+	t_sph		*sph_objs;
 	int			num_sphs;
 
-	t_cylindr	**cyln_objs;
+	t_cylindr	*cyln_objs;
 	int			num_cylns;
 
-	t_cone		**cone_objs;
+	t_cone		*cone_objs;
 	int			num_cons;
 
-	t_plane		**plane_objs;
+	t_plane		*plane_objs;
 	int			num_plans;
 
-	t_light		**light_srcs;
+	t_light		*light_srcs;
 	int			num_l_src;
 }					t_object;
 
@@ -242,7 +244,7 @@ void				camera(t_object *object, char **arr);
 void				light(t_data *data, t_object *object, char **arr);
 void				position(t_coord *p, char *arr);
 void				radius(float *rad, char *arr);
-void				angle(float angle, char *arr);
+void				angle(float *angle, char *arr);
 void				color(t_color *color, char *arr);
 void 				ft_safe_free_arr(char **arr);
 float				coordinate(char *str);

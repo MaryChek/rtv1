@@ -1,38 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_arr.c                                      :+:      :+:    :+:   */
+/*   ft_izero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dtaisha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/19 17:09:13 by dtaisha           #+#    #+#             */
-/*   Updated: 2020/10/07 12:03:15 by dtaisha          ###   ########lyon.fr   */
+/*   Created: 2019/09/08 12:54:27 by dtaisha           #+#    #+#             */
+/*   Updated: 2019/09/17 21:04:09 by dtaisha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-//void	*ft_free_arr(char **str, size_t n)
-//{
-//	while (n)
-//	{
-//		free(str[n]);
-//		n--;
-//	}
-//	ft_strdel(str);
-//	if (str)
-//		free(str);
-//	return (NULL);
-//}
-
-void	*ft_free_arr(char **str, size_t n)
+void	ft_izero(int *s, size_t n)
 {
-	while (n)
+	size_t	i;
+
+	i = 0;
+	while (i < n)
 	{
-		ft_safe_free(str[n]);
-		n--;
+		s[i] = 0;
+		i++;
 	}
-	ft_safe_free(str[n]);
-	ft_safe_free(str);
-	return (NULL);
 }

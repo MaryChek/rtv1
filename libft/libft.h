@@ -98,5 +98,6 @@ int					ft_is_hex(char c);
 void				ft_swap(int	*a, int *b);
 void				ft_safe_free(void *item);
 int					ft_to_digit(char c);
+void				ft_izero(int *s, size_t n);
 
 #endif
