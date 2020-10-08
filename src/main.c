@@ -6,7 +6,7 @@
 /*   By: dtaisha <dtaisha@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/05 11:26:06 by dtaisha           #+#    #+#             */
-/*   Updated: 2020/10/08 22:31:55 by dtaisha          ###   ########lyon.fr   */
+/*   Updated: 2020/10/08 23:20:21 by dtaisha          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int			main(int ac, char **av)
 		if (!(data = (t_data*)malloc(sizeof(t_data))) ||
 				(allocation(data, av[1]) != 0))
 			free_error_exit("Malloc error\n", 1, data);
-//		preset_structures(data->p_object);
 		read_setups(data, av[1]); //там будем считывать файл из аргументов (название файла, и указатель на структурку куда вностить настройки)
 
 		t_object *object;
