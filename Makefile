@@ -12,8 +12,9 @@ HEAD = header/rtv1.h
 
 SRC_DIR = src/
 
-SRCS = main1.c tangent_to_object.c vector_color.c vectors.c\
-math.c key_press.c compute_lighting.c quater_rotation.c
+SRCS = main.c ray_trace.c color.c vectors.c\
+quadratic_equation.c key_press.c light_and_shadow.c \
+quater_rotation.c normal_to_obj.c no_name.c
 
 CFIND =	$(SRCS:%=$(SRC_DIR)%)
 

@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:25:42 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/02 19:07:38 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/08 20:08:54 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 
 typedef struct		s_quadr_equation
 {
-	float		a;
-	float		b;
-	float		c;
+	double		a;
+	double		b;
+	double		c;
 }					t_quadr_equation;
 
 typedef struct		s_mlx
@@ -40,19 +40,19 @@ typedef struct		s_viewport
 {
 	int			wid;
 	int			hig;
-	float		distanse;
+	double		distanse;
 }					t_viewport;
 
 typedef struct		s_coord
 {
-	float		x;
-	float		y;
-	float		z;
+	double		x;
+	double		y;
+	double		z;
 }					t_coord;
 
 typedef struct	s_quat
 {
-	float		w;
+	double		w;
 	t_coord		vec;
 }				t_quat;
 
@@ -67,7 +67,7 @@ typedef struct		s_sph
 {
 	t_coord		center;
 	t_color		color;
-	float		rad;
+	double		rad;
 	int			specular;
 }					t_sph;
 
@@ -75,8 +75,8 @@ typedef struct		s_cylindr
 {
 	t_coord		center;
 	t_color		color;
-	t_coord		rotation;
-	float		rad;
+	t_coord		rotation;// direction
+	double		rad;
 	int			specular;
 }					t_cylindr;
 
@@ -84,8 +84,8 @@ typedef struct		s_cone
 {
 	t_coord		center;
 	t_color		color;
-	t_coord		rotation;
-	int			angle;
+	t_coord		rotation; // direction
+	double		angle;
 	int			specular;
 }					t_cone;
 
@@ -93,7 +93,7 @@ typedef struct		s_plane
 {
 	t_coord		center;
 	t_color		color;
-	t_coord		rotation;
+	t_coord		rotation;// direction
 	int			specular;
 }					t_plane;
 
@@ -107,7 +107,7 @@ enum	type_of_light_src
 typedef struct		s_light
 {
 	int		type;
-	float	intensity;
+	double	intensity;
 	t_coord	pos_or_dir;
 }					t_light;
 
@@ -144,50 +144,54 @@ typedef struct		s_obj_info
 	t_coord		begin_vec;
 	t_coord		center;
 	t_coord		st_cent;
-	float		t;
+	double		t;
 }					t_obj_info;
 
 typedef struct		s_raytrace
 {
-	float		t_min;
-	float		t_max;
-	float		t_near;
+	double		t_min;
+	double		t_max;
+	double		t_near;
 	t_coord		begin_vec;
 	t_coord		center;
 	t_coord		st_cent;
 }					t_raytrace;
 
-t_color				light_and_shadow(t_obj_info near, t_object my,
+t_color				trace_to_light_src(t_obj_info near, t_object my,
 														t_raytrace value);
-float				compute_lighting(t_coord point, t_coord normal,
-											t_object my, t_raytrace value);
+double				compute_lighting(t_coord point, t_coord normal,
+												t_object my, int specular);
 
 int					key_press(int key);
 
-float				quadr_equation(t_quadr_equation factor, t_raytrace *value);
+double				quadr_equation(t_quadr_equation factor, t_raytrace *value);
 t_coord				normal_vector(t_coord vector);
-float				vector_len(t_coord q);
+double				vector_len(t_coord q);
 
-t_coord				cyln_normal(t_coord rotation, t_obj_info near);
-t_coord				cone_normal(t_coord rotation, t_obj_info near,
-															int angle);
+t_quat				creat_axis_of_rot(int x, int y, int z, double alpha);
+t_coord				vector_rotation(t_coord vector, t_quat roter);
 
-t_quat				creat_axis_of_rot(int x, int y, int z, int alpha);
-void				vector_rotation(t_coord *vector, t_quat roter);
-
-t_raytrace			min_and_max_to_raytracing(float t_min, float t_max);
-t_obj_info			*ray_tracing(t_object my, t_raytrace value, t_coord point);
+void				min_and_max_to_raytrace(t_raytrace *value, double t_min,
+																double t_max);
+t_obj_info			*ray_trace(t_object my, t_raytrace value, t_coord point);
 
 t_color				mult_colors(t_color v1, t_color v2, int minus);
-t_color				brightness_change(t_color color, float mult);
+t_color				brightness_change(t_color color, double mult);
 void				change_color(t_color *color, int r, int g, int b);
 
 t_coord				win_to_viewport(int x, int y, t_viewport vp);
-float				dot(t_coord v_1, t_coord v_2);
+double				dot(t_coord v_1, t_coord v_2);
 t_coord				sum_vectors(t_coord vec_1, t_coord vec_2);
-t_coord				vec_scalar_mult(t_coord vector, float mult);
+t_coord				vec_scalar_mult(t_coord vector, double mult);
 t_coord				vector_coord(t_coord begin_point, t_coord end_point);
 t_coord				reverse_vector(t_coord vector);
 
+void				fixing_the_near_obj(t_raytrace value, t_obj_info **near,
+														int type, int index);
+t_color				get_obj_color(t_object my, int type, int index);
+int					get_specul_obj(t_object my, int type, int index);
+t_coord				normal_to_obj(t_object my, t_obj_info near);
+void				put_color_to_img(int **img_data, int x, int y,
+														t_color color);
 
 #endif

@@ -1,44 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   math.c                                             :+:      :+:    :+:   */
+/*   quadratic_equation.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 18:25:44 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/01 19:01:26 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/08 17:58:44 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-// float		is_domain_of_definition(float num, float min, float max)
+// double		is_domain_of_definition(double num, double min, double max)
 // {
 // 	return ((num > 0.0 && num < max) ? num : 0.0);
 // }
 
-float min(float a, float b)
+double min(double a, double b)
 {
-	if (a < b && a >= 0.0f)
+	if (a > 0.0f && (a < b || b <= 0.))
 		return (a);
-	else if (b >= 0.0f)
+	else if (b > 0.0f)
 		return (b);
-	return (0.00000f);
+	return (0.0f);
 }
 
-float		quadr_equation(t_quadr_equation factor, t_raytrace *value)
+double		quadr_equation(t_quadr_equation factor, t_raytrace *value)
 {
-	float	dis;
-	float	t_1;
-	float	t_2;
-	float	t;
+	double	dis;
+	double	t_1;
+	double	t_2;
+	double	t;
 	
-	if (((dis = factor.b * factor.b - 4.0f * factor.a * factor.c) >= 0.0))
+	if (((dis = factor.b * factor.b - (4. * factor.a * factor.c)) >= 0.0))
 	{
-		t_1 = (float)((-factor.b + (float)sqrt(dis)) / (2.0f * factor.a));
-		t_2 = (float)((-factor.b - (float)sqrt(dis)) / (2.0f * factor.a));
+		t_1 = (-factor.b + sqrt(dis)) / (2. * factor.a);
+		t_2 = (-factor.b - sqrt(dis)) / (2. * factor.a);
 		t = min(t_1, t_2);
-		if (t <= value->t_max && t >= value->t_min)
+		if (t <= value->t_max && t > value->t_min)
 			value->t_near = t;
 		else
 			return (0);
@@ -47,7 +47,7 @@ float		quadr_equation(t_quadr_equation factor, t_raytrace *value)
 	return (0);
 }
 
-float		vector_len(t_coord vector)
+double		vector_len(t_coord vector)
 {
 	return (sqrt(vector.x * vector.x + vector.y * vector.y
 									+ vector.z * vector.z));
@@ -55,7 +55,7 @@ float		vector_len(t_coord vector)
 
 t_coord		normal_vector(t_coord vector)
 {
-	float	vec_len;
+	double	vec_len;
 
 	vec_len = vector_len(vector);
 	vector.x /= vec_len;
