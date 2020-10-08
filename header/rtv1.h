@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:25:42 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/07 23:08:29 by dtaisha          ###   ########lyon.fr   */
+/*   Updated: 2020/10/08 23:14:18 by dtaisha          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,23 @@
 
 # define T_MIN 0.0
 
-# define DEFAULT_COORDINATE 1.0f
+# define DEFAULT_COORDINATE 1.0
+# define DEFAULT_R 1.0
+# define DEFAULT_A 2.0
+# define DEFAULT_CAMERA 0.0
+# define DEFAULT_CAMERA_ANGLE 60.0
+# define DEFAULT_LIGHT 0.0
+# define DEFAULT_INTENSIVITY 0.3
+# define MAX_COORD 9999999
 # define MAX_INT 2147483647
-# define DEFAULT_Z -1.0f
+# define DEFAULT_Z -1.0
 
 
 typedef struct		s_quadr_equation
 {
-	float		a;
-	float		b;
-	float		c;
+	double		a;
+	double		b;
+	double		c;
 }					t_quadr_equation;
 
 typedef struct		s_mlx
@@ -59,21 +66,21 @@ typedef struct		s_mlx
 
 typedef struct		s_viewport
 {
-	float			wid;
-	float			hig;
-	float			distanse;
+	int			wid;
+	int			hig;
+	double		distanse;
 }					t_viewport;
 
 typedef struct		s_coord
 {
-	float		x;
-	float		y;
-	float		z;
+	double		x;
+	double		y;
+	double		z;
 }					t_coord;
 
 typedef struct	s_quat
 {
-	float		w;
+	double		w;
 	t_coord		vec;
 }				t_quat;
 
@@ -88,7 +95,7 @@ typedef struct		s_sph
 {
 	t_coord		center;
 	t_color		color;
-	float		rad;
+	double		rad;
 	int			specular;
 }					t_sph;
 
@@ -96,8 +103,8 @@ typedef struct		s_cylindr
 {
 	t_coord		center;
 	t_color		color;
-	t_coord		rotation;
-	float		rad;
+	t_coord		rotation;// direction
+	double		rad;
 	int			specular;
 }					t_cylindr;
 
@@ -105,8 +112,8 @@ typedef struct		s_cone
 {
 	t_coord		center;
 	t_color		color;
-	t_coord		rotation;
-	float		angle;
+	t_coord		rotation; // direction
+	double		angle;
 	int			specular;
 }					t_cone;
 
@@ -114,7 +121,7 @@ typedef struct		s_plane
 {
 	t_coord		center;
 	t_color		color;
-	t_coord		rotation;
+	t_coord		rotation;// direction
 	int			specular;
 }					t_plane;
 
@@ -128,7 +135,7 @@ enum	type_of_light_src
 typedef struct		s_light
 {
 	int		type;
-	float	intensity;
+	double	intensity;
 	t_coord	pos_or_dir;
 }					t_light;
 
@@ -170,14 +177,14 @@ typedef struct		s_obj_info
 	t_coord		begin_vec;
 	t_coord		center;
 	t_coord		st_cent;
-	float		t;
+	double		t;
 }					t_obj_info;
 
 typedef struct		s_raytrace
 {
-	float		t_min;
-	float		t_max;
-	float		t_near;
+	double		t_min;
+	double		t_max;
+	double		t_near;
 	t_coord		begin_vec;
 	t_coord		center;
 	t_coord		st_cent;
@@ -191,7 +198,7 @@ typedef struct		s_data
 
 
 t_color				mult_colors(t_color v1, t_color v2, int minus);
-//void				brightness_change(t_color *color, float mult);
+t_color				brightness_change(t_color color, double mult);
 void				change_color(t_color *color, int r, int g, int b);
 
 t_coord				win_to_viewport(int x, int y, t_viewport vp, t_coord rot);
@@ -213,27 +220,28 @@ int					buttons_press(int key, t_data *data);
 void				read_setups(t_data *data, char *name);
 void 				draw(t_data *data, t_mlx *mlx, t_object *object);
 void				paint_the_pix(int *img_data, int x, int y, t_color color);
-//float				compute_lighting(t_coord p, t_coord normal, t_light *light_srcs, int num_light_src);
-t_color				brightness_change(t_color color, float mult);
-float				dot(t_coord v_1, t_coord v_2);
+// double				compute_lighting(t_coord p, t_coord normal, t_light *light_srcs, int num_light_src);
+//t_color				brightness_change(t_color color,  double mult);
+double				dot(t_coord v_1, t_coord v_2);
+t_obj_info			*ray_trace(t_object my, t_raytrace value, t_coord point);
 
 t_coord				sum_vectors(t_coord vec_1, t_coord vec_2);
-t_coord				vec_scalar_mult(t_coord vector, float mult);
+t_coord				vec_scalar_mult(t_coord vector, double mult);
 t_coord				vector_coord(t_coord begin_point, t_coord end_point);
-//float				quadr_equation(t_quadr_equation factor, float *t);
+// double				quadr_equation(t_quadr_equation factor,  double *t);
 //void				normal_vector(t_coord *q);
-//float				vector_len(t_coord q);
+// double				vector_len(t_coord q);
 t_color				light_and_shadow(t_obj_info *near, t_object *object, t_raytrace value);
-float				compute_lighting(t_coord point, t_coord normal, t_object *object,
+ double				compute_lighting(t_coord point, t_coord normal, t_object *object,
 						  t_raytrace value);
 
-float				quadr_equation(t_quadr_equation factor, t_raytrace *value);
+ double				quadr_equation(t_quadr_equation factor, t_raytrace *value);
 t_coord				normal_vector(t_coord vector);
-float				vector_len(t_coord q);
+ double				vector_len(t_coord q);
 
 t_coord				cyln_normal(t_coord rotation, t_obj_info near);
-t_coord				cone_normal(t_coord rotation, t_obj_info near, float angle);
-t_raytrace			fill_in_values_to_raytracing(float t_min, float t_max, float t_near);
+t_coord				cone_normal(t_coord rotation, t_obj_info near,  double angle);
+t_raytrace			fill_in_values_to_raytracing( double t_min,  double t_max,  double t_near);
 t_obj_info			*ray_tracing(t_object *object, t_raytrace value, t_coord point);
 
 void				sphere(t_data *data, t_object *object, char **arr);
@@ -242,12 +250,10 @@ void				cone(t_data *data, t_object *object, char **arr);
 void				plane(t_data *data, t_object *object, char **arr);
 void				camera(t_object *object, char **arr);
 void				light(t_data *data, t_object *object, char **arr);
-void				position(t_coord *p, char *arr);
-void				radius(float *rad, char *arr);
-void				angle(float *angle, char *arr);
-void				color(t_color *color, char *arr);
+void				position(t_coord *p, char *arr, t_data *pData);
+void 				color(t_color *color, char *arr);
 void 				ft_safe_free_arr(char **arr);
-float				coordinate(char *str);
+ double				coordinate(char *str);
 void				preset_structures(t_object *object);
 void				validate_fd(int fd, t_data *data);
 

@@ -6,26 +6,43 @@
 /*   By: dtaisha <dtaisha@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 10:02:25 by dtaisha           #+#    #+#             */
-/*   Updated: 2020/10/08 00:25:08 by dtaisha          ###   ########lyon.fr   */
+/*   Updated: 2020/10/08 10:18:15 by dtaisha          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-static void check_cam_and_light(int *figs)
+static void		set_default(t_object *object)
+{
+	enum		type_of_light_src;
+
+	object->camera.x = DEFAULT_CAMERA;
+	object->camera.y = DEFAULT_CAMERA;
+	object->camera.z = DEFAULT_CAMERA;
+	object->rot_cam.vec.x = DEFAULT_CAMERA;
+	object->rot_cam.vec.y = DEFAULT_CAMERA;
+	object->rot_cam.vec.z = DEFAULT_CAMERA;
+	object->rot_cam.w = DEFAULT_CAMERA_ANGLE;
+	object->light_srcs[0].pos_or_dir.x = DEFAULT_LIGHT;
+	object->light_srcs[0].pos_or_dir.y = DEFAULT_LIGHT;
+	object->light_srcs[0].pos_or_dir.z = DEFAULT_LIGHT;
+	object->light_srcs[0].type = AMBIENT;
+	object->light_srcs[0].intensity = DEFAULT_INTENSIVITY;
+}
+
+static void		check_cam_and_light(int *figs)
 {
 	if (figs[0] == 0)
-		error_exit("SCENE ERROR: There is no light in configuration file! "
-			 "Don't you wanna see the black window, nah??\n", 1);
+		figs[0] = 1;
 	if (figs[1] == 0 && figs[2] == 0 && figs[3] == 0 && figs[4] == 0)
 		error_exit("SCENE ERROR: There is no figures in configuration file! "
 				   "What did you expect, nah??\n", 1);
-	if (figs[5] != 1)
+	if (figs[5] > 1)
 		error_exit("SCENE ERROR: In configuration file should be only "
 			 "1 camera! not less not more!\n", 1);
 }
 
-static int *count_figure(char *name, int fd, char *line, int *figs)
+static int		*count_figure(char *name, int fd, char *line, int *figs)
 {
 
 	fd = open(name, O_RDONLY);
@@ -54,13 +71,13 @@ static int *count_figure(char *name, int fd, char *line, int *figs)
 	return (figs);
 }
 
-int allocation(t_data *data, char *param_name)
+int				allocation(t_data *data, char *param_name)
 {
-	t_object *object;
-	int *num_obj;
-	int arr[6];
-	ft_izero(arr, 6);
+	t_object	*object;
+	int			*num_obj;
+	int			arr[6];
 
+	ft_izero(arr, 6);
 	num_obj = (count_figure(param_name, 0, NULL, arr));
 	if (!(data->mlx_ptr = (t_mlx *) malloc(sizeof(t_mlx)))
 	|| !(object = (t_object *) malloc(sizeof(t_object)))
@@ -76,5 +93,6 @@ int allocation(t_data *data, char *param_name)
 	object->num_cylns = num_obj[2];
 	object->num_cons = num_obj[3];
 	object->num_plans = num_obj[4];
+	set_default(object);
 	return (0);
 }

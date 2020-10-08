@@ -12,12 +12,12 @@
 
 #include "rtv1.h"
 
-// float		is_domain_of_definition(float num, float min, float max)
+//  double		is_domain_of_definition( double num,  double min,  double max)
 // {
 // 	return ((num > 0.0 && num < max) ? num : 0.0);
 // }
 
-float min(float a, float b)
+ double min( double a,  double b)
 {
 	if (a < b && a >= 0.0f)
 		return (a);
@@ -26,17 +26,17 @@ float min(float a, float b)
 	return (0.00000f);
 }
 
-float		quadr_equation(t_quadr_equation factor, t_raytrace *value)
+ double		quadr_equation(t_quadr_equation factor, t_raytrace *value)
 {
-	float	dis;
-	float	t_1;
-	float	t_2;
-	float	buf;
+	 double	dis;
+	 double	t_1;
+	 double	t_2;
+	 double	buf;
 
 	if (((dis = factor.b * factor.b - 4 * factor.a * factor.c) >= 0.0))
 	{
-		t_1 = (float)((-factor.b + (float)sqrt(dis)) / (2.0f * factor.a));
-		t_2 = (float)((-factor.b - (float)sqrt(dis)) / (2.0f * factor.a));
+		t_1 = ( double)((-factor.b + ( double)sqrt(dis)) / (2.0f * factor.a));
+		t_2 = ( double)((-factor.b - ( double)sqrt(dis)) / (2.0f * factor.a));
 		buf = min(t_1, t_2);
 		if (buf < value->t_max && buf > value->t_min)
 			value->t_near = buf;
@@ -47,7 +47,7 @@ float		quadr_equation(t_quadr_equation factor, t_raytrace *value)
 	return (0);
 }
 
-float		vector_len(t_coord vector)
+ double		vector_len(t_coord vector)
 {
 	return (sqrt(vector.x * vector.x + vector.y * vector.y
 				 + vector.z * vector.z));
@@ -55,7 +55,7 @@ float		vector_len(t_coord vector)
 
 t_coord		normal_vector(t_coord vector)
 {
-	float	vec_len;
+	 double	vec_len;
 
 	vec_len = vector_len(vector);
 	vector.x /= vec_len;

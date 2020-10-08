@@ -8,7 +8,6 @@ src/objects
 .idea/
 .vscode/
 .DS_Store
-*.bak
 *.dSYM/
 rtv1.dSYM
 workspace.xml

@@ -19,7 +19,6 @@ int		error_exit(char *text, int code)
 		ft_putstr("usage: ./rtv1 [scene]\n");
 		ft_putstr("\t\0scene:\0");
 		ft_putstr("The following options are available:\n");
-		ft_putstr("\t\ttest   \t\ttest var, for develop(tmp)\n");
 		ft_putstr("\t\tscene_1\t\tStage with plane\n");
 		ft_putstr("\t\tscene_2\t\tStage with sphere\n");
 		ft_putstr("\t\tscene_3\t\tStage with cylinder\n");

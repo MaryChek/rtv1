@@ -35,23 +35,23 @@ t_color	mult_colors(t_color v1, t_color v2, int minus)
 	return (v1);
 }
 
-t_color		brightness_change(t_color color, float mult)
+t_color		brightness_change(t_color color,  double mult)
 {
 	int	tmp;
 
-	if (((tmp = (int)((float)color.r * mult))) > 255)
+	if (((tmp = (int)(( double)color.r * mult))) > 255)
 		color.r = 255;
 	else if (tmp <= 0.0)
 		color.r = 0;
 	else
 		color.r = tmp;
-	if (((tmp = (int)((float)color.g * mult))) > 255)
+	if (((tmp = (int)(( double)color.g * mult))) > 255)
 		color.g = 255;
 	else if (tmp <= 0.0)
 		color.g = 0;
 	else
 		color.g = tmp;
-	if (((tmp = (int)((float)color.b * mult))) > 255)
+	if (((tmp = (int)(( double)color.b * mult))) > 255)
 		color.b = 255;
 	else if (tmp <= 0.0)
 		color.b = 0;

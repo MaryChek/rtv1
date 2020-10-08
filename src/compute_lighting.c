@@ -12,13 +12,13 @@
 
 #include "rtv1.h"
 
-float	compute_lighting(t_coord point, t_coord normal, t_object *object,
+ double	compute_lighting(t_coord point, t_coord normal, t_object *object,
 						  t_raytrace value)
 {
-	float	light_pow;
+	 double	light_pow;
 	int		i;
 	t_coord	vec_l;
-	float	nor_dot_l;
+	 double	nor_dot_l;
 
 	light_pow = 0.0;
 	i = -1;
@@ -87,6 +87,6 @@ t_color		light_and_shadow(t_obj_info *near, t_object *object, t_raytrace value)
 		normal = object->plane_objs[near->index].rotation;
 	}
 	value = fill_in_values_to_raytracing(0.001f, 1.0, 0.0);
-	float tmp = compute_lighting(near->point, normal, object, value);
+	 double tmp = compute_lighting(near->point, normal, object, value);
 	return (brightness_change(color_near_obj(object, *near), tmp));
 }

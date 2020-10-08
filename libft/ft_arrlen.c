@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_arr.c                                      :+:      :+:    :+:   */
+/*   ft_arrlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dtaisha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/19 17:09:13 by dtaisha           #+#    #+#             */
-/*   Updated: 2020/10/07 22:58:57 by dtaisha          ###   ########lyon.fr   */
+/*   Created: 2019/09/04 16:28:33 by dtaisha           #+#    #+#             */
+/*   Updated: 2020/10/08 12:19:22 by dtaisha          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_free_arr(char **str, size_t n)
+size_t		ft_arrlen(char **arr)
 {
-	while (n)
+	size_t	i;
+
+	i = 0;
+	if (arr)
 	{
-		ft_safe_free(str[n]);
-		n--;
+		i = 1;
+		while (*arr)
+		{
+			i++;
+			arr++;
+		}
+		return (i - 1);
 	}
-	ft_safe_free(str[n]);
-	ft_safe_free(str);
-	return (NULL);
+	return (i);
 }

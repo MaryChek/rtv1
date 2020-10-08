@@ -13,13 +13,13 @@
 #include <stdio.h>
 #include "rtv1.h"
 
-t_coord cone_normal(t_coord rotation, t_obj_info near, float angle)
+t_coord cone_normal(t_coord rotation, t_obj_info near,  double angle)
 {
 	t_coord normal;
-	float k;
-	float m;
+	 double k;
+	 double m;
 
-	k = (float) tan(angle);
+	k = ( double) tan(angle);
 	m = dot(near.begin_vec, rotation) * near.t + dot(near.st_cent, rotation);
 	k = (k * k + 1.0f) * m;
 	normal = vector_coord(near.center, near.point);//( P-C - (1+k*k)*V*m )
@@ -29,7 +29,7 @@ t_coord cone_normal(t_coord rotation, t_obj_info near, float angle)
 
 t_coord cyln_normal(t_coord rotation, t_obj_info near)
 {
-	float m;
+	 double m;
 	t_coord normal;
 
 	m = dot(near.begin_vec, rotation) * near.t + dot(near.st_cent, rotation);
@@ -53,7 +53,7 @@ void check_near_obj(t_raytrace value, t_obj_info **near, int type, int index)
 	}
 }
 
-t_raytrace fill_in_values_to_raytracing(float t_min, float t_max, float t_near)
+t_raytrace fill_in_values_to_raytracing( double t_min,  double t_max,  double t_near)
 {
 	t_raytrace value;
 
@@ -66,27 +66,27 @@ t_raytrace fill_in_values_to_raytracing(float t_min, float t_max, float t_near)
 int tang_to_cone(t_raytrace *value, t_cone cone, t_coord st_point)
 {
 	t_quadr_equation factor;
-	float dot_ov_r;
-	float dot_co_r;
-	float k;
+	 double dot_ov_r;
+	 double dot_co_r;
+	 double k;
 
 	value->center = cone.center;
 	value->st_cent = vector_coord(cone.center, st_point);
 	dot_co_r = dot(value->st_cent, cone.rotation);
 	dot_ov_r = dot(value->begin_vec, cone.rotation);
-	k = (float) tan(cone.angle);
+	k = ( double) tan(cone.angle);
 	k = k * k + 1.0;
-	factor.a = dot(value->begin_vec, value->begin_vec) - k * (float) pow(dot_ov_r, 2.0);
+	factor.a = dot(value->begin_vec, value->begin_vec) - k * ( double) pow(dot_ov_r, 2.0);
 	factor.b = 2.0 * (dot(value->begin_vec, value->st_cent) - k * dot_co_r * dot_ov_r);
-	factor.c = dot(value->st_cent, value->st_cent) - k * (float) pow(dot_co_r, 2.0);
+	factor.c = dot(value->st_cent, value->st_cent) - k * ( double) pow(dot_co_r, 2.0);
 	return (quadr_equation(factor, value));
 }
 
 int tang_to_plane(t_raytrace *value, t_plane plane, t_coord st_point)
 {
-	float t;
-	float dot_ov_r;
-	float dot_co_r;
+	 double t;
+	 double dot_ov_r;
+	 double dot_co_r;
 
 	value->center = plane.center;
 	value->st_cent = vector_coord(plane.center, st_point);
@@ -108,19 +108,19 @@ int tang_to_plane(t_raytrace *value, t_plane plane, t_coord st_point)
 int tang_to_cyln(t_raytrace *value, t_cylindr cyln, t_coord st_point)
 {
 	t_quadr_equation factor;
-	float dot_ov_r;
-	float dot_co_r;
+	 double dot_ov_r;
+	 double dot_co_r;
 //	t_coord center;
 
 	value->center = cyln.center;
 	value->st_cent = vector_coord(cyln.center, st_point);
 	dot_co_r = dot(value->st_cent, cyln.rotation);
 	dot_ov_r = dot(value->begin_vec, cyln.rotation);
-	factor.a = dot(value->begin_vec, value->begin_vec) - (float) pow(dot_ov_r, 2.0);
+	factor.a = dot(value->begin_vec, value->begin_vec) - ( double) pow(dot_ov_r, 2.0);
 	factor.b = 2.0 * (dot(value->begin_vec, value->st_cent) -
 					  dot_co_r * dot_ov_r);
 	factor.c = dot(value->st_cent, value->st_cent) -
-			   (float) pow(dot_co_r, 2.0) - cyln.rad * cyln.rad;
+			   ( double) pow(dot_co_r, 2.0) - cyln.rad * cyln.rad;
 	return (quadr_equation(factor, value));
 }
 

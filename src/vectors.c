@@ -16,8 +16,8 @@ t_coord		win_to_viewport(int x, int y, t_viewport vp, t_coord rot)
 {
 	t_coord		point;
 
-	point.x = (float)(x - (WIN_WID / 2)) + rot.x;
-	point.y = (float)((WIN_HIG / 2) - y) + rot.y;
+	point.x = ( double)(x - (WIN_WID / 2)) + rot.x;
+	point.y = ( double)((WIN_HIG / 2) - y) + rot.y;
 	if (point.x == 0.0 && point.y == 0.0) // для дебага
 		point.z = vp.distanse;
 	point.z = vp.distanse + rot.z;
@@ -34,7 +34,7 @@ t_coord		vector_coord(t_coord begin_point, t_coord end_point)
 	return (rez_point);
 }
 
-float		dot(t_coord vec_1, t_coord vec_2)
+ double		dot(t_coord vec_1, t_coord vec_2)
 {
 	return ((vec_1.x * vec_2.x + vec_1.y * vec_2.y + vec_1.z * vec_2.z));
 }
@@ -49,7 +49,7 @@ t_coord		sum_vectors(t_coord vec_1, t_coord vec_2)
 	return (point);
 }
 
-t_coord		vec_scalar_mult(t_coord vector, float mult)
+t_coord		vec_scalar_mult(t_coord vector,  double mult)
 {
 	vector.x *= mult;
 	vector.y *= mult;

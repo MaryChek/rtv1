@@ -6,7 +6,7 @@
 /*   By: dtaisha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/19 17:11:48 by dtaisha           #+#    #+#             */
-/*   Updated: 2020/09/19 17:12:01 by dtaisha          ###   ########.fr       */
+/*   Updated: 2020/10/08 23:26:38 by dtaisha          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,8 @@ void				ft_swap(int	*a, int *b);
 void				ft_safe_free(void *item);
 int					ft_to_digit(char c);
 void				ft_izero(int *s, size_t n);
+size_t				ft_arrlen(char **arr);
+void				ft_safe_free_arr(char **arr);
+size_t				ft_cnt_digits(long long int num);
 
 #endif

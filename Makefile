@@ -6,7 +6,7 @@
 #   By: dtaisha <dtaisha@student.21-school.ru>     +#+  +:+       +#+        #
 #                                                +#+#+#+#+#+   +#+           #
 #   Created: 2020/05/09 19:47:36 by dtaisha           #+#    #+#             #
-#   Updated: 2020/10/08 00:20:45 by dtaisha          ###   ########lyon.fr   #
+#   Updated: 2020/10/08 00:22:26 by dtaisha          ###   ########lyon.fr   #
 #                                                                            #
 # ************************************************************************** #
 
@@ -36,7 +36,7 @@ SRC_FILES = main.c\
 			param_validation.c allocation.c color.c \
 			errors.c  presets.c \
 			tear_down.c read_file.c light.c figure.c \
-			camera.c read_setups.c read_lib.c
+			camera.c read_setups.c read_utils.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 
