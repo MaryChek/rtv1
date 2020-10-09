@@ -10,5 +10,4 @@ void			grafic_connection(t_data *data, t_mlx *mlx)
 	mlx_hook(mlx->win, 2, 0, buttons_press, data);
 	mlx_hook(mlx->win, 17, (1L << 17), close_window, data);
 	mlx_loop(mlx->mlx);
-	(void) data;
 }

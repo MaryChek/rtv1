@@ -22,7 +22,6 @@ int			main(int ac, char **av)
 		if (!(data = (t_data*)malloc(sizeof(t_data))) ||
 				(allocation(data, av[1]) != 0))
 			free_error_exit("Malloc error\n", 1, data);
-//		preset_structures(data->p_object);
 		read_setups(data, av[1]); //там будем считывать файл из аргументов (название файла, и указатель на структурку куда вностить настройки)
 
 		t_object *object;
@@ -65,7 +64,7 @@ int			main(int ac, char **av)
 			i++;
 		}
 
-		//		grafic_connection(data, data->mlx_ptr);
+		grafic_connection(data, data->mlx_ptr);
 		free_all(data);
 	}
 

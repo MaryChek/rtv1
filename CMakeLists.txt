@@ -6,34 +6,27 @@ set(CMAKE_C_STANDARD 11)
 
 include_directories(header/)
 include_directories(libft/)
-include_directories(src/)
+include_directories(minilibx/)
 
 
 add_executable(rtv1
         header/rtv1.h
+        minilibx/
         src/
-        libft/
         src/allocation.c
+        src/hooks_and_deals.c
         src/param_validation.c
         src/errors.c
+        src/ray_trace.c
         src/main.c
-        src/color.c
         src/tear_down.c
         libft/ft_strchr.c
-        libft/get_next_line.c
-        libft/ft_free.c
-        libft/ft_free_arr.c
-        libft/ft_cnt_l.c
-        libft/ft_cnt_w.c
         libft/ft_bzero.c
         libft/ft_strcmp.c
         libft/ft_strlen.c
         libft/ft_strsplit.c
         libft/ft_putstr.c
         libft/ft_strsub.c
-        libft/ft_arrlen.c
-        libft/ft_safe_free_arr.c
-        libft/ft_cnt_digits.c
         libft/ft_strsplit.c
         libft/ft_isdigit.c
         libft/ft_memcpy.c
@@ -55,8 +48,16 @@ add_executable(rtv1
         libft/ft_strlcat.c
         libft/ft_strncat.c
         libft/ft_strnew.c
-        libft/ft_strncmp.c
         libft/ft_strnstr.c
         libft/ft_bzero.c
-        src/presets.c
-         src/read_file.c src/figure.c src/camera.c src/light.c src/read_utils.c libft/ft_to_digit.c libft/ft_izero.c)
+        src/read_utils.c
+        src/color.c
+        src/camera.c
+        src/figure.c
+        src/light.c
+        src/light_and_shadow.c
+        src/no_name.c
+        src/normal_to_obj.c
+        src/quadratic_equation.c
+        src/quater_rotation.c
+        src/vectors.c src/grafic_connection.c src/presets.c src/draw.c src/color.c src/quater_rotation.c src/read_file.c)

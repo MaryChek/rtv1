@@ -6,7 +6,7 @@
 #   By: dtaisha <dtaisha@student.21-school.ru>     +#+  +:+       +#+        #
 #                                                +#+#+#+#+#+   +#+           #
 #   Created: 2020/05/09 19:47:36 by dtaisha           #+#    #+#             #
-#   Updated: 2020/10/08 00:22:26 by dtaisha          ###   ########lyon.fr   #
+#   Updated: 2020/10/09 02:57:14 by dtaisha          ###   ########lyon.fr   #
 #                                                                            #
 # ************************************************************************** #
 
@@ -32,11 +32,12 @@ H_DIR = ./header/
 HEADER = $(addprefix $(H_DIR), $(H_FILE))
 
 SRC_DIR = ./src/
-SRC_FILES = main.c\
-			param_validation.c allocation.c color.c \
-			errors.c  presets.c \
-			tear_down.c read_file.c light.c figure.c \
-			camera.c read_setups.c read_utils.c
+SRC_FILES = main.c allocation.c camera.c color.c draw.c errors.c figure.c \
+			grafic_connection.c hooks_and_deals.c light.c \
+			light_and_shadow.c no_name.c normal_to_obj.c presets.c \
+			param_validation.c quadratic_equation.c quater_rotation.c \
+			ray_trace.c tear_down.c read_file.c read_utils.c vectors.c \
+
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 
