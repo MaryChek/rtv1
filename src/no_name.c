@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 15:45:41 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/08 19:20:41 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/09 17:02:34 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,25 +36,41 @@ int			get_specul_obj(t_object my, int type, int index)
 		return (my.plane_objs[index].specular);
 }
 
-void		fixing_the_near_obj(t_raytrace value, t_obj_info **near, int type, int index)
+void		fixing_the_near_obj(t_ray_data ray, t_obj_info **near, int type, int index)
 {
-	if ((!(*near) || value.t_near < (*near)->t))
+	if ((!(*near) || ray.t_near < (*near)->t))
 	{
 		if (!(*near))
 		{
 			*near = (t_obj_info *)malloc(sizeof(t_obj_info));
 		}
-		(*near)->center = value.center;
-		(*near)->st_cent = value.st_cent;
-		(*near)->t = (value.t_near - 0.0001);
+		(*near)->center = ray.cent_obj;
+		(*near)->st_cent = ray.st_cent;
+		(*near)->t = (ray.t_near - 0.0001);
 		(*near)->type = type;
 		(*near)->index = index;
-		(*near)->begin_vec = value.begin_vec;
 	}
 }
 
-void		min_and_max_to_raytrace(t_raytrace *value, double t_min, double t_max)
+t_ray_data	creat_ray(double max_len, t_coord point, t_coord direction)
 {
-	value->t_max = t_max;
-	value->t_min = t_min;
+	t_ray_data	ray;
+
+	ray.t_max = max_len;
+	ray.point = point;
+	ray.diration = direction;
+	return (ray);
+}
+
+t_coord		get_direction(t_cam camera, int x, int y)
+{
+	t_coord		direction;
+	t_coord		point;
+	t_coord		vector;
+
+	point = (t_coord){x - (WIN_WID / 2), (WIN_HIG / 2) - y, WIN_DIST};
+	point = vctr_rotation(point, camera.roter);
+	vector = vctr_sub(camera.point, point);
+	direction = vctr_normal(vector);
+	return (direction);
 }

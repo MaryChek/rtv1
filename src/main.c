@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 17:39:55 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/08 20:12:30 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/09 18:47:34 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,11 @@ int		main()
 	obj_cone.rotation.x = 1.0;
 	obj_cone.rotation.y = 0.0;
 	obj_cone.rotation.z = 0.0;
-	obj_cone.rotation = normal_vector((t_coord){1.0, 0.0, 0.0});
+	obj_cone.rotation = vctr_normal((t_coord){-1.0, 0.0, 0.0});
 
 	obj_cone.angle = 30.0;// 0.523599;
+
+	obj_cone.specular = 10.0;
 
 	my.num_cons++;
 
@@ -90,7 +92,7 @@ int		main()
 	// obj_plane.rotation.x = 1.0;
 	// obj_plane.rotation.y = -1.0;
 	// obj_plane.rotation.z = 0.0;
-	// obj_plane.rotation = normal_vector((t_coord){0.0, -1.0, 0.0});
+	// obj_plane.rotation = vctr_normal((t_coord){0.0, -1.0, 0.0});
 
 	// my.num_plans++;
 
@@ -98,16 +100,17 @@ int		main()
 
 	obj_plane2.center.x = 0.0;
 	obj_plane2.center.y = 0.0;
-	obj_plane2.center.z = 700.0;
+	obj_plane2.center.z = 100.0;
 	
 	obj_plane2.color.r = 255;
 	obj_plane2.color.g = 255;
 	obj_plane2.color.b = 0;
+	obj_plane2.specular = -1.0;
 
 	// obj_plane2.rotation.x = -1.0;
 	// obj_plane2.rotation.y = 1.0;
 	// obj_plane2.rotation.z = 1.0;
-	obj_plane2.rotation = normal_vector((t_coord){0.0, 0.0, 1.0});
+	obj_plane2.rotation = vctr_normal((t_coord){1.0, 1.0, 1.0});
 
 	my.num_plans++;
 
@@ -157,6 +160,7 @@ int		main()
 	obj_sph3.color.b = 0;
 	
 	obj_sph3.rad = 1.0;
+	obj_sph.specular = 10.0;
 
 	// my.num_sphs++;
 	
@@ -172,7 +176,7 @@ int		main()
 
 	obj_cyln.center.x = 0.0;
 	obj_cyln.center.y = 0.0;
-	obj_cyln.center.z = 600.1;
+	obj_cyln.center.z = 90.1;
 
 	obj_cyln.color.r = 114;
 	obj_cyln.color.g = 255;
@@ -181,7 +185,8 @@ int		main()
 	obj_cyln.rotation.x = 1.0;
 	obj_cyln.rotation.y = 1.0;
 	obj_cyln.rotation.z = 0.0;
-	obj_cyln.rotation = normal_vector((t_coord){1.0, 1.0, 0.0});
+	obj_cyln.rotation = vctr_normal((t_coord){1.0, 1.0, 0.0});
+	obj_cyln.specular = 10;
 	
 
 	obj_cyln.rad = 50.0;
@@ -194,11 +199,15 @@ int		main()
 
 // ------------------------------------------ CAMERA
 
-	my.camera.x = 0.0;
-	my.camera.y = 0.0;
-	my.camera.z = -100.0;
+	t_cam		camera;
+	
+	camera.point.x = 0.0;
+	camera.point.y = 0.0;
+	camera.point.z = -100.0;
 
-	my.rot_cam = creat_axis_of_rot(0, 0, 0, 1.0);
+	camera.roter = creat_axis_of_rot(0, 0, 0, 1.0);
+
+	my.camera = camera;
 	
 // ------------------------------------------ LIGHT SOURCES
 
@@ -207,27 +216,27 @@ int		main()
 	t_light		light_1;
 
 	light_1.type = AMBIENT;
-	light_1.intensity = 0.0;
+	light_1.intensity = 0.1;
 	
 	my.num_l_src++;
 	
 	t_light		light_2;
 
 	light_2.type = POINT;
-	light_2.intensity = 0.6;
-	light_2.pos_or_dir.x = -60.0;
-	light_2.pos_or_dir.y = 10.0;
+	light_2.intensity = 0.4;
+	light_2.pos_or_dir.x = 0.0;
+	light_2.pos_or_dir.y = -10.0;
 	light_2.pos_or_dir.z = 0.0;
 
 	my.num_l_src++;
 
 	t_light		light_3;
-
+///////////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	light_3.type = DIRECTIONAL;
-	light_3.intensity = 0.0;
+	light_3.intensity = 0.3;
 	light_3.pos_or_dir.x = 0.0;
-	light_3.pos_or_dir.y = -1.0;
-	light_3.pos_or_dir.z = 0.0;
+	light_3.pos_or_dir.y = 0.5;
+	light_3.pos_or_dir.z = -0.8;
 
 	my.num_l_src++;
 
@@ -239,15 +248,11 @@ int		main()
 
 // ----------------------------------------- PARSING_END
 
-	t_viewport view_port;
-
-	view_port.wid = WIN_WID;
-	view_port.hig = WIN_HIG;
-	view_port.distanse = 1079.0;
-
-	int x, y;
-	t_raytrace	value;
+	int			x;
+	int			y;
+	t_ray_data	ray;
 	t_obj_info	*near;
+	double		dist;
 	
 	y = -1;
 	while (++y < WIN_HIG)
@@ -255,12 +260,11 @@ int		main()
 		x = -1;
 		while (++x < WIN_WID)
 		{
-			value.begin_vec = normal_vector(vector_coord(my.camera,
-			vector_rotation(win_to_viewport(x, y, view_port), my.rot_cam)));
-			min_and_max_to_raytrace(&value, 0.0, INFINITY);
-			if ((near = ray_trace(my, value, my.camera)))
+			my.camera.direct = get_direction(camera, x, y);
+			ray = creat_ray(INFINITY, my.camera.point, my.camera.direct);
+			if ((near = ray_trace(my, ray)))
 			{
-				my.pix_color = trace_to_light_src(*near, my, value);
+				my.pix_color = trace_to_light_src(*near, my);
 				free(near);
 			}
 			else

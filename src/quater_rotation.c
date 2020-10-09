@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/30 21:27:09 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/07 21:10:52 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/09 16:43:10 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ t_quat		mol_quat(t_quat a, t_quat b)
 	return (res);
 }
 
-t_coord		vector_rotation(t_coord vector, t_quat rotor)
+t_coord		vctr_rotation(t_coord vector, t_quat rotor)
 {
 	t_quat	tmp;
 
 	tmp = mol_quat(rotor, (t_quat){0.0, vector});
-	rotor.vec = reverse_vector(rotor.vec);
+	rotor.vec = vctr_reverse(rotor.vec);
 	normal_quat(&rotor);
 	tmp = mol_quat((t_quat){0.0, vector}, rotor);
 	vector.x = tmp.vec.x;
