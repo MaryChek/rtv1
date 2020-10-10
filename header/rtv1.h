@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:25:42 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/09 03:08:31 by dtaisha          ###   ########lyon.fr   */
+/*   Updated: 2020/10/10 21:28:17 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@
 # include "mlx.h"
 # include "libft.h"
 # include <OpenCL/cl.h>
-#include <stdio.h>
+# include <stdio.h>
 
 # define WIN_WID 1024
 # define WIN_HIG 768
+# define WIN_DIST 1080
 
 # define ESC 53
 # define SCROLL_UP 4
@@ -38,11 +39,9 @@
 # define DEFAULT_R 1.0
 # define DEFAULT_A 2.0
 # define DEFAULT_CAMERA 0.0
-# define DEFAULT_CAMERA_ANGLE 60.0
+# define DEFAULT_CAMERA_ANGLE 1.0
 # define DEFAULT_LIGHT 0.0
 # define DEFAULT_INTENSIVITY 0.3
-
-
 
 typedef struct		s_quadr_equation
 {
@@ -62,12 +61,12 @@ typedef struct		s_mlx
 	int 		size_line;
 }					t_mlx;
 
-typedef struct		s_viewport
+typedef struct		s_color
 {
-	int			wid;
-	int			hig;
-	double		distanse;
-}					t_viewport;
+	int			r;
+	int			g;
+	int			b;
+}					t_color;
 
 typedef struct		s_coord
 {
@@ -82,45 +81,38 @@ typedef struct	s_quat
 	t_coord		vec;
 }				t_quat;
 
-typedef struct		s_color
-{
-	int			r;
-	int			g;
-	int			b;
-}					t_color;
-
 typedef struct		s_sph
 {
 	t_coord		center;
 	t_color		color;
 	double		rad;
-	int			specular;
+	double		specular;
 }					t_sph;
 
 typedef struct		s_cylindr
 {
 	t_coord		center;
 	t_color		color;
-	t_coord		rotation;// direction
+	t_coord		direction;
 	double		rad;
-	int			specular;
+	double		specular;
 }					t_cylindr;
 
 typedef struct		s_cone
 {
 	t_coord		center;
 	t_color		color;
-	t_coord		rotation; // direction
+	t_coord		direction;
 	double		angle;
-	int			specular;
+	double		specular;
 }					t_cone;
 
 typedef struct		s_plane
 {
 	t_coord		center;
 	t_color		color;
-	t_coord		rotation;// direction
-	int			specular;
+	t_coord		direction;
+	double		specular;
 }					t_plane;
 
 enum	type_of_light_src
@@ -137,10 +129,17 @@ typedef struct		s_light
 	t_coord	pos_or_dir;
 }					t_light;
 
+typedef struct		s_vector
+{
+	t_coord		point;
+	t_coord		direct;
+	t_quat		roter;
+}					t_vector;
+
 typedef struct		s_object
 {
-	t_coord		camera;
-	t_quat		rot_cam;
+	t_vector	camera;
+
 	t_color		pix_color;
 
 	t_sph		*sph_objs;
@@ -172,36 +171,26 @@ typedef struct		s_obj_info
 	int			type;
 	int			index;
 	t_coord		point;
-	t_coord		begin_vec;
 	t_coord		center;
 	t_coord		st_cent;
 	double		t;
 }					t_obj_info;
 
-typedef struct		s_raytrace
+typedef struct		s_ray_data
 {
-	double		t_min;
 	double		t_max;
 	double		t_near;
-	t_coord		begin_vec;
-	t_coord		center;
+	t_coord		direction;
+	t_coord		cent_obj;
 	t_coord		st_cent;
-}					t_raytrace;
+	t_coord		point;
+}					t_ray_data;
 
 typedef struct		s_data
 {
-	t_mlx				*mlx_ptr;
-	t_object			*p_object;
-}						t_data;
-
-
-t_color				mult_colors(t_color v1, t_color v2, int minus);
-t_color				brightness_change(t_color color, double mult);
-void				change_color(t_color *color, int r, int g, int b);
-
-//t_coord				win_to_viewport(int x, int y, t_viewport vp, t_coord rot);
-
-int					key_press(int key);
+	t_mlx		*mlx_ptr;
+	t_object	*p_object;
+}					t_data;
 
 int					allocation(t_data *data, char *param_name);
 int					main(int ac, char **av);
@@ -215,10 +204,7 @@ void				grafic_preset(t_mlx *mlx);
 int					close_window(t_data *data);
 int					buttons_press(int key, t_data *data);
 void				read_setups(t_data *data, char *name);
-void 				draw(t_data *data, t_mlx *mlx, t_object *object);
-t_obj_info			*ray_trace(t_object *object, t_raytrace value, t_coord point);
-t_coord				vector_coord(t_coord begin_point, t_coord end_point);
-t_coord				normal_vector(t_coord vector);
+void 				draw(t_data *data, t_mlx *mlx, t_object object);
 
 void				sphere(t_data *data, t_object *object, char **arr);
 void				cylinder(t_data *data, t_object *object, char **arr);
@@ -233,39 +219,43 @@ double				coordinate(char *str);
 void				preset_structures(t_object *object);
 void				validate_fd(int fd, t_data *data);
 
-t_color				trace_to_light_src(t_obj_info near, t_object *object,
-										  t_raytrace value);
+t_color				trace_to_light_src(t_obj_info near, t_object objs);
 
-int					key_press(int key);
+// int					key_press(int key);
 
-double				quadr_equation(t_quadr_equation factor, t_raytrace *value);
-t_coord				normal_vector(t_coord vector);
-double				vector_len(t_coord q);
+double				quadr_equation(t_quadr_equation factor, t_ray_data *ray);
+t_coord				vctr_normal(t_coord vector);
+double				vctr_len(t_coord q);
+t_coord				vctr_rotation(t_coord vector, t_quat roter);
 
-t_quat				creat_axis_of_rot(int x, int y, int z, double alpha);
-t_coord				vector_rotation(t_coord vector, t_quat roter);
+t_quat				creat_axis_of_rot(t_coord vector, double alpha);
 
-void				min_and_max_to_raytrace(t_raytrace *value, double t_min,
+void				min_and_max_to_raytrace(t_ray_data *ray, double t_min,
 											double t_max);
-t_obj_info			*ray_trace(t_object *object, t_raytrace value, t_coord point);
+t_obj_info			*ray_trace(t_object objs, t_ray_data ray);
 
 t_color				mult_colors(t_color v1, t_color v2, int minus);
 t_color				brightness_change(t_color color, double mult);
 void				change_color(t_color *color, int r, int g, int b);
 
-t_coord				win_to_viewport(int x, int y, t_viewport vp);
 double				dot(t_coord v_1, t_coord v_2);
-t_coord				sum_vectors(t_coord vec_1, t_coord vec_2);
-t_coord				vec_scalar_mult(t_coord vector, double mult);
-t_coord				vector_coord(t_coord begin_point, t_coord end_point);
-t_coord				reverse_vector(t_coord vector);
+t_coord				vctr_sum(t_coord vec_1, t_coord vec_2);
+t_coord				vctr_mult(t_coord vector, double mult);
+t_coord				vctr_sub(t_coord begin_point, t_coord end_point);
+t_coord				vctr_reverse(t_coord vector);
 
-void				fixing_the_near_obj(t_raytrace value, t_obj_info **near,
+void				fixing_the_near_obj(t_ray_data ray, t_obj_info **near,
 										int type, int index);
-t_color				get_obj_color(t_object *object, int type, int index);
-int					get_specul_obj(t_object *object, int type, int index);
-t_coord				normal_to_obj(t_object *object, t_obj_info near);
+t_color				get_obj_color(t_object objs, int type, int index);
+int					get_specul_obj(t_object objs, int type, int index);
+t_coord				get_direction(t_vector camera, int x, int y);
+t_ray_data			creat_ray(double max_len, t_coord point,
+													t_coord direction);
+
+t_coord				normal_to_obj(t_object objs, t_obj_info near);
+
 void				put_color_to_img(int **img_data, int x, int y,
 									 t_color color);
 
+////////////////////////////////////////////////////////////////////////////
 #endif

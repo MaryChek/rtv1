@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/13 11:46:20 by dtaisha           #+#    #+#             */
-/*   Updated: 2020/10/10 18:53:00 by rtacos           ###   ########.fr       */
+/*   Created: 2020/10/09 18:53:09 by rtacos            #+#    #+#             */
+/*   Updated: 2020/10/10 21:36:51 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <rtv1.h>
 
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+void	camera(t_object *objects, char **arr)
 {
-	size_t		len_needle;
+	size_t		len;
 
-	if (*needle == '\0')
-		return ((char *)haystack);
-	len_needle = ft_strlen(needle);
-	while (*haystack != '\0' && len-- >= len_needle)
+	write(1, "camera\n", 7);
+	len = ft_arrlen(arr);
+	if (len > 1)
+		position(&objects->camera.point, arr[1], NULL);
+	if (len > 2)
 	{
-		if (*haystack == *needle &&
-				((ft_memcmp(haystack, needle, len_needle)) == 0))
-			return ((char *)haystack);
-		haystack++;
+		position(&objects->camera.roter.vec, arr[2], NULL);
+		objects->camera.roter = creat_axis_of_rot(objects->camera.roter.vec,
+												objects->camera.roter.w);
 	}
-	return (NULL);
+//	objects->rot_cam.w = DEFAULT_CAMERA_ANGLE;
 }

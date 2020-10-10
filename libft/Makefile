@@ -10,7 +10,6 @@
 #                                                                            #
 # ************************************************************************** #
 
-
 NAME = libft.a
 
 SRC = ft_strncmp.c ft_memalloc.c ft_strcat.c ft_strncpy.c ft_bzero.c \
@@ -37,17 +36,18 @@ INC = libft.h
 
 all: $(NAME)
 
-$(NAME): $(SRC) $(FT_O)
-	ar rc $(NAME) $(FT_O)
-	ranlib $(NAME)
+$(NAME): $(SRC) $(FT_O) $(INC)
+	@ar rc $(NAME) $(FT_O)
+	@ranlib $(NAME)
+	@echo "------------make libft finish------------"
 
 $(FT_O): %.o: %.c
-	gcc -c -Wall -Wextra -Werror $< -I $(INC)
+	@gcc -c -Wall -Wextra -Werror $< -I $(INC)
 
 clean:
-	rm -rf $(FT_O)
+	@rm -rf $(FT_O)
 
 fclean: clean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
 
-re: fclean all
+re: @fclean all

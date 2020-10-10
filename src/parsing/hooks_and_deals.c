@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks_and_deals.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtaisha <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/19 16:22:07 by dtaisha           #+#    #+#             */
-/*   Updated: 2020/09/21 00:20:49 by dtaisha          ###   ########lyon.fr   */
+/*   Updated: 2020/10/10 21:04:07 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,8 @@ int				buttons_press(int key, t_data *data)
 	if (key == ESC)
 		close_window(data);
 	else if (key == SPACE)
-	{
 		write(1,"SPACE\n", 6);
-	}
 	else if (key == LEFT || key == RIGHT || key == UP || key == DOWN)
-	{
 		write(1,"ARROW\n", 6);
-	}
 	return (0);
 }

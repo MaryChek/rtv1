@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   grafic_connection.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/13 11:46:20 by dtaisha           #+#    #+#             */
-/*   Updated: 2020/10/10 18:53:00 by rtacos           ###   ########.fr       */
+/*   Created: 2020/10/09 18:53:30 by rtacos            #+#    #+#             */
+/*   Updated: 2020/10/10 20:54:46 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "rtv1.h"
 
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+void			grafic_connection(t_data *data, t_mlx *mlx)
 {
-	size_t		len_needle;
-
-	if (*needle == '\0')
-		return ((char *)haystack);
-	len_needle = ft_strlen(needle);
-	while (*haystack != '\0' && len-- >= len_needle)
-	{
-		if (*haystack == *needle &&
-				((ft_memcmp(haystack, needle, len_needle)) == 0))
-			return ((char *)haystack);
-		haystack++;
-	}
-	return (NULL);
+	grafic_preset(mlx);
+	draw(data, mlx, *(data->p_object));
+	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img_ptr, 0, 0);
+	mlx_hook(mlx->win, 2, 0, buttons_press, data);
+	mlx_hook(mlx->win, 17, (1L << 17), close_window, data);
+	mlx_loop(mlx->mlx);
 }

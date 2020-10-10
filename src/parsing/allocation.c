@@ -3,31 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   allocation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtaisha <dtaisha@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 10:02:25 by dtaisha           #+#    #+#             */
-/*   Updated: 2020/10/08 10:18:15 by dtaisha          ###   ########lyon.fr   */
+/*   Updated: 2020/10/10 20:59:47 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-static void		set_default(t_object *object)
+static void		set_default(t_object *objs)
 {
-	enum		type_of_light_src;
-
-	object->camera.x = DEFAULT_CAMERA;
-	object->camera.y = DEFAULT_CAMERA;
-	object->camera.z = DEFAULT_CAMERA;
-	object->rot_cam.vec.x = DEFAULT_CAMERA;
-	object->rot_cam.vec.y = DEFAULT_CAMERA;
-	object->rot_cam.vec.z = DEFAULT_CAMERA;
-	object->rot_cam.w = DEFAULT_CAMERA_ANGLE;
-	object->light_srcs[0].pos_or_dir.x = DEFAULT_LIGHT;
-	object->light_srcs[0].pos_or_dir.y = DEFAULT_LIGHT;
-	object->light_srcs[0].pos_or_dir.z = DEFAULT_LIGHT;
-	object->light_srcs[0].type = AMBIENT;
-	object->light_srcs[0].intensity = DEFAULT_INTENSIVITY;
+	objs->camera.point.x = DEFAULT_CAMERA;
+	objs->camera.point.y = DEFAULT_CAMERA;
+	objs->camera.point.z = DEFAULT_CAMERA;
+	objs->camera.roter.vec.x = DEFAULT_CAMERA;
+	objs->camera.roter.vec.y = DEFAULT_CAMERA;
+	objs->camera.roter.vec.z = DEFAULT_CAMERA;
+	objs->camera.roter.w = DEFAULT_CAMERA_ANGLE;
+	objs->light_srcs[0].pos_or_dir.x = DEFAULT_LIGHT;
+	objs->light_srcs[0].pos_or_dir.y = DEFAULT_LIGHT;
+	objs->light_srcs[0].pos_or_dir.z = DEFAULT_LIGHT;
+	objs->light_srcs[0].type = AMBIENT;
+	objs->light_srcs[0].intensity = DEFAULT_INTENSIVITY;
 }
 
 static void		check_cam_and_light(int *figs)
@@ -73,26 +71,26 @@ static int		*count_figure(char *name, int fd, char *line, int *figs)
 
 int				allocation(t_data *data, char *param_name)
 {
-	t_object	*object;
+	t_object	*objs;
 	int			*num_obj;
 	int			arr[6];
 
 	ft_izero(arr, 6);
 	num_obj = (count_figure(param_name, 0, NULL, arr));
 	if (!(data->mlx_ptr = (t_mlx *) malloc(sizeof(t_mlx)))
-	|| !(object = (t_object *) malloc(sizeof(t_object)))
-	|| !(object->light_srcs = (t_light *) malloc(sizeof(t_light) * ((num_obj[0]))))
-	|| !(object->sph_objs = (t_sph *) malloc(sizeof(t_sph) * ((num_obj[1]))))
-	|| !(object->cyln_objs = (t_cylindr *) malloc(sizeof(t_cylindr) * ((num_obj[2]))))
-	|| !(object->cone_objs = (t_cone *) malloc(sizeof(t_cone) * ((num_obj[3]))))
-	|| !(object->plane_objs = (t_plane *) malloc(sizeof(t_plane) * ((num_obj[4])))))
+	|| !(objs = (t_object *) malloc(sizeof(t_object)))
+	|| !(objs->light_srcs = (t_light *) malloc(sizeof(t_light) * ((num_obj[0]))))
+	|| !(objs->sph_objs = (t_sph *) malloc(sizeof(t_sph) * ((num_obj[1]))))
+	|| !(objs->cyln_objs = (t_cylindr *) malloc(sizeof(t_cylindr) * ((num_obj[2]))))
+	|| !(objs->cone_objs = (t_cone *) malloc(sizeof(t_cone) * ((num_obj[3]))))
+	|| !(objs->plane_objs = (t_plane *) malloc(sizeof(t_plane) * ((num_obj[4])))))
 		return (-1);
-	data->p_object = object;
-	object->num_l_src = num_obj[0];
-	object->num_sphs = num_obj[1];
-	object->num_cylns = num_obj[2];
-	object->num_cons = num_obj[3];
-	object->num_plans = num_obj[4];
-	set_default(object);
+	data->p_object = objs;
+	objs->num_l_src = num_obj[0];
+	objs->num_sphs = num_obj[1];
+	objs->num_cylns = num_obj[2];
+	objs->num_cons = num_obj[3];
+	objs->num_plans = num_obj[4];
+	set_default(objs);
 	return (0);
 }
