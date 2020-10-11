@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/05 11:26:06 by dtaisha           #+#    #+#             */
-/*   Updated: 2020/10/10 20:54:37 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/11 20:21:39 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int			main(int ac, char **av)
 				(allocation(data, av[1]) != 0))
 			free_error_exit("Malloc error\n", 1, data);
 		read_setups(data, av[1]); //там будем считывать файл из аргументов (название файла, и указатель на структурку куда вностить настройки)
-
+		grafic_connection(data, data->mlx);
+		// free_all(data);
 // 		t_object *object;
 // 		object = data->p_object;
 
@@ -65,9 +66,6 @@ int			main(int ac, char **av)
 // 			printf("light %d %.2f [%.2f, %.2f, %.2f]\n", object->light_srcs[i].type, object->light_srcs[i].intensity, object->light_srcs[i].pos_or_dir.x, object->light_srcs[i].pos_or_dir.y, object->light_srcs[i].pos_or_dir.z);
 // 			i++;
 // 		}
-
-		grafic_connection(data, data->mlx_ptr);
-		free_all(data);
 	}
 
 	else

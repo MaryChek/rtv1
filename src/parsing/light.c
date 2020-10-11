@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 18:53:45 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/10 21:38:20 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/11 19:59:58 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ static void		intensity(double *intensity, char *arr)
 	}
 }
 
-void			light(t_data *data, t_object *objects, char **arr)
+void			light(t_data *data, t_scene *objects, char **arr)
 {
 	static int	i;
 	size_t		len;
 
 	i += 1;
-	printf("light %d\n", i);
+	// printf("light %d\n", i);
 	len = ft_arrlen(arr);
 	if (!ft_strcmp(arr[1], "AMBIENT"))
 		objects->light_srcs[i - 1].type = AMBIENT;

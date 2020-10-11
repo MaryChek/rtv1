@@ -1,0 +1,11 @@
+#			position	 	 R 		color	rotation	  angle
+sphere		0.0 0.0 50.0	20.0	red
+cylinder	0.0 0.0 90.1	50.0	white	1.0 1.0 0.0
+cone		0.0 0.0 50.0			green	1.0 0.0 0.0		30
+plane		0.0 0.0 100.0			yellow	0.0 0.0 1.0
+camera		0.0 50.0 -50.0					0.0 1.0 0.0		90
+
+#			type		intensity		position
+light		AMBIENT			0.2
+light		POINT			0.3			50.0 30.0 -10.0
+light		DIRECTIONAL		0.2			-0.5 0.5 -0.2

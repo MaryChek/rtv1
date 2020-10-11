@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 18:54:07 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/10 21:35:25 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/11 14:59:02 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		validate_fd(int fd, t_data *data)
 		free_error_exit("Error: can't read file\n", 1, data);
 }
 
-static void		read_line(t_data *data, t_object *objects, char *line)
+static void		read_line(t_data *data, t_scene *objects, char *line)
 {
 	char		**arr;
 

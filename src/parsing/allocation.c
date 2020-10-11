@@ -6,13 +6,22 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 10:02:25 by dtaisha           #+#    #+#             */
-/*   Updated: 2020/10/10 20:59:47 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/11 20:52:57 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-static void		set_default(t_object *objs)
+static void		ft_obj_null(t_scene *objs)
+{
+	objs->light_srcs = NULL;
+	objs->plane_objs = NULL;
+	objs->sph_objs = NULL;
+	objs->cone_objs = NULL;
+	objs->cyln_objs = NULL;
+}
+
+static void		set_default(t_scene *objs)
 {
 	objs->camera.point.x = DEFAULT_CAMERA;
 	objs->camera.point.y = DEFAULT_CAMERA;
@@ -71,19 +80,21 @@ static int		*count_figure(char *name, int fd, char *line, int *figs)
 
 int				allocation(t_data *data, char *param_name)
 {
-	t_object	*objs;
+	t_scene		*objs;
 	int			*num_obj;
 	int			arr[6];
 
 	ft_izero(arr, 6);
+	if (!(objs = (t_scene *) malloc(sizeof(t_scene))))
+		return (-1);
+	ft_obj_null(objs);
 	num_obj = (count_figure(param_name, 0, NULL, arr));
-	if (!(data->mlx_ptr = (t_mlx *) malloc(sizeof(t_mlx)))
-	|| !(objs = (t_object *) malloc(sizeof(t_object)))
-	|| !(objs->light_srcs = (t_light *) malloc(sizeof(t_light) * ((num_obj[0]))))
-	|| !(objs->sph_objs = (t_sph *) malloc(sizeof(t_sph) * ((num_obj[1]))))
-	|| !(objs->cyln_objs = (t_cylindr *) malloc(sizeof(t_cylindr) * ((num_obj[2]))))
-	|| !(objs->cone_objs = (t_cone *) malloc(sizeof(t_cone) * ((num_obj[3]))))
-	|| !(objs->plane_objs = (t_plane *) malloc(sizeof(t_plane) * ((num_obj[4])))))
+	if (!(data->mlx = (t_mlx *) malloc(sizeof(t_mlx)))
+	|| (num_obj[0] && !(objs->light_srcs = (t_light *) malloc(sizeof(t_light) * ((num_obj[0])))))
+	|| (num_obj[1] && !(objs->sph_objs = (t_sph *) malloc(sizeof(t_sph) * ((num_obj[1])))))
+	|| (num_obj[2] && !(objs->cyln_objs = (t_cylindr *) malloc(sizeof(t_cylindr) * ((num_obj[2])))))
+	|| (num_obj[3] && !(objs->cone_objs = (t_cone *) malloc(sizeof(t_cone) * ((num_obj[3])))))
+	|| (num_obj[4] && !(objs->plane_objs = (t_plane *) malloc(sizeof(t_plane) * ((num_obj[4]))))))
 		return (-1);
 	data->p_object = objs;
 	objs->num_l_src = num_obj[0];

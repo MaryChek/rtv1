@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 18:59:17 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/10 21:28:28 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/11 15:42:50 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int			tang_to_sph(t_ray_data *ray, t_sph sph)
 	return (quadr_equation(factor, ray));
 }
 
-t_obj_info		*ray_trace(t_object objs, t_ray_data ray)
+t_obj_info		*ray_trace(t_scene objs, t_ray_data ray)
 {
 	int			i;
 	t_obj_info	*near;

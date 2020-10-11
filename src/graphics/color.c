@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 18:50:57 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/07 21:39:56 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/11 15:41:41 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,6 @@ t_color		brightness_change(t_color color, double mult)
 	return (color);
 }
 
-void		change_color(t_color *color, int r, int g, int b)
-{
-	color->r = r;
-	color->g = g;
-	color->b = b;
-}
-
 void	put_color_to_img(int **img_data, int x, int y, t_color color)
 {
 	(*img_data)[((y * WIN_WID) + x)] = color.r << 16;
@@ -74,25 +67,37 @@ void	put_color_to_img(int **img_data, int x, int y, t_color color)
 	(*img_data)[((y * WIN_WID) + x)] += color.b;
 }
 
+void		change_color(t_color *color, t_color rgb)
+{
+	color->r = rgb.r;
+	color->g = rgb.g;
+	color->b = rgb.b;
+}
+
 void	color(t_color *color, char *arr)
 {
-	color->r = 0;
-	color->g = 0;
-	color->b = 0;
+	change_color(color, (t_color){0, 0, 0});
 	if (arr)
 	{
 		if (!ft_strcmp(arr, "red"))
-			color->r = 255;
+			change_color(color, RED);
 		else if (!ft_strcmp(arr, "green"))
-			color->g = 255;
+			change_color(color, GREEN);
 		else if (!ft_strcmp(arr, "blue"))
-			color->b = 255;
-		else
-			color->b = 60;
-	}
-	else
-	{
-		color->g = 128;
-		color->b = 128;
+			change_color(color, BLUE);
+		else if (!ft_strcmp(arr, "yellow"))
+			change_color(color, YELLOW);
+		else if (!ft_strcmp(arr, "white"))
+			change_color(color, WHITE);
+		else if (!ft_strcmp(arr, "orange"))
+			change_color(color, ORANGE);
+		else if (!ft_strcmp(arr, "sky-blue"))
+			change_color(color, SKY_BLUE);
+		else if (!ft_strcmp(arr, "violet"))
+			change_color(color, VIOLET);
+		else if (!ft_strcmp(arr, "pink"))
+			change_color(color, PINK);
+		else if (!ft_strcmp(arr, "metal"))
+			change_color(color, METAL);
 	}
 }

@@ -6,13 +6,13 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 18:03:46 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/10 19:40:06 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/11 14:56:22 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-static double	creat_vec_point_light(t_object objs, t_coord point, int ind,
+static double	creat_vec_point_light(t_scene objs, t_coord point, int ind,
 														t_coord *light_vct)
 {
 	if (objs.light_srcs[ind].type == POINT)
@@ -43,8 +43,8 @@ static double	patch_of_reflected_light(double specular, t_coord normal,
 	return (i);
 }
 
-static int		shadow_overlay(t_ray_data ray, t_coord light_vct,
-										t_object objs, t_coord normal)
+static double	shadow_overlay(t_ray_data ray, t_coord light_vct,
+										t_scene objs, t_coord normal)
 {
 	t_obj_info	*near;
 	double		nor_dot_l;
@@ -61,7 +61,7 @@ static int		shadow_overlay(t_ray_data ray, t_coord light_vct,
 	return (i);
 }
 
-double	compute_lighting(t_coord point, t_coord normal, t_object objs,
+double			compute_lighting(t_coord point, t_coord normal, t_scene objs,
 														double specular)
 {
 	t_coord		light_vct;
@@ -91,7 +91,7 @@ double	compute_lighting(t_coord point, t_coord normal, t_object objs,
 	return (light_pow);
 }
 
-t_color		trace_to_light_src(t_obj_info near, t_object objs)
+t_color		trace_to_light_src(t_obj_info near, t_scene objs)
 {
 	t_coord		normal;
 	t_color		color;

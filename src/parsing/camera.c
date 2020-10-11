@@ -6,13 +6,13 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 18:53:09 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/10 21:36:51 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/11 14:57:08 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <rtv1.h>
 
-void	camera(t_object *objects, char **arr)
+void	camera(t_scene *objects, char **arr)
 {
 	size_t		len;
 

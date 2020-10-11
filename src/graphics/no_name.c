@@ -6,13 +6,13 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 15:45:41 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/10 19:49:58 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/11 14:56:31 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-t_color		get_obj_color(t_object objs, int type, int index)
+t_color		get_obj_color(t_scene objs, int type, int index)
 {
 	if (type == SPH)
 		return (objs.sph_objs[index].color);
@@ -24,7 +24,7 @@ t_color		get_obj_color(t_object objs, int type, int index)
 		return (objs.plane_objs[index].color);
 }
 
-int			get_specul_obj(t_object objs, int type, int index)
+int			get_specul_obj(t_scene objs, int type, int index)
 {
 	if (type == SPH)
 		return (objs.sph_objs[index].specular);

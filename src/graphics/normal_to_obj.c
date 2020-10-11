@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 15:45:41 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/10 20:00:26 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/11 14:56:39 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static t_coord		plane_normal(t_coord plane_direct, t_coord cam_direct)
 	return (normal);
 }
 
-t_coord				normal_to_obj(t_object objs, t_obj_info near)
+t_coord				normal_to_obj(t_scene objs, t_obj_info near)
 {
 	t_coord		normal;
 	

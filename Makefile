@@ -41,13 +41,14 @@ MAIN_FILE = 	main.c
 GRAPHICS_FILES = color.c light_and_shadow.c \
 				no_name.c normal_to_obj.c \
 				quadratic_equation.c  ray_trace.c \
-				quater_rotation.c vectors.c
+				quater_rotation.c vectors.c draw.c \
+				grafic_connection.c
 PARSING_FILES = allocation.c camera.c \
-				draw.c errors.c figure.c \
-				grafic_connection.c light.c \
+				errors.c figure.c read_file.c \
+				 light.c tear_down.c \
 				hooks_and_deals.c read_utils.c \
-				presets.c param_validation.c \
-				tear_down.c read_file.c
+				presets.c param_validation.c
+				
 
 SRC_FILES = $(MAIN_FILE) $(GRAPHICS_FILES) $(PARSING_FILES)
 
@@ -72,7 +73,6 @@ $(OBJ_DIR):
 
 $(OBJ_DIR)%.o: $(GRAPH_DIR)%.c $(HEAD)
 	@$(COMP) -c $< -o $@
-
 
 $(OBJ_DIR)%.o: $(PARS_DIR)%.c $(HEAD)
 	@$(COMP) -c $< -o $@
