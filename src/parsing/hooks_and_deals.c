@@ -22,9 +22,5 @@ int				buttons_press(int key, t_data *data)
 {
 	if (key == ESC)
 		close_window(data);
-	else if (key == SPACE)
-		write(1,"SPACE\n", 6);
-	else if (key == LEFT || key == RIGHT || key == UP || key == DOWN)
-		write(1,"ARROW\n", 6);
 	return (0);
 }

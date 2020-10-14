@@ -14,8 +14,7 @@
 
 void	param_validation(char *param_name)
 {
-	if (!(ft_strcmp(param_name, "test")) &&
-		!(ft_strcmp(param_name, "scene_1")) &&
+	if (!(ft_strcmp(param_name, "scene_1")) &&
 		!(ft_strcmp(param_name, "scene_2")) &&
 		!(ft_strcmp(param_name, "scene_3")) &&
 		!(ft_strcmp(param_name, "scene_4")))

@@ -6,20 +6,24 @@ set(CMAKE_C_STANDARD 11)
 
 include_directories(header/)
 include_directories(libft/)
+include_directories(src/graphics/)
+include_directories(src/main/)
+include_directories(src/parsing/)
 include_directories(minilibx/)
+include_directories(scenes/)
 
 
 add_executable(rtv1
         header/rtv1.h
         minilibx/
         src/
-        src/allocation.c
-        src/hooks_and_deals.c
-        src/param_validation.c
-        src/errors.c
-        src/ray_trace.c
-        src/main.c
-        src/tear_down.c
+        src/parsing/allocation.c
+        src/parsing/hooks_and_deals.c
+        src/parsing/param_validation.c
+        src/parsing/errors.c
+        src/graphics/ray_trace.c
+        src/main/main.c
+        src/parsing/tear_down.c
         libft/ft_strchr.c
         libft/ft_bzero.c
         libft/ft_strcmp.c
@@ -50,14 +54,14 @@ add_executable(rtv1
         libft/ft_strnew.c
         libft/ft_strnstr.c
         libft/ft_bzero.c
-        src/read_utils.c
-        src/color.c
-        src/camera.c
-        src/figure.c
-        src/light.c
-        src/light_and_shadow.c
-        src/no_name.c
-        src/normal_to_obj.c
-        src/quadratic_equation.c
-        src/quater_rotation.c
-        src/vectors.c src/grafic_connection.c src/presets.c src/draw.c src/color.c src/quater_rotation.c src/read_file.c)
+        src/parsing/read_utils.c
+        src/graphics/color.c
+        src/parsing/camera.c
+        src/parsing/figure.c
+        src/parsing/light.c
+        src/graphics/light_and_shadow.c
+        src/graphics/no_name.c
+        src/graphics/normal_to_obj.c
+        src/graphics/quadratic_equation.c
+        src/graphics/quater_rotation.c
+        src/graphics/vectors.c src/graphics/grafic_connection.c src/parsing/presets.c src/graphics/draw.c src/graphics/color.c src/graphics/quater_rotation.c src/parsing/read_file.c)

@@ -3,12 +3,12 @@ a.out
 rtv1
 *.a
 *.o
-src/objects
-/obj
+/src/objects/
 .idea/
 .vscode/
 .DS_Store
 *.dSYM/
 rtv1.dSYM
 workspace.xml
-fractol.dSYM/
+*.dSYM/
+/minilibx

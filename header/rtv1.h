@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:25:42 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/11 20:10:20 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/13 23:49:44 by dtaisha          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,6 @@
 # define WIN_DIST 1080
 
 # define ESC 53
-# define SCROLL_UP 4
-# define SCROLL_DOWN 5
-# define LEFT_BTTN 1
-# define LEFT 123
-# define RIGHT 124
-# define UP 125
-# define DOWN 126
-# define SPACE 49
 
 # define T_MIN 0.0
 

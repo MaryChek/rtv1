@@ -6,7 +6,7 @@
 #   By: dtaisha <dtaisha@student.21-school.ru>     +#+  +:+       +#+        #
 #                                                +#+#+#+#+#+   +#+           #
 #   Created: 2020/05/09 19:47:36 by dtaisha           #+#    #+#             #
-#   Updated: 2020/10/09 02:57:14 by dtaisha          ###   ########lyon.fr   #
+#   Updated: 2020/10/13 22:39:15 by dtaisha          ###   ########lyon.fr   #
 #                                                                            #
 # ************************************************************************** #
 
@@ -48,7 +48,6 @@ PARSING_FILES = allocation.c camera.c \
 				 light.c tear_down.c \
 				hooks_and_deals.c read_utils.c \
 				presets.c param_validation.c
-				
 
 SRC_FILES = $(MAIN_FILE) $(GRAPHICS_FILES) $(PARSING_FILES)
 
@@ -57,6 +56,8 @@ OBJ_DIR = obj/
 OBJ_FILE =	$(SRC_FILES:.c=.o)
 
 OBJ = $(addprefix $(OBJ_DIR), $(OBJ_FILE))
+
+.PHONY: all clean fclean re
 
 all: lib $(NAME)
 
@@ -80,19 +81,13 @@ $(OBJ_DIR)%.o: $(PARS_DIR)%.c $(HEAD)
 $(OBJ_DIR)%.o: $(MAIN_DIR)%.c $(HEAD)
 	@$(COMP) -c $< -o $@
 
-# $(MINILIBX):
-# 	@echo "------------make minilibx finish------------"
-# 	@$(MAKE) -sC $(MINILIBX_DIR)
-
 clean:
 	@$(MAKE) -sC $(LIBFT_DIR) clean
-# @$(MAKE) -sC $(MINILIBX_DIR) clean
 	@rm -rf $(OBJ_DIR)
 	@echo "---------------clean finish--------------"
 
 fclean: clean
 	@rm -f $(LIBFT)
-# @rm -f $(MINILIBX)
 	@rm -f $(NAME)
 	@echo "--------------fclean finish--------------"
 
