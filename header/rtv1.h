@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:25:42 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/13 23:49:44 by dtaisha          ###   ########lyon.fr   */
+/*   Updated: 2020/10/14 10:33:47 by dtaisha          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # define DEFAULT_CAMERA_ANGLE 30.0
 # define DEFAULT_LIGHT 0.0
 # define DEFAULT_INTENSIVITY 0.3
+# define DEFAULT_SPECULAR -1.0
 
 # define RED (t_color){255, 0, 0}
 # define ORANGE (t_color){255, 150, 0}

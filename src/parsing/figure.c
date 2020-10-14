@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 18:53:25 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/11 19:59:13 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/14 13:42:31 by dtaisha          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void			sphere(t_data *data, t_scene *objects, char **arr)
 		color(&objects->sph_objs[i - 1].color, arr[3]);
 	else
 		color(&objects->sph_objs[i - 1].color, NULL);
-
+	objects->sph_objs[i - 1].specular = (len > 4) ? coordinate(arr[4]): DEFAULT_SPECULAR;
 }
 
 void			cylinder(t_data *data, t_scene *objects, char **arr)
@@ -53,6 +53,7 @@ void			cylinder(t_data *data, t_scene *objects, char **arr)
 		position(&objects->cyln_objs[i - 1].direction, arr[4], data);
 	else
 		position(&objects->cyln_objs[i - 1].direction, NULL, data);
+	objects->cyln_objs[i - 1].specular = (len > 5)? coordinate(arr[5]): DEFAULT_SPECULAR;
 	objects->cyln_objs[i - 1].direction = vctr_normal(objects->cyln_objs[i - 1].direction);
 }
 
@@ -76,7 +77,8 @@ void			cone(t_data *data, t_scene *objects, char **arr)
 		position(&objects->cone_objs[i - 1].direction, arr[3], data);
 	else
 		position(&objects->cone_objs[i - 1].direction, NULL, data);
-	objects->cone_objs[i - 1].angle = (len > 3)? coordinate(arr[4]): DEFAULT_A;
+	objects->cone_objs[i - 1].angle = (len > 4)? coordinate(arr[4]): DEFAULT_A;
+	objects->cone_objs[i - 1].specular = (len > 5)? coordinate(arr[5]): DEFAULT_SPECULAR;
 	objects->cone_objs[i - 1].direction = vctr_normal(objects->cone_objs[i - 1].direction);
 }
 
@@ -100,5 +102,6 @@ void			plane(t_data *data, t_scene *objects, char **arr)
 		position(&objects->plane_objs[i - 1].direction, arr[3], data);
 	else
 		position(&objects->plane_objs[i - 1].direction, NULL, data);
+	objects->plane_objs[i - 1].specular = (len > 4)? coordinate(arr[4]): DEFAULT_SPECULAR;
 	objects->plane_objs[i - 1].direction = vctr_normal(objects->plane_objs[i - 1].direction);
 }
