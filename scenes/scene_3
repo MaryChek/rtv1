@@ -1,14 +1,15 @@
 #			position	 	 R 		color	rotation	  angle		specular
-sphere		0.0 0.0 4.0		0.2		red									10
-sphere		0.5 0.5 4.0		0.2		white								10
-sphere		0.0 -0.5 4.0	0.2		orange								10
-sphere		0.0 0.5 4.0		0.2		sky-blue							10
-sphere		-0.5 0.0 4.0	0.2		blue								10
-sphere		0.5 0.0 4.0		0.2		yellow								10
-sphere		0.5 -0.5 4.0	0.2		green								10
-sphere		-0.5 0.5 4.0	0.2		metal								10
-sphere		1.0 0.5 4.0		0.2		pink								10
-sphere		-0.5 -0.5 4.0	0.2		violet								10
+sphere		-0.9 0.0 4.0	0.2		red									50
+sphere		0.1 0.5 4.0		0.2		white								50
+sphere		-0.9 -0.5 4.0	0.2		orange								50
+sphere		-0.9 0.5 4.0	0.2		sky-blue							50
+sphere		-0.4 0.0 4.0	0.2		blue								50
+sphere		0.1 0.0 4.0		0.2		yellow								50
+sphere		0.6 0.0 4.0		0.2		violet								50
+sphere		0.1 -0.5 4.0	0.2		green								50
+sphere		-0.4 0.5 4.0	0.2		metal								50
+sphere		0.6 0.5 4.0		0.2		pink								50
+sphere		-0.4 -0.5 4.0	0.2		violet								50
 
 #cylinder	1.0 0.0 10.1	2.0	yellow	1.0 1.0 0.0
 #cylinder	2.0 0.0 10.1	2.0	white	1.0 1.0 0.0
@@ -19,7 +20,7 @@ sphere		-0.5 -0.5 4.0	0.2		violet								10
 #camera		110.0 10.0 100.0				0.0 1.0 0.0		90
 
 #			type		intensity		position
-light		AMBIENT			0.0
+light		AMBIENT			0.1
 light		POINT			0.3			5.0 0.0 -2.0
 light		POINT			0.2			0.0 0.0 -2.0
 #light		DIRECTIONAL		0.2			-0.5 0.5 -0.2

@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:25:42 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/14 10:33:47 by dtaisha          ###   ########lyon.fr   */
+/*   Updated: 2020/10/15 22:18:23 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ typedef struct		s_light
 	int		type;
 	double	intensity;
 	t_coord	pos_or_dir;
+	t_color	color; // pars color for light_src!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }					t_light;
 
 typedef struct		s_vector
@@ -178,7 +179,10 @@ typedef struct		s_obj_info
 	t_coord		point;
 	t_coord		center;
 	t_coord		st_cent;
+	t_coord		normal;
+	t_color		color_obj;
 	double		t;
+	double		specular;
 }					t_obj_info;
 
 typedef struct		s_ray_data
@@ -237,11 +241,12 @@ t_quat				creat_axis_of_rot(t_coord vector, double alpha);
 
 void				min_and_max_to_raytrace(t_ray_data *ray, double t_min,
 											double t_max);
-t_obj_info			*ray_trace(t_scene objs, t_ray_data ray);
+int					ray_trace(t_scene objs, t_ray_data ray, t_obj_info *near);
 
-t_color				mult_colors(t_color v1, t_color v2, int minus);
-t_color				brightness_change(t_color color, double mult);
-void				change_color(t_color *color, t_color rgb);
+t_color				colors_sum(t_color v1, t_color v2);
+t_color				color_scal(t_color color, double mult);
+void				color_change(t_color *color, t_color rgb);
+t_color				colors_mult(t_color v1, t_color v2);
 
 double				dot(t_coord v_1, t_coord v_2);
 t_coord				vctr_sum(t_coord vec_1, t_coord vec_2);
@@ -249,7 +254,7 @@ t_coord				vctr_mult(t_coord vector, double mult);
 t_coord				vctr_sub(t_coord begin_point, t_coord end_point);
 t_coord				vctr_reverse(t_coord vector);
 
-void				fixing_the_near_obj(t_ray_data ray, t_obj_info **near,
+int					fixing_the_near_obj(t_ray_data ray, t_obj_info *near,
 										int type, int index);
 t_color				get_obj_color(t_scene objs, int type, int index);
 int					get_specul_obj(t_scene objs, int type, int index);
@@ -261,6 +266,6 @@ t_coord				normal_to_obj(t_scene objs, t_obj_info near);
 
 void				put_color_to_img(int **img_data, int x, int y,
 									 t_color color);
+double				ft_clampd(double num, double min, double max);
 
-////////////////////////////////////////////////////////////////////////////
 #endif

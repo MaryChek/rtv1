@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 18:53:19 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/14 13:44:57 by dtaisha          ###   ########lyon.fr   */
+/*   Updated: 2020/10/15 19:18:22 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void 				draw(int **img_data, t_scene objs)
 	int			x;
 	int			y;
 	t_ray_data	ray;
-	t_obj_info	*near;
+	t_obj_info	near;
 	double		dist;
 
 	y = -1;
@@ -28,13 +28,10 @@ void 				draw(int **img_data, t_scene objs)
 		{
 			objs.camera.direct = get_direction(objs.camera, x, y);
 			ray = creat_ray(INFINITY, objs.camera.point, objs.camera.direct);
-			if ((near = ray_trace(objs, ray)))
-			{
-				objs.pix_color = trace_to_light_src(*near, objs);
-				free(near);
-			}
+			if ((ray_trace(objs, ray, &near)))
+				objs.pix_color = trace_to_light_src(near, objs);
 			else
-				change_color(&objs.pix_color, (t_color){0, 0, 0});
+				color_change(&objs.pix_color, (t_color){0, 0, 0});
 			put_color_to_img(img_data, x, y, objs.pix_color);
 		}
 	}

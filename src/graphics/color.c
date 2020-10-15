@@ -6,57 +6,27 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 18:50:57 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/11 15:41:41 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/15 21:58:48 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-t_color	mult_colors(t_color v1, t_color v2, int minus)
+t_color	colors_sum(t_color v1, t_color v2)
 {
-	if (!minus)
-	{
-		if (((v1.r += v2.r)) > 255)
-			v1.r = 255;
-		if (((v1.g += v2.g)) > 255)
-			v1.g = 255;
-		if (((v1.b += v2.b)) > 255)
-			v1.b = 255;
-	}
-	else
-	{
-		if (((v1.r -= v2.r)) < 0)
-			v1.r = 0;
-		if (((v1.g -= v2.g)) < 0)
-			v1.g = 0;
-		if (((v1.b -= v2.b)) < 0)
-			v1.b = 0;
-	}
+	v1.r = ft_clampd((double)v1.r + (double)v2.r, 0, 255);
+	v1.g = ft_clampd((double)v1.g + (double)v2.g, 0, 255);
+	v1.b = ft_clampd((double)v1.b + (double)v2.b, 0, 255);
 	return (v1);
 }
 
-t_color		brightness_change(t_color color, double mult)
+t_color		color_scal(t_color color, double mult)
 {
-	int	tmp;
+	double	tmp;
 
-	if (((tmp = (int)((double)color.r * mult))) > 255)
-		color.r = 255;
-	else if (tmp <= 0.0)
-		color.r = 0;
-	else
-		color.r = tmp;
-	if (((tmp = (int)((double)color.g * mult))) > 255)
-		color.g = 255;
-	else if (tmp <= 0.0)
-		color.g = 0;
-	else
-		color.g = tmp;
-	if (((tmp = (int)((double)color.b * mult))) > 255)
-		color.b = 255;
-	else if (tmp <= 0.0)
-		color.b = 0;
-	else
-		color.b = tmp;
+	color.r = ft_clampd((double)color.r * mult, 0, 255);
+	color.g = ft_clampd((double)color.g * mult, 0, 255);
+	color.b = ft_clampd((double)color.b * mult, 0, 255);
 	return (color);
 }
 
@@ -67,7 +37,7 @@ void	put_color_to_img(int **img_data, int x, int y, t_color color)
 	(*img_data)[((y * WIN_WID) + x)] += color.b;
 }
 
-void		change_color(t_color *color, t_color rgb)
+void		color_change(t_color *color, t_color rgb)
 {
 	color->r = rgb.r;
 	color->g = rgb.g;
@@ -76,28 +46,36 @@ void		change_color(t_color *color, t_color rgb)
 
 void	color(t_color *color, char *arr)
 {
-	change_color(color, (t_color){0, 0, 0});
+	*color = (t_color){0, 0, 0};
 	if (arr)
 	{
 		if (!ft_strcmp(arr, "red"))
-			change_color(color, RED);
+			color_change(color, RED);
 		else if (!ft_strcmp(arr, "green"))
-			change_color(color, GREEN);
+			color_change(color, GREEN);
 		else if (!ft_strcmp(arr, "blue"))
-			change_color(color, BLUE);
+			color_change(color, BLUE);
 		else if (!ft_strcmp(arr, "yellow"))
-			change_color(color, YELLOW);
+			color_change(color, YELLOW);
 		else if (!ft_strcmp(arr, "white"))
-			change_color(color, WHITE);
+			color_change(color, WHITE);
 		else if (!ft_strcmp(arr, "orange"))
-			change_color(color, ORANGE);
+			color_change(color, ORANGE);
 		else if (!ft_strcmp(arr, "sky-blue"))
-			change_color(color, SKY_BLUE);
+			color_change(color, SKY_BLUE);
 		else if (!ft_strcmp(arr, "violet"))
-			change_color(color, VIOLET);
+			color_change(color, VIOLET);
 		else if (!ft_strcmp(arr, "pink"))
-			change_color(color, PINK);
+			color_change(color, PINK);
 		else if (!ft_strcmp(arr, "metal"))
-			change_color(color, METAL);
+			color_change(color, METAL);
 	}
+}
+
+t_color		colors_mult(t_color v1, t_color v2)
+{
+	v1.r = ft_clampd((double)v1.r * (double)v2.r, 0, 255);
+	v1.g = ft_clampd((double)v1.g * (double)v2.g, 0, 255);
+	v1.b = ft_clampd((double)v1.b * (double)v2.b, 0, 255);
+	return (v1);
 }

@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 18:53:09 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/14 00:20:25 by dtaisha          ###   ########lyon.fr   */
+/*   Updated: 2020/10/15 19:01:29 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	camera(t_scene *objects, char **arr)
 {
 	size_t		len;
 
-	write(1, "camera\n", 7);
+	// write(1, "camera\n", 7);
 	len = ft_arrlen(arr);
 	if (len > 1)
 		position(&objects->camera.point, arr[1], NULL);

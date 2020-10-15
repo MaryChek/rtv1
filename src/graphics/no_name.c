@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 15:45:41 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/11 14:56:31 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/15 19:17:13 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,17 @@ t_coord		get_direction(t_vector camera, int x, int y)
 	return (direction);
 }
 
-void		fixing_the_near_obj(t_ray_data value, t_obj_info **near, int type, int index)
+int			fixing_the_near_obj(t_ray_data value, t_obj_info *near, int type, int index)
 {
-	if ((!(*near) || value.t_near < (*near)->t))
+	if ((near->t == -1 || value.t_near < near->t))
 	{
-		if (!(*near))
-			*near = (t_obj_info *)malloc(sizeof(t_obj_info));
-		(*near)->center = value.cent_obj;
-		(*near)->st_cent = value.st_cent;
-		(*near)->t = (value.t_near - 0.0001);
-		(*near)->type = type;
-		(*near)->index = index;
+		near->center = value.cent_obj;
+		near->st_cent = value.st_cent;
+		near->t = (value.t_near - 0.0001);
+		near->type = type;
+		near->index = index;
 	}
+	return (1);
 }
 
 t_ray_data	creat_ray(double max_len, t_coord point, t_coord direction)
@@ -71,4 +70,11 @@ t_ray_data	creat_ray(double max_len, t_coord point, t_coord direction)
 	ray.point = point;
 	ray.direction = direction;
 	return (ray);
+}
+
+double		ft_clampd(double num, double min, double max)
+{
+	num = num < min ? min : num;
+	num = num > max ? max : num;
+	return (num);
 }

@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 18:59:17 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/11 15:42:50 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/15 18:50:13 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,27 +87,26 @@ int			tang_to_sph(t_ray_data *ray, t_sph sph)
 	return (quadr_equation(factor, ray));
 }
 
-t_obj_info		*ray_trace(t_scene objs, t_ray_data ray)
+int			ray_trace(t_scene objs, t_ray_data ray, t_obj_info *near)
 {
 	int			i;
-	t_obj_info	*near;
 
 	i = -1;
-	near = NULL;
+	near->t = -1.0;
 	while (objs.plane_objs && ++i < objs.num_plans)
 		if (tang_to_plane(&ray, objs.plane_objs[i]))
-			fixing_the_near_obj(ray, &near, PLANE, i);
+			fixing_the_near_obj(ray, near, PLANE, i);
 	i = -1;
 	while (objs.sph_objs && ++i < objs.num_sphs)
 		if (tang_to_sph(&ray, objs.sph_objs[i]))
-			fixing_the_near_obj(ray, &near, SPH, i);
+			fixing_the_near_obj(ray, near, SPH, i);
 	i = -1;
 	while (objs.cyln_objs && ++i < objs.num_cylns)
 		if (tang_to_cyln(&ray, objs.cyln_objs[i]))
-			fixing_the_near_obj(ray, &near, CYLINDER, i);
+			fixing_the_near_obj(ray, near, CYLINDER, i);
 	i = -1;
 	while (objs.cone_objs && ++i < objs.num_cons)
 		if (tang_to_cone(&ray, objs.cone_objs[i]))
-			fixing_the_near_obj(ray, &near, CONE, i);
-	return (near);
+			fixing_the_near_obj(ray, near, CONE, i);
+	return (near->t > -1.0 ? 1 : 0);
 }
