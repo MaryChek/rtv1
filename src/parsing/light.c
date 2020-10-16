@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 18:53:45 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/11 19:59:58 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/16 09:50:53 by dtaisha          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void			light(t_data *data, t_scene *objects, char **arr)
 	size_t		len;
 
 	i += 1;
-	// printf("light %d\n", i);
 	len = ft_arrlen(arr);
 	if (!ft_strcmp(arr[1], "AMBIENT"))
 		objects->light_srcs[i - 1].type = AMBIENT;
@@ -44,4 +43,6 @@ void			light(t_data *data, t_scene *objects, char **arr)
 		position(&objects->light_srcs[i - 1].pos_or_dir, arr[3], data);
 	else
 		position(&objects->light_srcs[i - 1].pos_or_dir, NULL, data);
+	if (len > 4 && ft_strcmp(arr[1], "AMBIENT"))
+		color(&objects->light_srcs[i - 1].color, arr[4]);
 }

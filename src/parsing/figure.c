@@ -18,7 +18,6 @@ void			sphere(t_data *data, t_scene *objects, char **arr)
 	size_t		len;
 
 	i += 1;
-	// printf("sphere %d\n", i);
 	len = ft_arrlen(arr);
 	if (len > 1)
 		position(&objects->sph_objs[i - 1].center, arr[1], data);
@@ -38,7 +37,6 @@ void			cylinder(t_data *data, t_scene *objects, char **arr)
 	size_t		len;
 
 	i += 1;
-	// printf("cylinder %d\n", i);
 	len = ft_arrlen(arr);
 	if (len > 1)
 		position(&objects->cyln_objs[i - 1].center, arr[1], data);
@@ -63,7 +61,6 @@ void			cone(t_data *data, t_scene *objects, char **arr)
 	size_t		len;
 
 	i += 1;
-	// printf("cone %d\n", i);
 	len = ft_arrlen(arr);
 	if (len > 1)
 		position(&objects->cone_objs[i - 1].center, arr[1], data);
@@ -88,7 +85,6 @@ void			plane(t_data *data, t_scene *objects, char **arr)
 	size_t		len;
 
 	i += 1;
-	// printf("plane %d\n", i);
 	len = ft_arrlen(arr);
 	if (len > 1)
 		position(&objects->plane_objs[i - 1].center, arr[1], data);

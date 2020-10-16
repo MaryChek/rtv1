@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 18:54:12 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/09 18:54:13 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/16 12:19:20 by dtaisha          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ static double	double_tail(char *str)
 	if (*(str + 1))
 		str++;
 	if (*str)
+	{
 		digit1 = ft_to_digit(*str);
-	if (*(str + 1))
-		str++;
-	if (*str)
-		digit2 = ft_to_digit(*str);
+		if (*(str + 1))
+			digit2 = ft_to_digit(*(str + 1));
+	}
 	tail = (( double) digit1 * 0.1) + (( double) digit2 * 0.01);
 	return (tail);
 }
