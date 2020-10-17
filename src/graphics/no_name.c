@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 15:45:41 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/15 19:17:13 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/17 15:32:53 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ t_coord		get_direction(t_vector camera, int x, int y)
 	return (direction);
 }
 
-int			fixing_the_near_obj(t_ray_data value, t_obj_info *near, int type, int index)
+int			fixing_the_near_obj(t_ray_data value, t_obj_info *near,
+												int type, int index)
 {
 	if ((near->t == -1 || value.t_near < near->t))
 	{

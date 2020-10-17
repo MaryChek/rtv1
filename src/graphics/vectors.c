@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:25:37 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/10 21:06:22 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/17 15:34:02 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_coord		vctr_reverse(t_coord vector)
 
 t_coord		vctr_sub(t_coord begin_point, t_coord end_point)
 {
-	t_coord rez_point;
+	t_coord		rez_point;
 
 	rez_point.x = end_point.x - begin_point.x;
 	rez_point.y = end_point.y - begin_point.y;
@@ -40,7 +40,7 @@ double		dot(t_coord vec_1, t_coord vec_2)
 
 t_coord		vctr_sum(t_coord vec_1, t_coord vec_2)
 {
-	t_coord point;
+	t_coord		point;
 
 	point.x = vec_1.x + vec_2.x;
 	point.y = vec_1.y + vec_2.y;

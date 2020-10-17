@@ -6,13 +6,13 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 18:53:19 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/15 19:18:22 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/17 15:29:48 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void 				draw(int **img_data, t_scene objs)
+void		draw(int **img_data, t_scene objs)
 {
 	int			x;
 	int			y;

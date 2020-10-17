@@ -6,11 +6,12 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 15:45:41 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/11 14:56:39 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/17 15:33:40 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+
 static t_coord		cone_normal(t_coord rotation, t_obj_info near, float angle,
 															t_coord direct)
 {
@@ -41,7 +42,7 @@ static t_coord		cyln_normal(t_coord rotation, t_obj_info near,
 static t_coord		plane_normal(t_coord plane_direct, t_coord cam_direct)
 {
 	t_coord	normal;
-	
+
 	normal = plane_direct;
 	if (dot(cam_direct, normal) > 0.0f)
 		normal = vctr_reverse(normal);
@@ -51,7 +52,7 @@ static t_coord		plane_normal(t_coord plane_direct, t_coord cam_direct)
 t_coord				normal_to_obj(t_scene objs, t_obj_info near)
 {
 	t_coord		normal;
-	
+
 	if (near.type == SPH)
 		normal = vctr_sub(near.center, near.point);
 	else if (near.type == CYLINDER)

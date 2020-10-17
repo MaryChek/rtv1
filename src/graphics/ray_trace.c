@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 18:59:17 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/15 18:50:13 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/17 15:39:26 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int			tang_to_plane(t_ray_data *ray, t_plane plane)
 	ray->st_cent = vctr_sub(plane.center, ray->point);
 	dot_co_r = dot(ray->st_cent, plane.direction);
 	dot_ov_r = dot(ray->direction, plane.direction);
-	t = (- dot_co_r) / dot_ov_r;
+	t = (-dot_co_r) / dot_ov_r;
 	if ((t > 0.00001 && t < ray->t_max))
 	{
 		ray->t_near = t;
