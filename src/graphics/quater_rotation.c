@@ -6,13 +6,13 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/30 21:27:09 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/10 21:27:50 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/17 18:50:57 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void		normal_quat(t_quat *q)
+void		quat_normal(t_quat *q)
 {
 	double	quat_len;
 
@@ -30,15 +30,15 @@ t_quat		creat_axis_of_rot(t_coord vector, double alpha)
 	double	a;
 
 	a = alpha * M_PI / 180;
-	axis.w = cos(a / 2);
-	axis.vec.x = vector.x * sin(a / 2);
-	axis.vec.y = vector.y * sin(a / 2);
-	axis.vec.z = vector.z * sin(a / 2);
-	normal_quat(&axis);
+	axis.w = cos(a);
+	axis.vec.x = vector.x * sin(a);
+	axis.vec.y = vector.y * sin(a);
+	axis.vec.z = vector.z * sin(a);
+	quat_normal(&axis);
 	return (axis);
 }
 
-t_quat		mol_quat(t_quat a, t_quat b)
+t_quat		quat_mol(t_quat a, t_quat b)
 {
 	t_quat	res;
 
@@ -57,10 +57,10 @@ t_coord		vctr_rotation(t_coord vector, t_quat rotor)
 {
 	t_quat	tmp;
 
-	tmp = mol_quat(rotor, (t_quat){0.0, vector});
+	tmp = quat_mol(rotor, (t_quat){0.0, vector});
 	rotor.vec = vctr_reverse(rotor.vec);
-	normal_quat(&rotor);
-	tmp = mol_quat((t_quat){0.0, vector}, rotor);
+	quat_normal(&rotor);
+	tmp = quat_mol((t_quat){0.0, vector}, rotor);
 	vector.x = tmp.vec.x;
 	vector.y = tmp.vec.y;
 	vector.z = tmp.vec.z;

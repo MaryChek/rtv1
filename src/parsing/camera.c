@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 18:53:09 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/17 16:29:21 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/17 18:00:26 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	camera(t_scene *objects, char **arr)
 	if (len > 1)
 		position(&objects->camera.point, arr[1], NULL);
 	if (len > 2)
-		position(&objects->camera.roter.vec, arr[2], NULL);
-	if (len > 3)
-		objects->camera.roter.w = coordinate(arr[3]);
-	objects->camera.roter = creat_axis_of_rot(objects->camera.roter.vec,
-												objects->camera.roter.w);
+		position(&objects->camera.angles, arr[2], NULL);
+	// if (len > 3)
+	// 	objects->camera.roter.w = coordinate(arr[3]);
+	// objects->camera.roter = creat_axis_of_rot(objects->camera.roter.vec,
+	// 											objects->camera.roter.w);
 }

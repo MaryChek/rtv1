@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:25:42 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/15 22:18:23 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/17 18:51:27 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@
 
 # define T_MIN 0.0
 
-# define DEFAULT_COORDINATE 1.0
+# define DEFAULT_COORDINATE 0.0
 # define DEFAULT_R 1.0
 # define DEFAULT_A 2.0
 # define DEFAULT_CAMERA 0.0
-# define DEFAULT_CAMERA_ANGLE 30.0
 # define DEFAULT_LIGHT 0.0
 # define DEFAULT_INTENSIVITY 0.3
 # define DEFAULT_SPECULAR -1.0
+# define DEFAULT_COLOR (t_color){255, 255, 255}
 
 # define RED (t_color){255, 0, 0}
 # define ORANGE (t_color){255, 150, 0}
@@ -46,7 +46,6 @@
 # define PINK (t_color){255, 0, 255}
 # define METAL (t_color){154, 174, 196}
 # define WHITE (t_color){255, 255, 255}
-
 
 typedef struct		s_quadr_equation
 {
@@ -139,7 +138,7 @@ typedef struct		s_vector
 {
 	t_coord		point;
 	t_coord		direct;
-	t_quat		roter;
+	t_coord		angles;
 }					t_vector;
 
 typedef struct		s_scene
@@ -238,6 +237,8 @@ double				vctr_len(t_coord q);
 t_coord				vctr_rotation(t_coord vector, t_quat roter);
 
 t_quat				creat_axis_of_rot(t_coord vector, double alpha);
+t_quat				quat_mol(t_quat a, t_quat b);
+void				quat_normal(t_quat *q);
 
 void				min_and_max_to_raytrace(t_ray_data *ray, double t_min,
 											double t_max);

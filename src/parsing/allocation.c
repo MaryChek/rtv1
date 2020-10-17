@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 10:02:25 by dtaisha           #+#    #+#             */
-/*   Updated: 2020/10/11 20:52:57 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/17 18:51:33 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,6 @@ static void		set_default(t_scene *objs)
 	objs->camera.point.x = DEFAULT_CAMERA;
 	objs->camera.point.y = DEFAULT_CAMERA;
 	objs->camera.point.z = DEFAULT_CAMERA;
-	objs->camera.roter.vec.x = DEFAULT_CAMERA;
-	objs->camera.roter.vec.y = DEFAULT_CAMERA;
-	objs->camera.roter.vec.z = DEFAULT_CAMERA;
-	objs->camera.roter.w = DEFAULT_CAMERA_ANGLE;
 	objs->light_srcs[0].pos_or_dir.x = DEFAULT_LIGHT;
 	objs->light_srcs[0].pos_or_dir.y = DEFAULT_LIGHT;
 	objs->light_srcs[0].pos_or_dir.z = DEFAULT_LIGHT;

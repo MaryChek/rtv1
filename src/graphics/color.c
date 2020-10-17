@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 18:50:57 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/17 15:41:34 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/17 17:03:08 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ t_color		colors_sum(t_color v1, t_color v2)
 
 t_color		color_scal(t_color color, double mult)
 {
-	double	tmp;
-
 	color.r = ft_clampd((double)color.r * mult, 0, 255);
 	color.g = ft_clampd((double)color.g * mult, 0, 255);
 	color.b = ft_clampd((double)color.b * mult, 0, 255);
@@ -70,12 +68,4 @@ void		color(t_color *color, char *arr)
 		else if (!ft_strcmp(arr, "metal"))
 			color_change(color, METAL);
 	}
-}
-
-t_color		colors_mult(t_color v1, t_color v2)
-{
-	v1.r = ft_clampd((double)v1.r * (double)v2.r, 0, 255);
-	v1.g = ft_clampd((double)v1.g * (double)v2.g, 0, 255);
-	v1.b = ft_clampd((double)v1.b * (double)v2.b, 0, 255);
-	return (v1);
 }

@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 18:59:17 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/17 15:39:26 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/17 18:50:25 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int			tang_to_cyln(t_ray_data *ray, t_cylindr cyln)
 	t_quadr_equation	factor;
 	double				dot_ov_r;
 	double				dot_co_r;
-	t_coord				center;
 
 	ray->cent_obj = cyln.center;
 	ray->st_cent = vctr_sub(cyln.center, ray->point);

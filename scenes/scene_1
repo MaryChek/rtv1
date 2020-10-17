@@ -1,8 +1,15 @@
 #			position	 	 R 		color	rotation	  angle specular
-sphere		0.0 0.0 4.0		1.0		red						10		20
-cone		4.0 0.0 50.0			green	1.0 0.0 0.0		10		20
+sphere		-2.0 0.0 12		1.0		blue					10		20
+sphere		0.0 0.0 6.0		1.0		green					10		20
+sphere		2.0 0.0 0.0		1.0		red						10		20
+#cone		0.0 0.0 50.0			green	1.0 0.0 0.0		10		20
+#cylinder	4.0 0.0 50.0	10.3	white	1.0 0.0 0.0				89
+plane		5.0 0.0 100.0			violet	0.0 0.0 1.0
+
+#			position					
+camera		0.0 0.0 0.0					0.0 90.0 -10.0
 
 #			type		intensity		position
-light		AMBIENT			0.0
+light		AMBIENT			0.2
 light		POINT			0.3			5.0 0.0 -2.0
 light		DIRECTIONAL		0.2			0.5 0.5 -0.2

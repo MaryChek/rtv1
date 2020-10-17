@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 18:53:45 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/16 09:50:53 by dtaisha          ###   ########lyon.fr   */
+/*   Updated: 2020/10/17 16:38:07 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,6 @@ void			light(t_data *data, t_scene *objects, char **arr)
 		position(&objects->light_srcs[i - 1].pos_or_dir, NULL, data);
 	if (len > 4 && ft_strcmp(arr[1], "AMBIENT"))
 		color(&objects->light_srcs[i - 1].color, arr[4]);
+	else
+		objects->light_srcs[i - 1].color = DEFAULT_COLOR;
 }

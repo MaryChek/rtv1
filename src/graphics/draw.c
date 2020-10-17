@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 18:53:19 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/17 15:29:48 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/17 18:51:05 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void		draw(int **img_data, t_scene objs)
 	int			y;
 	t_ray_data	ray;
 	t_obj_info	near;
-	double		dist;
 
 	y = -1;
 	while (++y < WIN_HIG)

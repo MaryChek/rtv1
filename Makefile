@@ -12,7 +12,7 @@
 
 NAME = rtv1
 
-CFLAGS = -g
+CFLAGS = -g -Wall -Wextra -Werror
 
 CC = clang
 

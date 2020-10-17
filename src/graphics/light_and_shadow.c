@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 18:03:46 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/17 15:43:01 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/17 17:05:35 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ t_color			compute_lighting(t_light *src, int num_light_src,
 										t_obj_info near, t_scene objs)
 {
 	int			i;
-	double		brightness_obj_col;
 	t_color		color_pix;
 	t_coord		l_vctr;
 
@@ -81,7 +80,8 @@ t_color			compute_lighting(t_light *src, int num_light_src,
 	while (++i < num_light_src)
 	{
 		if (src[i].type == AMBIENT)
-			color_pix = color_scal(near.color_obj, src[i].intensity);
+			color_pix = colors_sum(color_pix,
+								color_scal(near.color_obj, src[i].intensity));
 		else
 		{
 			if (!shadow_overlay(&(src[i]), &l_vctr, near, objs))
@@ -98,12 +98,8 @@ t_color			compute_lighting(t_light *src, int num_light_src,
 
 t_color			trace_to_light_src(t_obj_info near, t_scene objs)
 {
-	double		light_pow;
 	t_coord		d_t;
 
-	objs.light_srcs[0].color = (t_color){0, 0, 0};
-	objs.light_srcs[1].color = (t_color){255, 255, 255};
-	objs.light_srcs[2].color = (t_color){255, 255, 255};
 	d_t = vctr_mult(objs.camera.direct, near.t);
 	near.point = vctr_sum(objs.camera.point, d_t);
 	near.normal = normal_to_obj(objs, near);

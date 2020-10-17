@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 15:45:41 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/17 15:33:40 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/17 18:49:49 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_coord				normal_to_obj(t_scene objs, t_obj_info near)
 		normal = cone_normal(objs.cone_objs[near.index].direction, near,
 							objs.cone_objs[near.index].angle,
 							objs.camera.direct);
-	else if (near.type == PLANE)
+	else
 		normal = plane_normal(objs.plane_objs[near.index].direction,
 							objs.camera.direct);
 	return (vctr_normal(normal));
