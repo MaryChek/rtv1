@@ -132,7 +132,7 @@ typedef struct		s_light
 	int		type;
 	double	intensity;
 	t_coord	pos_or_dir;
-	t_color	color; // pars color for light_src!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	t_color	color;
 }					t_light;
 
 typedef struct		s_vector
