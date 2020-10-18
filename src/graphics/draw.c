@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 18:53:19 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/17 18:51:05 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/18 20:00:38 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void		draw(int **img_data, t_scene objs)
 	t_obj_info	near;
 
 	y = -1;
+	objs.camera.roter = quat_roter(objs.camera);
 	while (++y < WIN_HIG)
 	{
 		x = -1;

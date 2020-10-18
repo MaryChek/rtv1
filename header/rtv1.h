@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:25:42 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/17 18:51:27 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/18 20:38:43 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define WIN_WID 1920
 # define WIN_HIG 1080
 # define WIN_DIST 1080
+# define FOV 66
 
 # define ESC 53
 
@@ -139,6 +140,7 @@ typedef struct		s_vector
 	t_coord		point;
 	t_coord		direct;
 	t_coord		angles;
+	t_quat		roter;
 }					t_vector;
 
 typedef struct		s_scene
@@ -227,16 +229,18 @@ double				coordinate(char *str);
 void				preset_structures(t_scene *object);
 void				validate_fd(int fd, t_data *data);
 
-t_color				trace_to_light_src(t_obj_info near, t_scene objs);
+t_color				get_obj_color(t_scene objs, int type, int index);
+int					get_specul_obj(t_scene objs, int type, int index);
+t_coord				get_direction(t_vector camera, int x, int y);
 
-// int					key_press(int key);
+t_color				trace_to_light_src(t_obj_info near, t_scene objs);
 
 double				quadr_equation(t_quadr_equation factor, t_ray_data *ray);
 t_coord				vctr_normal(t_coord vector);
 double				vctr_len(t_coord q);
 t_coord				vctr_rotation(t_coord vector, t_quat roter);
 
-t_quat				creat_axis_of_rot(t_coord vector, double alpha);
+t_quat				quat_roter(t_vector camera);
 t_quat				quat_mol(t_quat a, t_quat b);
 void				quat_normal(t_quat *q);
 
@@ -257,9 +261,6 @@ t_coord				vctr_reverse(t_coord vector);
 
 int					fixing_the_near_obj(t_ray_data ray, t_obj_info *near,
 										int type, int index);
-t_color				get_obj_color(t_scene objs, int type, int index);
-int					get_specul_obj(t_scene objs, int type, int index);
-t_coord				get_direction(t_vector camera, int x, int y);
 t_ray_data			creat_ray(double max_len, t_coord point,
 													t_coord direction);
 
@@ -267,6 +268,5 @@ t_coord				normal_to_obj(t_scene objs, t_obj_info near);
 
 void				put_color_to_img(int **img_data, int x, int y,
 									 t_color color);
-double				ft_clampd(double num, double min, double max);
 
 #endif

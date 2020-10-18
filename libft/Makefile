@@ -26,7 +26,7 @@ SRC = ft_strncmp.c ft_memalloc.c ft_strcat.c ft_strncpy.c ft_bzero.c \
 	  ft_lstnew.c ft_lstdelone.c ft_lstdel.c ft_lstadd.c ft_lstiter.c \
 	  ft_lstmap.c ft_free_list.c get_next_line.c ft_free.c ft_izero.c\
 	  ft_is_hex.c ft_atoi_base.c ft_is_space.c ft_swap.c ft_to_digit.c \
-	  ft_safe_free_arr.c ft_cnt_digits.c
+	  ft_safe_free_arr.c ft_cnt_digits.c ft_check_borders.c
 
 FT_O = $(SRC:.c=.o)
 

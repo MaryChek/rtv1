@@ -6,13 +6,13 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 18:25:44 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/17 15:31:20 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/18 20:24:16 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-double		min(double a, double b)
+static double		min(double a, double b)
 {
 	if (a > 0.0f && (a < b || b <= 0.))
 		return (a);
@@ -21,7 +21,7 @@ double		min(double a, double b)
 	return (0.0f);
 }
 
-double		quadr_equation(t_quadr_equation factor, t_ray_data *ray)
+double				quadr_equation(t_quadr_equation factor, t_ray_data *ray)
 {
 	double	dis;
 	double	t_1;
@@ -40,21 +40,4 @@ double		quadr_equation(t_quadr_equation factor, t_ray_data *ray)
 		return (1);
 	}
 	return (0);
-}
-
-double		vctr_len(t_coord vector)
-{
-	return (sqrt(vector.x * vector.x + vector.y * vector.y
-									+ vector.z * vector.z));
-}
-
-t_coord		vctr_normal(t_coord vector)
-{
-	double	vec_len;
-
-	vec_len = vctr_len(vector);
-	vector.x /= vec_len;
-	vector.y /= vec_len;
-	vector.z /= vec_len;
-	return (vector);
 }

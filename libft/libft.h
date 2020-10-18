@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/19 17:11:48 by dtaisha           #+#    #+#             */
-/*   Updated: 2020/10/10 18:51:44 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/18 20:18:18 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,6 @@ void				ft_izero(int *s, size_t n);
 size_t				ft_arrlen(char **arr);
 void				ft_safe_free_arr(char **arr);
 size_t				ft_cnt_digits(long long int num);
+double				ft_check_borders(double num, double min, double max);
 
 #endif

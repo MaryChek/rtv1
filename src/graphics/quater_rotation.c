@@ -6,13 +6,13 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/30 21:27:09 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/17 18:50:57 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/18 20:10:16 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void		quat_normal(t_quat *q)
+void			quat_normal(t_quat *q)
 {
 	double	quat_len;
 
@@ -24,21 +24,7 @@ void		quat_normal(t_quat *q)
 	q->vec.z /= quat_len;
 }
 
-t_quat		creat_axis_of_rot(t_coord vector, double alpha)
-{
-	t_quat	axis;
-	double	a;
-
-	a = alpha * M_PI / 180;
-	axis.w = cos(a);
-	axis.vec.x = vector.x * sin(a);
-	axis.vec.y = vector.y * sin(a);
-	axis.vec.z = vector.z * sin(a);
-	quat_normal(&axis);
-	return (axis);
-}
-
-t_quat		quat_mol(t_quat a, t_quat b)
+t_quat			quat_mol(t_quat a, t_quat b)
 {
 	t_quat	res;
 
@@ -53,16 +39,47 @@ t_quat		quat_mol(t_quat a, t_quat b)
 	return (res);
 }
 
-t_coord		vctr_rotation(t_coord vector, t_quat rotor)
+t_coord			vctr_rotation(t_coord vector, t_quat rotor)
 {
 	t_quat	tmp;
 
 	tmp = quat_mol(rotor, (t_quat){0.0, vector});
 	rotor.vec = vctr_reverse(rotor.vec);
 	quat_normal(&rotor);
-	tmp = quat_mol((t_quat){0.0, vector}, rotor);
+	tmp = quat_mol(tmp, rotor);
 	vector.x = tmp.vec.x;
 	vector.y = tmp.vec.y;
 	vector.z = tmp.vec.z;
 	return (vector);
+}
+
+static t_quat	rot(t_quat q, double angle)
+{
+	t_quat	axis;
+	double	a;
+
+	a = angle * M_PI / 360.0;
+	axis.w = q.w * cos(a);
+	axis.vec.x = q.vec.x * sin(a);
+	axis.vec.y = q.vec.y * sin(a);
+	axis.vec.z = q.vec.z * sin(a);
+	return (axis);
+}
+
+
+t_quat			quat_roter(t_vector camera)
+{
+	t_quat	roter;
+	t_quat	axis_x;
+	t_quat	axis_y;
+	t_quat	axis_z;
+
+	roter = (t_quat){1, (t_coord){0,0,0}};
+	axis_x = rot((t_quat){1, (t_coord){1,0,0}}, camera.angles.x);
+	axis_y = rot((t_quat){1, (t_coord){0,1,0}}, camera.angles.y);
+	axis_z = rot((t_quat){1, (t_coord){0,0,1}}, camera.angles.z);
+	roter = quat_mol(roter, axis_x);
+	roter = quat_mol(roter, axis_y);
+	roter = quat_mol(roter, axis_z);
+	return roter;
 }

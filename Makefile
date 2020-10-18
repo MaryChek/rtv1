@@ -39,10 +39,11 @@ MAIN_DIR = $(SRC_DIR)main/
 
 MAIN_FILE = 	main.c
 GRAPHICS_FILES = color.c light_and_shadow.c \
-				no_name.c normal_to_obj.c \
-				quadratic_equation.c  ray_trace.c \
-				quater_rotation.c vectors.c draw.c \
-				grafic_connection.c
+				fixing_the_near_obj.c normal_to_obj.c \
+				quadratic_equation.c ray_trace.c \
+				quater_rotation.c draw.c \
+				grafic_connection.c get_utils.c \
+				vectors_1.c vectors_2.c
 PARSING_FILES = allocation.c camera.c \
 				errors.c figure.c read_file.c \
 				 light.c tear_down.c \

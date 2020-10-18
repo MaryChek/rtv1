@@ -6,11 +6,10 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 18:59:17 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/17 18:50:25 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/18 20:25:34 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "rtv1.h"
 
 int			tang_to_plane(t_ray_data *ray, t_plane plane)
