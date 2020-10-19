@@ -6,12 +6,13 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 18:54:07 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/11 14:59:02 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/19 13:02:26 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-void		validate_fd(int fd, t_data *data)
+
+void			validate_fd(int fd, t_data *data)
 {
 	if (fd < 0)
 		free_error_exit("Error: file doesn't exist\n", 1, data);
@@ -47,14 +48,15 @@ static void		read_line(t_data *data, t_scene *objects, char *line)
 
 void			read_setups(t_data *data, char *name)
 {
-	int			fd = 0;
+	int			fd;
 	char		*line;
 
+	fd = 0;
 	fd = open(name, O_RDONLY);
 	validate_fd(fd, data);
 	while (get_next_line(fd, &line))
 	{
-		if(line[0] != '#' && ft_strlen(line) > 10)
+		if (line[0] != '#' && ft_strlen(line) > 10)
 			read_line(data, data->p_object, line);
 		ft_safe_free(line);
 	}

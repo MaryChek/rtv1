@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_safe_free_arr.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtaisha <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/19 17:09:13 by dtaisha           #+#    #+#             */
-/*   Updated: 2020/10/07 12:03:15 by dtaisha          ###   ########lyon.fr   */
+/*   Updated: 2020/10/19 16:43:39 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 void			ft_safe_free_arr(char **arr)
 {
 	char		**cpy;
+	size_t		i;
 
 	cpy = arr;
-	size_t i = 0;
+	i = 0;
 	if (arr)
 	{
 		while (*cpy != NULL)

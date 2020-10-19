@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:25:42 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/19 12:40:59 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/19 16:42:30 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ typedef struct		s_mlx
 	void		*win;
 	void		*img_ptr;
 	int			*img_data;
-	int 		bit_pp;
-	int 		endian;
-	int 		size_line;
+	int			bit_pp;
+	int			endian;
+	int			size_line;
 }					t_mlx;
 
 typedef struct		s_color
@@ -80,11 +80,11 @@ typedef struct		s_coord
 	double		z;
 }					t_coord;
 
-typedef struct	s_quat
+typedef struct		s_quat
 {
 	double		w;
 	t_coord		vec;
-}				t_quat;
+}					t_quat;
 
 typedef struct		s_sph
 {
@@ -120,19 +120,19 @@ typedef struct		s_plane
 	double		specular;
 }					t_plane;
 
-enum	type_of_light_src
+enum				e_type_of_light_src
 {
 	AMBIENT,
 	POINT,
-	DIRECTIONAL,
+	DIRECTIONAL
 };
 
 typedef struct		s_light
 {
-	int		type;
-	double	intensity;
-	t_coord	pos_or_dir;
-	t_color	color;
+	int			type;
+	double		intensity;
+	t_coord		pos_or_dir;
+	t_color		color;
 }					t_light;
 
 typedef struct		s_vector
@@ -165,7 +165,7 @@ typedef struct		s_scene
 	int			num_l_src;
 }					t_scene;
 
-enum	type_obj
+enum				e_type_obj
 {
 	SPH,
 	CYLINDER,
@@ -214,7 +214,7 @@ void				grafic_preset(t_mlx *mlx);
 int					close_window(t_data *data);
 int					buttons_press(int key, t_data *data);
 void				read_setups(t_data *data, char *name);
-void 				draw(int **img_data, t_scene object);
+void				draw(int **img_data, t_scene object);
 
 void				sphere(t_data *data, t_scene *object, char **arr);
 void				cylinder(t_data *data, t_scene *object, char **arr);
@@ -222,12 +222,15 @@ void				cone(t_data *data, t_scene *object, char **arr);
 void				plane(t_data *data, t_scene *object, char **arr);
 void				camera(t_scene *object, char **arr);
 void				light(t_data *data, t_scene *object, char **arr);
-void				position(t_coord *p, char *arr, t_data *pData);
-void 				color(t_color *color, char *arr);
-void 				ft_safe_free_arr(char **arr);
+void				position(t_coord *p, char *arr, t_data *p_data);
+void				color(t_color *color, char *arr);
+void				ft_safe_free_arr(char **arr);
 double				coordinate(char *str);
 void				preset_structures(t_scene *object);
 void				validate_fd(int fd, t_data *data);
+
+void				set_default(t_scene *objs);
+void				ft_obj_null(t_scene *objs);
 
 t_color				get_obj_color(t_scene objs, int type, int index);
 int					get_specul_obj(t_scene objs, int type, int index);
@@ -267,6 +270,6 @@ t_ray_data			creat_ray(double max_len, t_coord point,
 t_coord				normal_to_obj(t_scene objs, t_obj_info near);
 
 void				put_color_to_img(int **img_data, int x, int y,
-									 t_color color);
+									t_color color);
 
 #endif

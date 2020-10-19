@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/30 21:27:09 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/18 20:10:16 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/19 12:57:33 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ static t_quat	rot(t_quat q, double angle)
 	return (axis);
 }
 
-
 t_quat			quat_roter(t_vector camera)
 {
 	t_quat	roter;
@@ -74,12 +73,12 @@ t_quat			quat_roter(t_vector camera)
 	t_quat	axis_y;
 	t_quat	axis_z;
 
-	roter = (t_quat){1, (t_coord){0,0,0}};
-	axis_x = rot((t_quat){1, (t_coord){1,0,0}}, camera.angles.x);
-	axis_y = rot((t_quat){1, (t_coord){0,1,0}}, camera.angles.y);
-	axis_z = rot((t_quat){1, (t_coord){0,0,1}}, camera.angles.z);
+	roter = (t_quat){1, (t_coord){0, 0, 0}};
+	axis_x = rot((t_quat){1, (t_coord){1, 0, 0}}, camera.angles.x);
+	axis_y = rot((t_quat){1, (t_coord){0, 1, 0}}, camera.angles.y);
+	axis_z = rot((t_quat){1, (t_coord){0, 0, 1}}, camera.angles.z);
 	roter = quat_mol(roter, axis_x);
 	roter = quat_mol(roter, axis_y);
 	roter = quat_mol(roter, axis_z);
-	return roter;
+	return (roter);
 }

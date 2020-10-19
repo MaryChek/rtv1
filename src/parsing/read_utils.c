@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 18:54:12 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/16 12:19:20 by dtaisha          ###   ########lyon.fr   */
+/*   Updated: 2020/10/19 16:33:35 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ static double	double_tail(char *str)
 		if (*(str + 1))
 			digit2 = ft_to_digit(*(str + 1));
 	}
-	tail = (( double) digit1 * 0.1) + (( double) digit2 * 0.01);
+	tail = ((double)digit1 * 0.1) + ((double)digit2 * 0.01);
 	return (tail);
 }
 
- double			coordinate(char *str)
+double			coordinate(char *str)
 {
 	long long int	left;
 	double			right;
@@ -48,10 +48,10 @@ static double	double_tail(char *str)
 		if (left == 0 && str[0] == '-')
 			sign = -1.0;
 		if (ft_strchr(str, '.'))
-			right =  double_tail(str);
+			right = double_tail(str);
 		else
 			right = 0.0;
-		res = ( double) left + right;
+		res = (double)left + right;
 		res = res > 0 ? res * sign : res;
 		return (res);
 	}

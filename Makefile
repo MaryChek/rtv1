@@ -14,7 +14,7 @@ NAME = rtv1
 
 CFLAGS = -g -Wall -Wextra -Werror
 
-CC = clang
+CC = gcc
 
 MLX = -lmlx -framework OpenGL -framework AppKit
 
@@ -48,7 +48,8 @@ PARSING_FILES = allocation.c camera.c \
 				errors.c figure.c read_file.c \
 				 light.c tear_down.c \
 				hooks_and_deals.c read_utils.c \
-				presets.c param_validation.c
+				presets.c param_validation.c \
+				set_default.c
 
 SRC_FILES = $(MAIN_FILE) $(GRAPHICS_FILES) $(PARSING_FILES)
 

@@ -3,7 +3,7 @@ sphere		0.0 0.0 50.0	20.0	red								10.0
 cylinder	0.0 0.0 90.1	50.0	white	1.0 1.0 0.0				100.0
 cone		0.0 0.0 50.0			green	1.0 0.0 0.0		30		5.
 plane		0.0 0.0 100.0			yellow	0.0 0.0 1.0				-1
-camera		0.0 50.0 -50.0					0.0 1.0 0.0		90
+camera		0.0 0.0 -250.0					0.0 0.0 0.0		90
 
 #			type		intensity		position
 light		AMBIENT			0.2
