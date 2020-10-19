@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/18 19:54:06 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/18 20:50:40 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/19 12:40:31 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_coord		get_direction(t_vector camera, int x, int y)
 	t_coord		point;
 	double		distanse;
 
-	// distanse = (WIN_WID) / tan(FOV / 2);
+	// distanse = -(WIN_WID / 2.0) / tan(FOV / 2.0);
 	distanse = WIN_DIST;
 	point = (t_coord){x - (WIN_WID / 2), (WIN_HIG / 2) - y, distanse};
 	point = vctr_rotation(point, camera.roter);
