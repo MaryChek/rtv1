@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 18:54:12 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/19 16:33:35 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/10/20 15:28:11 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,16 @@ double			coordinate(char *str)
 	if (*str)
 	{
 		left = ft_atoi(str);
-		if (left == 0 && str[0] == '-')
+		if ((left == 0 && str[0] == '-') || left < 0)
+		{
 			sign = -1.0;
+			left *= -1;
+		}
 		if (ft_strchr(str, '.'))
 			right = double_tail(str);
 		else
 			right = 0.0;
-		res = (double)left + right;
+		res = left + right;
 		res = res > 0 ? res * sign : res;
 		return (res);
 	}

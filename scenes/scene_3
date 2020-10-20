@@ -1,4 +1,18 @@
 #			position	 	 R 		color	rotation	  angle		specular
+
+
+
+
+
+
+
+
+
+
+
+
+
+#			position	 	 R 		color	rotation	  angle		specular
 sphere		-10.9 0.0 4.0	0.1		red
 sphere		0.1 0.55 4.2	0.2		white								50
 sphere		0.4554 -0.5 4.0	0.3		orange								50
