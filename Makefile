@@ -46,7 +46,7 @@ GRAPHICS_FILES = color.c light_and_shadow.c \
 				vectors_1.c vectors_2.c
 PARSING_FILES = allocation.c camera.c \
 				errors.c figure.c read_file.c \
-				 light.c tear_down.c \
+				light.c tear_down.c \
 				hooks_and_deals.c read_utils.c \
 				presets.c param_validation.c \
 				set_default.c
@@ -93,7 +93,5 @@ fclean: clean
 	@rm -f $(NAME)
 	@echo "--------------fclean finish--------------"
 
-re:
-	@$(MAKE) fclean
-	@$(MAKE) all
+re: fclean all
 	@echo "------------fclean all finish------------"
