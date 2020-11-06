@@ -3,40 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rtacos <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: dtaisha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/16 17:30:54 by rtacos            #+#    #+#             */
-/*   Updated: 2019/09/19 18:27:33 by rtacos           ###   ########.fr       */
+/*   Created: 2020/09/19 17:11:11 by dtaisha           #+#    #+#             */
+/*   Updated: 2020/09/19 17:11:14 by dtaisha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	**ft_strsplit(char const *s, char c)
+char		**ft_strsplit(char const *s, char c)
 {
-	char	**tg;
+	size_t	symb;
 	size_t	i;
-	size_t	w;
-	size_t	l;
+	size_t	start;
+	char	**str;
 
 	i = 0;
-	if (!s || !(tg = (char **)malloc(sizeof(char*) * (ft_word(s, c) + 1))))
+	start = 0;
+	if (!s || !(str = (char**)malloc(sizeof(char*) * (ft_cnt_w(s, c) + 1))))
 		return (NULL);
-	w = 0;
-	while (s[i])
+	while (s[start])
 	{
-		if (s[i] != c)
+		if (s[start] == c)
+			start++;
+		else
 		{
-			l = ft_letter(s, c, i);
-			if (!(tg[w++] = ft_strsub(s, i, l)))
-			{
-				ft_freetg(tg, w - 1);
-				return (NULL);
-			}
-			i = i + l - 1;
+			symb = ft_cnt_l(s, c, start);
+			if (!(str[i] = ft_strsub(s, start, symb)))
+				return (ft_free_arr(str, i - 1));
+			i++;
+			start = symb + start;
 		}
-		i++;
 	}
-	tg[w] = NULL;
-	return (tg);
+	str[i] = NULL;
+	return (str);
 }

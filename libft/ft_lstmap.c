@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rtacos <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: dtaisha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/18 19:49:01 by rtacos            #+#    #+#             */
-/*   Updated: 2019/09/18 23:26:31 by rtacos           ###   ########.fr       */
+/*   Created: 2019/09/21 22:53:34 by dtaisha           #+#    #+#             */
+/*   Updated: 2019/09/22 00:02:51 by dtaisha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,26 @@
 
 t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
-	t_list *list;
-	t_list *tmp;
+	t_list	*tmp;
+	t_list	*start;
+	t_list	*fresh;
 
-	if (!(lst && f))
-		return (NULL);
 	tmp = f(lst);
-	list = tmp;
-	while (lst->next)
+	if (((lst == NULL) ||
+				(fresh = ft_lstnew(tmp->content, tmp->content_size)) == NULL))
+		return (NULL);
+	start = fresh;
+	lst = lst->next;
+	while (lst)
 	{
-		lst = lst->next;
-		if (!(tmp->next = f(lst)))
+		tmp = f(lst);
+		if ((fresh->next = ft_lstnew(tmp->content, tmp->content_size)) == NULL)
 		{
-			ft_dellst(&list);
+			ft_free_list(start);
 			return (NULL);
 		}
-		tmp = tmp->next;
+		fresh = fresh->next;
+		lst = lst->next;
 	}
-	return (list);
+	return (start);
 }

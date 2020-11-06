@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strclr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rtacos <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: dtaisha <dtaisha@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/13 21:54:09 by rtacos            #+#    #+#             */
-/*   Updated: 2019/09/15 20:40:01 by rtacos           ###   ########.fr       */
+/*   Created: 2019/09/15 12:24:21 by dtaisha           #+#    #+#             */
+/*   Updated: 2019/09/17 20:48:09 by dtaisha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 void	ft_strclr(char *s)
 {
 	if (s != NULL)
-		ft_bzero(s, ft_strlen(s));
+		ft_memset(s, (int)'\0', ft_strlen(s));
 }

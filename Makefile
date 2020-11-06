@@ -1,60 +1,97 @@
+# ************************************************************************** #
+#                                                                            #
+#                                                        :::      ::::::::   #
+#   Makefile                                           :+:      :+:    :+:   #
+#                                                    +:+ +:+         +:+     #
+#   By: dtaisha <dtaisha@student.21-school.ru>     +#+  +:+       +#+        #
+#                                                +#+#+#+#+#+   +#+           #
+#   Created: 2020/05/09 19:47:36 by dtaisha           #+#    #+#             #
+#   Updated: 2020/10/13 22:39:15 by dtaisha          ###   ########lyon.fr   #
+#                                                                            #
+# ************************************************************************** #
+
 NAME = rtv1
 
-LIB_DIR = libft/
+CFLAGS = -g -Wall -Wextra -Werror
 
-LIBFT_H = -I $(LIB_DIR)
-
-LIBFTA = libft.a
-
-RTV1_H = -I header/
-
-HEAD = header/rtv1.h
-
-SRC_DIR = src/
-
-SRCS = main1.c tangent_to_object.c vector_color.c vectors.c\
-math.c key_press.c
-
-CFIND =	$(SRCS:%=$(SRC_DIR)%)
-
-OBJ_DIR =	obj/
-
-OFILE =	$(SRCS:%.c=%.o)
-
-OBJ =	$(addprefix $(OBJ_DIR), $(OFILE))
-
-CFLAGS = -Wall -Wextra -Werror -g
-
-CC = clang
+CC = gcc
 
 MLX = -lmlx -framework OpenGL -framework AppKit
 
-OPENCL = -framework OpenCL
+COMP = $(CC) $(CFLAGS) $(INCLUDES)
 
-COMP =	$(CC) $(CFLAGS) $(RTV1_H) $(LIBFT_H) $(LIB_DIR)$(LIBFTA)
+LIBFT_DIR = libft/
+LIBFT_H = -I $(LIBFT_DIR)
+LIBFT_A = libft.a
+LIBFT = $(LIBFT_DIR)$(LIBFT_A)
 
-all: $(NAME)
+HEAD_DIR = header/
+RTV1_H = -I $(HEAD_DIR)
+HEAD = $(HEAD_DIR)rtv1.h
+
+INCLUDES = $(LIBFT_H) $(RTV1_H)
+
+SRC_DIR = src/
+GRAPH_DIR = $(SRC_DIR)graphics/
+PARS_DIR = $(SRC_DIR)parsing/
+MAIN_DIR = $(SRC_DIR)main/
+
+
+MAIN_FILE = 	main.c
+GRAPHICS_FILES = color.c light_and_shadow.c \
+				fixing_the_near_obj.c normal_to_obj.c \
+				quadratic_equation.c ray_trace.c \
+				quater_rotation.c draw.c \
+				grafic_connection.c get_utils.c \
+				vectors_1.c vectors_2.c
+PARSING_FILES = allocation.c camera.c \
+				errors.c figure.c read_file.c \
+				light.c tear_down.c \
+				hooks_and_deals.c read_utils.c \
+				presets.c param_validation.c \
+				set_default.c
+
+SRC_FILES = $(MAIN_FILE) $(GRAPHICS_FILES) $(PARSING_FILES)
+
+OBJ_DIR = obj/
+
+OBJ_FILE =	$(SRC_FILES:.c=.o)
+
+OBJ = $(addprefix $(OBJ_DIR), $(OBJ_FILE))
+
+.PHONY: all clean fclean re
+
+all: lib $(NAME)
+
+lib:
+	@make -C $(LIBFT_DIR)
+
+$(NAME): $(LIBFT) $(OBJ_DIR) $(OBJ) $(HEAD)
+	@$(COMP) $(LIBFT) $(MLX) $(OBJ) -o $(NAME)
+	@echo "-----------compiled rtv1 finish----------"
 
 $(OBJ_DIR):
-		@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)
+	@echo "-----------mkdir OBJ_DIR finish----------"
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEAD)
-		@$(CC) $(CFLAGS) $(RTV1_H) $(LIBFT_H) -c $< -o $@
+$(OBJ_DIR)%.o: $(GRAPH_DIR)%.c $(HEAD)
+	@$(COMP) -c $< -o $@
 
-$(NAME): $(OBJ_DIR) $(OBJ)
-	@make -C $(LIB_DIR)
-	@cp $(LIB_DIR)$(LIBFTA) .
-	@mv $(LIBFTA) $(NAME)
-	$(COMP) $(MLX) $(OPENCL) $(addprefix $(SRC_DIR), $(SRCS)) -o $(NAME)
+$(OBJ_DIR)%.o: $(PARS_DIR)%.c $(HEAD)
+	@$(COMP) -c $< -o $@
+
+$(OBJ_DIR)%.o: $(MAIN_DIR)%.c $(HEAD)
+	@$(COMP) -c $< -o $@
 
 clean:
-	@/bin/rm -rf $(OBJ_DIR)
-	@make -C $(LIB_DIR) clean
-	@echo OBJECTS FILES HAS BEEN DELETED.
+	@$(MAKE) -sC $(LIBFT_DIR) clean
+	@rm -rf $(OBJ_DIR)
+	@echo "---------------clean finish--------------"
 
 fclean: clean
-	@/bin/rm -f $(NAME)
-	@make -C $(LIB_DIR) fclean
-	@echo OBJECT FILES AND EXECUTABLE HAS BEEN DELETED.
+	@rm -f $(LIBFT)
+	@rm -f $(NAME)
+	@echo "--------------fclean finish--------------"
 
 re: fclean all
+	@echo "------------fclean all finish------------"

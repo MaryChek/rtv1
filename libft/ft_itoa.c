@@ -3,37 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rtacos <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: dtaisha <dtaisha@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/16 13:18:14 by rtacos            #+#    #+#             */
-/*   Updated: 2019/09/18 19:06:25 by rtacos           ###   ########.fr       */
+/*   Created: 2019/09/16 19:20:42 by dtaisha           #+#    #+#             */
+/*   Updated: 2019/09/17 21:20:16 by dtaisha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_itoa(int n, int count_zero)
+static int		ft_count_num(int num)
+{
+	int				len;
+
+	if (num <= 0)
+		len = 1;
+	else
+		len = 0;
+	while (num)
+	{
+		num = num / 10;
+		len++;
+	}
+	return (len);
+}
+
+char			*ft_itoa(int n)
 {
 	char			*str;
-	size_t			max;
-	unsigned int	i;
+	unsigned int	num;
+	int				len;
 
-	max = ft_intlen(n) + count_zero + (n < 0 ? 1 : 0);
-	if (n < 0)
-		i = (unsigned int)(n * (-1));
-	else
-		i = (unsigned int)(n);
-	if (!(str = ft_strnew(max)))
+	num = 0;
+	len = ft_count_num(n);
+	if ((str = ft_strnew(len)) == NULL)
 		return (NULL);
-	while (i >= 10)
-	{
-		str[--max] = (i % 10) + 48;
-		i /= 10;
-	}
-	str[--max] = (i % 10) + 48;
-	while (count_zero--)
-		str[--max] = '0';
 	if (n < 0)
+	{
+		num = -n;
 		str[0] = '-';
+	}
+	else if (n > 0)
+		num = n;
+	else if (n == 0)
+		str[0] = '0';
+	while (num > 0)
+	{
+		str[--len] = (num % 10) + '0';
+		num = num / 10;
+	}
 	return (str);
 }
