@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/30 21:27:09 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/19 12:57:33 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/12/16 15:45:00 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_coord			vctr_rotation(t_coord vector, t_quat rotor)
 	return (vector);
 }
 
-static t_quat	rot(t_quat q, double angle)
+t_quat			rot(t_quat q, double angle)
 {
 	t_quat	axis;
 	double	a;

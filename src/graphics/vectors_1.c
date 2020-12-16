@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/18 20:23:13 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/18 20:23:16 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/12/14 21:02:46 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_coord		vctr_sub(t_coord begin_point, t_coord end_point)
 	return (rez_point);
 }
 
-double		dot(t_coord vec_1, t_coord vec_2)
+double		vctr_dot(t_coord vec_1, t_coord vec_2)
 {
 	return ((vec_1.x * vec_2.x + vec_1.y * vec_2.y + vec_1.z * vec_2.z));
 }

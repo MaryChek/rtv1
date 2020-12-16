@@ -6,7 +6,7 @@
 /*   By: rtacos <rtacos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:25:42 by rtacos            #+#    #+#             */
-/*   Updated: 2020/10/20 09:36:26 by rtacos           ###   ########.fr       */
+/*   Updated: 2020/12/16 15:45:12 by rtacos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "libft.h"
 # include <OpenCL/cl.h>
 # include <stdio.h>
+#include <stdlib.h>
 
 # define WIN_WID 1920
 # define WIN_HIG 1080
@@ -47,6 +48,15 @@
 # define PINK (t_color){255, 0, 255}
 # define METAL (t_color){154, 174, 196}
 # define WHITE (t_color){255, 255, 255}
+
+typedef unsigned char png_byte;
+
+typedef struct		s_parser
+{
+	char		*name;
+	char		*source;
+	char		*cur;
+}					t_parser;
 
 typedef struct		s_quadr_equation
 {
@@ -102,6 +112,24 @@ typedef struct		s_cylindr
 	double		rad;
 	double		specular;
 }					t_cylindr;
+
+typedef struct		s_cylinder_cap
+{
+	t_coord		head;
+	t_coord		tail;
+	float		rad;	
+	t_color		color;
+	double		specular;
+	t_coord		direction;
+}					t_cylinder_cap;
+
+typedef struct		s_cone_cap
+{
+	t_coord		head;
+	t_coord		tail;
+	float		rad;
+	t_color		color;
+}					t_cone_cap;
 
 typedef struct		s_cone
 {
@@ -163,6 +191,12 @@ typedef struct		s_scene
 
 	t_light		*light_srcs;
 	int			num_l_src;
+
+	t_cone_cap	*cone_cap_objs;
+	int			num_cone_cap;
+
+	t_cylinder_cap	*cyln_cap_objs;
+	int				num_cyln_cap;
 }					t_scene;
 
 enum				e_type_obj
@@ -170,7 +204,9 @@ enum				e_type_obj
 	SPH,
 	CYLINDER,
 	CONE,
-	PLANE
+	PLANE,
+	CAP_CYLN,
+	CAP_CONE
 };
 
 typedef struct		s_obj_info
@@ -181,7 +217,7 @@ typedef struct		s_obj_info
 	t_coord		center;
 	t_coord		st_cent;
 	t_coord		normal;
-	t_color		color_obj;
+	t_color		color_pix;
 	double		t;
 	double		specular;
 }					t_obj_info;
@@ -194,6 +230,7 @@ typedef struct		s_ray_data
 	t_coord		cent_obj;
 	t_coord		st_cent;
 	t_coord		point;
+	int			fl;
 }					t_ray_data;
 
 typedef struct		s_data
@@ -201,6 +238,13 @@ typedef struct		s_data
 	t_mlx		*mlx;
 	t_scene		*p_object;
 }					t_data;
+
+typedef struct	s_2d_map
+{
+	float u;
+	float v;
+}				t_2d_map;
+
 
 int					allocation(t_data *data, char *param_name);
 int					main(int ac, char **av);
@@ -256,7 +300,7 @@ t_color				color_scal(t_color color, double mult);
 void				color_change(t_color *color, t_color rgb);
 t_color				colors_mult(t_color v1, t_color v2);
 
-double				dot(t_coord v_1, t_coord v_2);
+double				vctr_dot(t_coord v_1, t_coord v_2);
 t_coord				vctr_sum(t_coord vec_1, t_coord vec_2);
 t_coord				vctr_mult(t_coord vector, double mult);
 t_coord				vctr_sub(t_coord begin_point, t_coord end_point);
@@ -271,5 +315,10 @@ t_coord				normal_to_obj(t_scene objs, t_obj_info near);
 
 void				put_color_to_img(int **img_data, int x, int y,
 									t_color color);
+
+
+
+t_color		get_color_pix(t_scene objs, t_obj_info near);
+t_quat			rot(t_quat q, double angle);
 
 #endif
